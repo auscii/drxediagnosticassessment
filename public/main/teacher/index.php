@@ -26,6 +26,7 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <title>E-Diagnostic Assessment</title>
     <link href="../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../../dist/css/style.min.css" rel="stylesheet">
+    <link href="../../assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -133,7 +134,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
 
                         <li class="active sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../main/teacher/assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment Management</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="../../main/teacher/assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
+                                <li class="sidebar-item"><a href="../../main/teacher/sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
+                            </ul>
+                        </li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
@@ -352,6 +358,13 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <script src="../../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../../dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="../../assets/libs/toastr/build/toastr.min.js"></script>
+
+    <script>
+          $(function(){
+                toastr.info('Welcome to DRx E-Diagnostic Assessment!', 'Welcome!');
+          });
+    </script>
 
 </body>
 

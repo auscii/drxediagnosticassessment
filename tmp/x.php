@@ -9,39 +9,6 @@ if (!empty($_SESSION['drxassessmentname'])) {
 }
 
 
-
-if(isset($_POST['drxassessment_question1'])){
-    $drxassessment_question1 = $_POST['drxassessment_question1'];
-} else {
-    $drxassessment_question1 = "";
-}
-
-if(isset($_POST['drxassessment_q1_answer_1'])){
-    $drxassessment_q1_answer_1 = $_POST['drxassessment_q1_answer_1'];
-} else {
-    $drxassessment_q1_answer_1 = "";
-}
-
-if(isset($_POST['drxassessment_q1_answer_2'])){
-    $drxassessment_q1_answer_2 = $_POST['drxassessment_q1_answer_2'];
-} else {
-    $drxassessment_q1_answer_2 = "";
-}
-
-if(isset($_POST['drxassessment_q1_answer_3'])){
-    $drxassessment_q1_answer_3 = $_POST['drxassessment_q1_answer_3'];
-} else {
-    $drxassessment_q1_answer_3 = "";
-}
-
-if(isset($_POST['drxassessment_q1_answer_4'])){
-    $drxassessment_q1_answer_4 = $_POST['drxassessment_q1_answer_4'];
-} else {
-    $drxassessment_q1_answer_4 = "";
-}
-
-
-
 if(isset($_POST['drx_status'])){
     $drx_status = $_POST['drx_status'];
 } else {
@@ -54,84 +21,81 @@ if(isset($_POST['drx_key'])){
     $drx_key = "";
 }
 
-if(isset($_POST['dr_delete_is_status'])){
-    $dr_delete_is_status = $_POST['dr_delete_is_status'];
+if (isset($_POST['drx_clear_status'])) {
+    $drx_clear_status = $_POST['drx_clear_status'];
 } else {
-    $dr_delete_is_status = "";
+    $drx_clear_status = "";
 }
 
-if(isset($_POST['drx_delete_is_key'])){
-    $drx_delete_is_key = $_POST['drx_delete_is_key'];
+if(isset($_POST['drxassessment_order'])){
+    $drxassessment_order = $_POST['drxassessment_order'];
 } else {
-    $drx_delete_is_key = "";
+    $drxassessment_order = "";
 }
 
-$date_created_format = date('Y-m-d g:i:s');
+$drxassessment_status = 1;
+$drxassessment_statuz = 0;
 
-if($drx_status == "addnewassessment"){
-    $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment (
-                                        drxassessment_question1,
-                                        drxassessment_q1_answer_1,
-                                        drxassessment_q1_answer_2,
-																				drxassessment_q1_answer_3,
-																				drxassessment_q1_answer_4,
-                                        drxassessment_created_at
-                                        )
-                                        VALUES (
-                                        :drxassessment_question1,
-                                        :drxassessment_q1_answer_1,
-                                        :drxassessment_q1_answer_2,
-																				:drxassessment_q1_answer_3,
-																				:drxassessment_q1_answer_4,
-                                        :drxassessment_created_at
-                                        )");
-    $drx_statement->execute(
-        array(
-            'drxassessment_question1'               => $drxassessment_question1,
-            'drxassessment_q1_answer_1'             => $drxassessment_q1_answer_1,
-            'drxassessment_q1_answer_2'             => $drxassessment_q1_answer_2,
-						'drxassessment_q1_answer_3'						  => $drxassessment_q1_answer_3,
-						'drxassessment_q1_answer_4'						  => $drxassessment_q1_answer_4,
-						'drxassessment_created_at'						  => $date_created_format
-        )
-    );
-    $drx_statement->fetchAll();
-}
+if($drx_status == "sendorderassessment"){
+    // echo "order= " . $drxassessment_order . " id= " . $drxassessment_id. " ordervalue= " . $drxassessmentordervalue; exit();
+    // echo 'key= ' . $drx_key . " order= " . $drxassessment_order; exit();
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $result = $connection->prepare("SELECT drxassessment_order_no, drxassessment_id, drxassessment_order_value
+                                    FROM drxassessment_order_roles
+                                    WHERE drxassessment_order_no = '$drxassessment_order'");
+    $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+               $drxassessment_id = $row['drxassessment_id'];
+               $drxassessmentordervalue = $row['drxassessment_order_value'];
 
-if($drx_status == "editassessment"){
+
+               $drx_statement_s = $connection->prepare("UPDATE drxassessment_order_roles SET
+                                                           drxassessment_status = :drxassessment_status
+                                                        WHERE drxassessment_id = :drxassessment_id");
+               $drx_statement_s->execute(
+                  array(
+                      'drxassessment_status'                   => $drxassessment_status,
+                      'drxassessment_id'                       => $drxassessment_id
+                      )
+                  );
     $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
-                                                 drxassessment_question1        = :drxassessment_question1,
-                                                 drxassessment_q1_answer_1      = :drxassessment_q1_answer_1,
-                                                 drxassessment_q1_answer_2      = :drxassessment_q1_answer_2,
-																								 drxassessment_q1_answer_3      = :drxassessment_q1_answer_3,
-																								 drxassessment_q1_answer_4      = :drxassessment_q1_answer_4,
-																								 drxassessment_updated_at       = :drxassessment_updated_at
-                                           WHERE drxassessment_id = $drx_key;");
+                                                 drxassessment_order = :drxassessment_order,
+                                                 drxassessment_order_value = :drxassessment_order_value,
+                                                 drxassessment_status = :drxassessment_status
+                                           WHERE drxassessment_id = :drxassessment_id");
     $drx_statement->execute(
         array(
-            'drxassessment_question1'               => $drxassessment_question1,
-            'drxassessment_q1_answer_1'             => $drxassessment_q1_answer_1,
-            'drxassessment_q1_answer_2'             => $drxassessment_q1_answer_2,
-						'drxassessment_q1_answer_3'						  => $drxassessment_q1_answer_3,
-						'drxassessment_q1_answer_4'						  => $drxassessment_q1_answer_4,
-						'drxassessment_updated_at'						  => $date_created_format
+            'drxassessment_order'                   => $drxassessment_order,
+            'drxassessment_order_value'             => $drxassessmentordervalue,
+            'drxassessment_status'                  => $drxassessment_status,
+            'drxassessment_id'                      => $drx_key
         )
     );
-    $drx_statement->fetchAll();
-}
 
-if($dr_delete_is_status == "deleteassessment"){
-    $drx_statement = $connection->prepare("DELETE FROM drxassessment_assessment
-                                           WHERE drxassessment_id = :drxassessment_id;");
-    $drx_statement->execute(
+  }
+}
+$drxassessment_order_valuez = "";
+if ($drx_clear_status = "clearallassessment") {
+    $drx_statement_c_a = $connection->prepare("UPDATE drxassessment_assessment SET
+                                                      drxassessment_status = :drxassessment_status,
+                                                      drxassessment_order = :drxassessment_order,
+                                                      drxassessment_order_value = :drxassessment_order_value");
+    $drx_statement_c_a->execute(
         array(
-            'drxassessment_id'               => $drx_delete_is_key
+            'drxassessment_status'                  => $drxassessment_statuz,
+            'drxassessment_order'                   => $drxassessment_statuz,
+            'drxassessment_order_value'             => $drxassessment_order_valuez
         )
     );
-    $drx_statement->fetchAll();
+
+    $drx_statement_c_a_r = $connection->prepare("UPDATE drxassessment_order_roles SET
+                                                        drxassessment_status = :drxassessment_status");
+    $drx_statement_c_a_r->execute(
+        array(
+            'drxassessment_status'                  => $drxassessment_statuz
+        )
+    );
 }
-
-
 
 ?>
 
@@ -258,8 +222,8 @@ if($dr_delete_is_status == "deleteassessment"){
 
                         <li class="active sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="../assessment/" class="active sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
-                                <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
+                                <li class="sidebar-item"><a href="../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
+                                <li class="sidebar-item"><a href="../sequence/" class="active sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
@@ -287,12 +251,12 @@ if($dr_delete_is_status == "deleteassessment"){
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Asssement Management</h4>
+                        <h4 class="page-title">Sequence of Asssement</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active" aria-current="page">Asssement</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../assessment/">Management Asssement</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../sequence/">Sequence of Asssement</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -306,11 +270,8 @@ if($dr_delete_is_status == "deleteassessment"){
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-							<!-- <button type="button" onclick="addAssessment();" data-toggle="modal" data-target="#assessmentModal" class="btn btn-success btn-lg"><i class="ti-plus"></i></a> Add New Question</button> <br /> -->
-
 							<div class="card-body">
-									<!-- <h5 class="card-title">Assessment</h5> -->
-
+                <button type="submit" data-toggle="modal" data-target="#clearAssessmentModal" onclick="clearAllOrder();" name="drx_submit_btn" class="btn btn-secondary btn-mg" style="margin-bottom: 2%;"><i class="fas fa-ban"></i> CLEAR ALL</button>
 									<div class="table-responsive">
 											<table id="zero_config" class="table table-striped table-bordered">
 													<thead>
@@ -329,7 +290,7 @@ if($dr_delete_is_status == "deleteassessment"){
 														<?php
 	                          $drx_count = 0;
 	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_created_at ASC");
+	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_order ASC");
 	                          $result->execute();
 	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	                                     $drx_count++;
@@ -340,42 +301,54 @@ if($dr_delete_is_status == "deleteassessment"){
 	                                     $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
 	                                     $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
 	                                     $drxassessment_created_at = $row['drxassessment_created_at'];
-	                                     // $new_drxassessment_created_at = date('M d, Y / g:i A', strtotime($drxassessment_created_at));
+                                       $drxassessmentorder = $row['drxassessment_order'];
+                                       $drxassessmentordervalue = $row['drxassessment_order_value'];
+	                                     $drxassessmentstatus = $row['drxassessment_status'];
 	                          ?>
 															<tr>
-																<td class="text-center"><?php echo $drx_count; ?></td>
+																<td class="text-center">
+                                  <?php
+                                    if(empty($drxassessmentordervalue)) {
+                                        echo "Not set";
+                                    } else {
+                                        echo $drxassessmentordervalue;
+                                    }
+                                  ?>
+                                </td>
 																<td class="text-center"><?php echo $drxassessment_question1; ?></td>
 																<td class="text-center"><?php echo $drxassessment_q1_answer_1; ?></td>
 																<td class="text-center"><?php echo $drxassessment_q1_answer_2; ?></td>
 																<td class="text-center"><?php echo $drxassessment_q1_answer_3; ?></td>
 																<td class="text-center"><?php echo $drxassessment_q1_answer_4; ?></td>
 																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
-																<td class="text-center">
-                                  <!-- style="width: 200px;" -->
-																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-warning btn-mg"
-                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                          '<?php echo $drxassessment_question1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_2 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_3 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_4 ; ?>');">
-                                  <i class="ti-pencil"></i> Edit
+																<td class="text-center" style="width: 200px;">
+
+                                <?php if ($drxassessmentstatus === '0') { ?>
+                                  <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+                                  onclick="setAssessmentOrder('<?php echo $drxassessment_id ; ?>',
+                                                              '<?php echo $drxassessment_question1 ; ?>',
+                                                              '<?php echo $drxassessment_q1_answer_1 ; ?>',
+                                                              '<?php echo $drxassessment_q1_answer_2 ; ?>',
+                                                              '<?php echo $drxassessment_q1_answer_3 ; ?>',
+                                                              '<?php echo $drxassessment_q1_answer_4 ; ?>');">
+                                  <i class="fas fa-sort-numeric-down"></i> SET ORDER
                                   </button>
-																	<!-- &nbsp;
-                                  <button type="button" data-toggle="modal" data-target="#deleteAssessmentModal" class="btn btn-danger btn-mg"
-                                  onclick="deleteAssessment('<?php echo $drxassessment_id ; ?>');">
-                                  <i class="ti-trash"></i> Delete
-                                  </button> -->
+                                <?php } else if ($drxassessmentstatus === '1') { ?>
+                                  <button type="button" class="btn btn-warning btn-mg" disabled>
+                                  <i class="fas fa-sort-numeric-down"></i> ASSIGNED
+                                  </button>
+                                <?php } ?>
+
 																</td>
 															</tr>
 														<?php } ?>
+
 													</tbody>
 											</table>
-									</div>
+				</div>
+      </div>
+    </div>
 
-            </div>
-
-        </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
@@ -385,10 +358,7 @@ if($dr_delete_is_status == "deleteassessment"){
     <!-- ============================================================== -->
 
 
-		<!-- ============================================================== -->
-		<!-- MODALS -->
-		<!-- ============================================================== -->
-		<div class="modal fade" id="assessmentModal" tabindex="-1" role="dialog" aria-labelledby="assessmentModalLabel" aria-hidden="true">
+    <div class="modal fade" id="assessmentModal" tabindex="-1" role="dialog" aria-labelledby="assessmentModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 						<div class="modal-content">
 
@@ -405,47 +375,31 @@ if($dr_delete_is_status == "deleteassessment"){
 										<input type="hidden" id="drx_status" name="drx_status">
 										<input type="hidden" id="drx_key" name="drx_key">
 
-										<!-- <h4 class="card-title">Question</h4> -->
-										<div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
-												</div>
-										</div>
 
-										<div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">A.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">B.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">C.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">D.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
-												</div>
+										<div class="form-group">
+												<label id="drx_question" class="col-sm-3 text-right control-label col-form-label"></label>
+												<!-- <div class="col-sm-9"> -->
+                        <select class="form control" name="drxassessment_order" id="drxassessment_order">
+                          <option value="" disabled selected>Select Order</option>
+                          <?php
+                              $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  	                          $result = $connection->prepare("SELECT drxassessment_order_no, drxassessment_order_value FROM drxassessment_order_roles WHERE drxassessment_status = 0");
+  	                          $result->execute();
+  	                          while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                              $drxassessment_order_no = $row['drxassessment_order_no'];
+                              $drxassessment_order_value = $row['drxassessment_order_value'];
+                          ?>
+                          <option value="<?php echo $drxassessment_order_no; ?>"> <?php echo $drxassessment_order_value; ?> </option>
+                          <?php } ?>
+                        </select>
+												<!-- </div> -->
 										</div>
 
 
-										<div class="modal-footer">
+                    <center>
 											  <button type="submit" class="btn btn-success">Submit</button>
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
+                    </center>
 
 									</form>
 
@@ -457,12 +411,13 @@ if($dr_delete_is_status == "deleteassessment"){
 
 
 
-    <div class="modal fade" id="deleteAssessmentModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssessmentModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="clearAssessmentModal" tabindex="-1" role="dialog" aria-labelledby="clearAssessmentModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 						<div class="modal-content">
 
 								<div class="modal-header">
-										<h5 class="modal-title" id="deleteAssessmentModalLabel"></h5>
+										<h5 class="modal-title" id="clearAssessmentModalLabel"></h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 										</button>
@@ -471,13 +426,13 @@ if($dr_delete_is_status == "deleteassessment"){
 								<div class="modal-body">
 									<form method="POST">
 
-										<input type="hidden" id="dr_delete_is_status" name="dr_delete_is_status">
-										<input type="hidden" id="drx_delete_is_key" name="drx_delete_is_key">
+										<input type="hidden" id="drx_clear_status" name="drx_clear_status">
+										<input type="hidden" id="drx_clear_key" name="drx_clear_key">
 
-                    <h3 class="text-center">Are you sure you want to Delete?</h3>
+                    <h3 class="text-center">Are you sure you want to clear all sequence of Asssement?</h3>
 
                     <center>
-  									  <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Yes</button> &nbsp;
+  									  <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Yes</button> &nbsp;
   										<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> No</button>
                     </center>
 
@@ -486,9 +441,6 @@ if($dr_delete_is_status == "deleteassessment"){
 						</div>
 				</div>
 		</div>
-		<!-- ============================================================== -->
-		<!-- END MODALS -->
-		<!-- ============================================================== -->
 
 
 
@@ -526,27 +478,14 @@ if($dr_delete_is_status == "deleteassessment"){
         /****************************************
          *       Basic Table                   *
          ****************************************/
-        $('#zero_config').DataTable();
-    </script>
+    // $('#zero_config').DataTable();
 
-		<script>
-
-    function addAssessment(){
-      $("#assessmentModalLabel").html("Add New Asssement") ;
-      $("#drx_status").val("addnewassessment") ;
-
-      $("#drxassessment_question1").val("") ;
-      $("#drxassessment_q1_answer_1").val("") ;
-      $("#drxassessment_q1_answer_2").val("") ;
-      $("#drxassessment_q1_answer_3").val("") ;
-      $("#drxassessment_q1_answer_4").val("") ;
-    }
-
-    function editAssessment(key, q1, a1, a2, a3, a4)
+    function setAssessmentOrder(key, q1, a1, a2, a3, a4)
     {
-          $("#assessmentModalLabel").html("Edit Asssement") ;
-          $("#drx_status").val("editassessment") ;
+          $("#assessmentModalLabel").html("Set Assessment Order") ;
+          $("#drx_status").val("sendorderassessment") ;
           $("#drx_key").val(key) ;
+          $("#drx_question").html(q1) ;
 
           $("#drxassessment_question1").val(q1) ;
           $("#drxassessment_q1_answer_1").val(a1) ;
@@ -555,13 +494,10 @@ if($dr_delete_is_status == "deleteassessment"){
           $("#drxassessment_q1_answer_4").val(a4) ;
     }
 
-    function deleteAssessment(key)
-    {
-          $("#deleteAssessmentModalLabel").html("Delete Asssement") ;
-          $("#dr_delete_is_status").val("deleteassessment") ;
-          $("#drx_delete_is_key").val(key) ;
+    function clearAllOrder(){
+          $("#clearAssessmentModalLabel").html("Clear All") ;
+          $("#drx_clear_status").val("clearallassessment") ;
     }
-
 
     </script>
 

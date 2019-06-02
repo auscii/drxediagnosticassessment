@@ -48,6 +48,7 @@ if (!empty($_POST['drxassessment_confirm_password'])) {
 		$drxassessment_confirm_password = "";
 }
 
+$date_created_format = date('Y-m-d g:i:s');
 
 if (isset($_POST['drxassessment_regsubmit'])) {
 
@@ -57,7 +58,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
                                   drxassessment_email,
                                   drxassessment_username,
                                   drxassessment_password,
-                                  drxassessment_position
+                                  drxassessment_position,
+																	drxassessment_created_at
                                   )
                                   VALUES (
                                   :drxassessment_name,
@@ -65,7 +67,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
                                   :drxassessment_email,
                                   :drxassessment_username,
                                   :drxassessment_password,
-                                  :drxassessment_position
+                                  :drxassessment_position,
+																	:drxassessment_created_at
                                   )");
     $drx->execute(
         array(
@@ -74,7 +77,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
             'drxassessment_email'           => $drxassessment_email,
             'drxassessment_username'        => $drxassessment_username,
             'drxassessment_password'        => $drxassessment_password,
-            'drxassessment_position'        => $drxassessment_position
+            'drxassessment_position'        => $drxassessment_position,
+            'drxassessment_created_at'      => $date_created_format
         )
     );
     $drx->fetchAll();
