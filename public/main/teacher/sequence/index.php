@@ -32,7 +32,12 @@ if(isset($_POST['drxassessment_order'])){
     $drxassessment_order = "";
 }
 
-// include("drx_order.php");
+if (isset($_POST['drxassessment_domain'])) {
+    $drxassessment_domain = $_POST['drxassessment_domain'];
+} else {
+    $drxassessment_domain = "";
+}
+
 
 $drxassessment_status = 1;
 
@@ -57,13 +62,15 @@ if($drx_status == "sendorderassessment") {
     $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
                                                  drxassessment_order = :drxassessment_order,
                                                  drxassessment_order_value = :drxassessment_order_value,
-                                                 drxassessment_status = :drxassessment_status
+                                                 drxassessment_status = :drxassessment_status,
+                                                 drxassessment_domain = :drxassessment_domain
                                            WHERE drxassessment_id = :drxassessment_id;");
     $drx_statement->execute(
         array(
             'drxassessment_order'                   => $drxassessment_order,
             'drxassessment_order_value'             => $drxassessmentordervalue,
             'drxassessment_status'                  => $drxassessment_status,
+            'drxassessment_domain'                  => $drxassessment_domain,
             'drxassessment_id'                      => $drx_key
         )
     );
@@ -82,12 +89,14 @@ if (isset($_POST['drx_btn_clear'])) {
     $drx_statement_c_a = $connection->prepare("UPDATE drxassessment_assessment SET
                                                       drxassessment_status = :drxassessment_status,
                                                       drxassessment_order = :drxassessment_order,
-                                                      drxassessment_order_value = :drxassessment_order_value");
+                                                      drxassessment_order_value = :drxassessment_order_value,
+                                                      drxassessment_domain = :drxassessment_domain");
     $drx_statement_c_a->execute(
         array(
             'drxassessment_status'                  => $drxassessment_statuz,
             'drxassessment_order'                   => $drxassessment_statuz,
-            'drxassessment_order_value'             => $drxassessment_order_valuez
+            'drxassessment_order_value'             => $drxassessment_order_valuez,
+            'drxassessment_domain'                  => $drxassessment_domain
         )
     );
 
@@ -281,12 +290,8 @@ if (isset($_POST['drx_btn_clear'])) {
 													<thead>
 															<tr>
 																	<th class="text-center">#</th>
-																	<th class="text-center">Question</th>
-																	<!-- <th class="text-center">(A)</th>
-																	<th class="text-center">(B)</th>
-																	<th class="text-center">(C)</th>
-																	<th class="text-center">(D)</th> -->
-																	<!-- <th class="text-center">Date Created</th> -->
+                                  <th class="text-center">Question</th>
+																	<th class="text-center">Subject</th>
 																	<th class="text-center">Action</th>
 															</tr>
 													</thead>
@@ -308,6 +313,7 @@ if (isset($_POST['drx_btn_clear'])) {
                                        $drxassessmentorder = $row['drxassessment_order'];
                                        $drxassessmentordervalue = $row['drxassessment_order_value'];
 	                                     $drxassessmentstatus = $row['drxassessment_status'];
+	                                     $drxassessmentdomain = $row['drxassessment_domain'];
 	                          ?>
 															<tr>
 																<td class="text-center">
@@ -320,28 +326,24 @@ if (isset($_POST['drx_btn_clear'])) {
                                   ?>
                                 </td>
 																<td class="text-center"><?php echo $drxassessment_question1; ?></td>
-																<!-- <td class="text-center"><?php echo $drxassessment_q1_answer_1; ?></td>
-																<td class="text-center"><?php echo $drxassessment_q1_answer_2; ?></td>
-																<td class="text-center"><?php echo $drxassessment_q1_answer_3; ?></td>
-																<td class="text-center"><?php echo $drxassessment_q1_answer_4; ?></td> -->
-																<!-- <td class="text-center"><?php echo $drxassessment_created_at; ?></td> -->
+																<td class="text-center"><?php echo $drxassessmentdomain; ?></td>
 																<td class="text-center" style="width: 200px;">
 
                                 <?php if ($drxassessmentstatus === '0') { ?>
-                                  <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+                                  <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg" style="width: 160px;"
                                   onclick="setAssessmentOrder('<?php echo $drxassessment_id ; ?>',
                                                               '<?php echo $drxassessment_question1 ; ?>',
                                                               '<?php echo $drxassessment_q1_answer_1 ; ?>',
                                                               '<?php echo $drxassessment_q1_answer_2 ; ?>',
                                                               '<?php echo $drxassessment_q1_answer_3 ; ?>',
                                                               '<?php echo $drxassessment_q1_answer_4 ; ?>');">
-                                  <i class="fas fa-sort-numeric-down"></i> SET ORDER
+                                  <i class="fas fa-sort-numeric-down"></i> UPDATE
                                   </button>
                                 <?php } else if ($drxassessmentstatus === '1') { ?>
-                                  <button type="button" class="btn btn-warning btn-mg" disabled>
+                                  <button type="button" style="width: 160px;" class="btn btn-warning btn-mg" disabled>
                                   <i class="fas fa-sort-numeric-down"></i> ASSIGNED
                                   </button>
-                                <?php } ?>
+                                <?php } ?> <br /><br />
 
 																</td>
 															</tr>
@@ -381,7 +383,6 @@ if (isset($_POST['drx_btn_clear'])) {
 
 										<div class="form-group">
 												<label id="drx_question" class="col-sm-3 text-left control-label col-form-label"></label>
-												<!-- <div class="col-sm-9"> -->
                         <select class="select2 form-control custom-select" name="drxassessment_order" id="drxassessment_order">
                           <option value="" disabled selected>Select Order</option>
                           <?php
@@ -395,7 +396,18 @@ if (isset($_POST['drx_btn_clear'])) {
                           <option value="<?php echo $drxassessment_order_no; ?>"> <?php echo $drxassessment_order_value; ?> </option>
                           <?php } ?>
                         </select>
-												<!-- </div> -->
+										</div>
+
+                    <div class="form-group">
+												<label class="col-sm-3 text-left control-label col-form-label">Domain</label>
+                        <select class="select2 form-control custom-select" name="drxassessment_domain" id="drxassessment_domain">
+                          <option value="" disabled selected>Select Domain</option>
+                          <option value="Number Sense">Number Sense</option>
+                          <option value="Memorization of Arithmetic Facts">Memorization of Arithmetic Facts</option>
+                          <option value="Accurate Calculation">Accurate Calculation</option>
+                          <option value="Fluent Calculation">Fluent Calculation</option>
+                          <option value="Mathematical Reasoning and Application">Mathematical Reasoning and Application</option>
+                        </select>
 										</div>
 
 
@@ -488,6 +500,8 @@ if (isset($_POST['drx_btn_clear'])) {
           $("#drxassessment_q1_answer_2").val(a2) ;
           $("#drxassessment_q1_answer_3").val(a3) ;
           $("#drxassessment_q1_answer_4").val(a4) ;
+          $("#drxassessment_domain").val("");
+          $("#drxassessment_order").val("");
     }
 
     function clearAllOrder(){
