@@ -8,6 +8,11 @@ if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = "";
 }
 
+if (!empty($_SESSION['drxassessmentid'])) {
+    $drxassessmentid = $_SESSION['drxassessmentid'];
+} else {
+    $drxassessmentid = "";
+}
 // echo $drxassessmentname;
 // exit();
 
@@ -131,9 +136,9 @@ if (!empty($_SESSION['drxassessmentname'])) {
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
 
-                        <li class="sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../main/student" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../main/student" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
@@ -163,9 +168,31 @@ if (!empty($_SESSION['drxassessmentname'])) {
                       <div class="card">
                           <div class="card-body">
                               <h4 class="card-title m-b-0">Assessment Results</h4>
+
+                              <?php
+  	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment_result WHERE drxassessment_user_id = $drxassessmentid ");
+  	                          $result->execute();
+  	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+  	                                     $drxassessment_id = $row['drxassessment_id'];
+                                         $drxassessment_user_id = $row['drxassessment_user_id'];
+  	                                     // $drxassessment_numbersense_result = $row['drxassessment_numbersense_result'];
+  	                                     // $drxassessment_memorizationarithmethicfacts_result = $row['drxassessment_memorizationarithmethicfacts_result'];
+  	                                     // $drxassessment_accuratecalculation_result = $row['drxassessment_accuratecalculation_result'];
+  	                                     // $drxassessment_fluentcalculation_result = $row['drxassessment_fluentcalculation_result'];
+  	                                     // $drxassessment_mathemathicalreasoningapplication_result = $row['drxassessment_mathemathicalreasoningapplication_result'];
+                                         $drxassessment_status = $row['drxassessment_status'];
+                              ?>
+
+                              <?php if ($drxassessment_status == 0) { ?>
+
+                              <?php echo "<br /><span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'><i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.</span>"; ?>
+
+                              <?php } else {?>
+
                               <div class="m-t-20">
                                   <div class="d-flex no-block align-items-center">
-                                      <span>81% English</span>
+                                      <span>Number Sense</span>
                                       <div class="ml-auto">
                                           <span>125</span>
                                       </div>
@@ -174,75 +201,73 @@ if (!empty($_SESSION['drxassessmentname'])) {
                                       <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                              <div>
-                                  <div class="d-flex no-block align-items-center m-t-25">
-                                      <span>72% Unique English</span>
+
+
+                              <div class="m-t-20">
+                                  <div class="d-flex no-block align-items-center">
+                                      <span>Memorization of Arithmetic Facts</span>
                                       <div class="ml-auto">
-                                          <span>120</span>
+                                          <span>125</span>
                                       </div>
                                   </div>
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 72%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                              <div>
-                                  <div class="d-flex no-block align-items-center m-t-25">
-                                      <span>53% Science</span>
+
+                              <div class="m-t-20">
+                                  <div class="d-flex no-block align-items-center">
+                                      <span>Accurate Calculation</span>
                                       <div class="ml-auto">
-                                          <span>785</span>
+                                          <span>125</span>
                                       </div>
                                   </div>
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 53%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                              <div>
-                                  <div class="d-flex no-block align-items-center m-t-25">
-                                      <span>3% Mathematics</span>
+
+                              <div class="m-t-20">
+                                  <div class="d-flex no-block align-items-center">
+                                      <span>Fluent Calculation</span>
                                       <div class="ml-auto">
-                                          <span>8</span>
+                                          <span>125</span>
                                       </div>
                                   </div>
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 3%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                              <div>
-                                  <div class="d-flex no-block align-items-center m-t-25">
-                                      <span>78% History</span>
+
+                              <div class="m-t-20">
+                                  <div class="d-flex no-block align-items-center">
+                                      <span>Mathematical Reasoning and Application</span>
                                       <div class="ml-auto">
-                                          <span>512</span>
+                                          <span>125</span>
                                       </div>
                                   </div>
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 78%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                              <div>
-                                  <div class="d-flex no-block align-items-center m-t-25">
-                                      <span>12% Music &amp; Arts</span>
-                                      <div class="ml-auto">
-                                          <span>51</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 12%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
+                              <?php } } ?>
+
                           </div>
                       </div>
 
                       <div class="row">
                           <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
+                            <a href="assessment/" title="Start Assessment" style="color: #fff;">
                               <div class="card card-hover">
                                   <div class="box bg-success text-center">
                                       <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>
                                       <h6 class="text-white">START ASSSESSMENT</h6>
                                   </div>
                               </div>
+                            </a>
                           </div>
                       </div>
-                      
+
                   </div>
               </div>
             </div>

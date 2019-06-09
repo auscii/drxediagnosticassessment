@@ -32,6 +32,8 @@ if (isset($_POST['drx_login_submit'])) {
 	$row = $m364->fetch(PDO::FETCH_ASSOC);
 
   	if ($row) {
+       $_SESSION['drx_welcome'] = 1;
+       $_SESSION['drxassessmentid'] = $row['drxassessment_id'] ;
   		 $_SESSION['drxassessmentcode'] = $row['drxassessment_code'] ;
   		 $_SESSION['drxassessmentname'] = $row['drxassessment_name'] ;
        $_SESSION['drxassessmentcontactnumber'] = $row['drxassessment_contactnumber'] ;
@@ -40,7 +42,6 @@ if (isset($_POST['drx_login_submit'])) {
        $_SESSION['drxassessmentpassword']=$row['drxassessment_password'] ;
        $_SESSION['drxassessmentposition']=$row['drxassessment_position'];
        $_SESSION['drxch3ck5ecur1ty']="z01nxc98zxncnzx12131102930190293019203910920391";
-
        $position = $row['drxassessment_position'];
 
        if ($position === "4dm1n15t4t0r") {

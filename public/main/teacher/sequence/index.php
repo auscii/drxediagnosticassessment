@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../../../../config/common/asdasf9z09x0c90zx90123.php");
-
+$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
 } else {
@@ -239,6 +239,9 @@ if (isset($_POST['drx_btn_clear'])) {
                                 <li class="sidebar-item"><a href="../sequence/" class="active sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
                         </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
@@ -298,7 +301,6 @@ if (isset($_POST['drx_btn_clear'])) {
 													<tbody>
 														<?php
 	                          $drx_count = 0;
-	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_order ASC");
 	                          $result->execute();
 	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -352,6 +354,180 @@ if (isset($_POST['drx_btn_clear'])) {
 											</table>
 				</div>
       </div>
+      <h2 class="text-center">SUMMARY OF SEQUENCE OF ASSESSMENT</h2> <br />
+
+      <div class="row">
+       <div class="col-md-6">
+           <div class="card" style="height: 470px;">
+               <div class="card-body">
+                 <h5 class="card-title">NUMBER SENSE</h5>
+                 <?php
+                 $drx_count = 0;
+                 $sql = "SELECT count(*) FROM drxassessment_assessment
+                         WHERE drxassessment_domain = 'Number Sense'";
+                 $result = $connection->prepare($sql);
+                 $result->execute();
+                 $total_number_sense = $result->fetchColumn();
+                 if ($total_number_sense == 0) {
+                   echo "<label style='color:red;'>No assessment assigned.</label>";
+                 } else {
+                     $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
+                                                            drxassessment_status
+                                                     FROM drxassessment_assessment
+                                                     WHERE drxassessment_domain = 'Number Sense'
+                                                     ");
+                     $result->execute();
+                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                $drx_count++;
+                                $drxassessmentdomainx = $row['drxassessment_domain'];
+                                $drxassessment_question1 = $row['drxassessment_question1'];
+                                $drxassessmentxstatus = $row['drxassessment_status'];
+                                echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
+                          }
+                                echo "<label style='color:green;'>Total Assessment of Number Sense: ".
+                                $total_number_sense."</label>";
+                 }
+                 ?>
+               </div>
+           </div>
+       </div>
+       <div class="col-md-6">
+           <div class="card" style="height: 470px;">
+               <div class="card-body">
+                   <h5 class="card-title">MEMORIZATION OF ARITHMETIC FACTS</h5>
+                   <?php
+                   $drx_count = 0;
+                   $sql = "SELECT count(*) FROM drxassessment_assessment
+                           WHERE drxassessment_domain = 'Memorization of Arithmetic Facts'";
+                   $result = $connection->prepare($sql);
+                   $result->execute();
+                   $total_memorization_of_arithmetic_facts = $result->fetchColumn();
+                   if ($total_memorization_of_arithmetic_facts == 0) {
+                     echo "<label style='color:red;'>No assessment assigned.</label>";
+                   } else {
+                       $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
+                                                              drxassessment_status
+                                                       FROM drxassessment_assessment
+                                                       WHERE drxassessment_domain = 'Memorization of Arithmetic Facts'
+                                                       ");
+                       $result->execute();
+                           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+                                  $drxassessmentdomainx = $row['drxassessment_domain'];
+                                  $drxassessment_question1 = $row['drxassessment_question1'];
+                                  $drxassessmentxstatus = $row['drxassessment_status'];
+                                  echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
+                            }
+                                  echo "<label style='color:green;'>Total Assessment of Memorization of Arithmetic Facts: ".
+                                  $total_memorization_of_arithmetic_facts."</label>";
+                   }
+                   ?>
+               </div>
+           </div>
+       </div>
+       <div class="col-md-4">
+           <div class="card" style="height: 470px;">
+               <div class="card-body">
+                   <h5 class="card-title">ACCURATE CALCULATION</h5>
+                   <?php
+                   $drx_count = 0;
+                   $sql = "SELECT count(*) FROM drxassessment_assessment
+                           WHERE drxassessment_domain = 'Accurate Calculation'";
+                   $result = $connection->prepare($sql);
+                   $result->execute();
+                   $total_accurate_calculation = $result->fetchColumn();
+                   if ($total_accurate_calculation == 0) {
+                     echo "<label style='color:red;'>No assessment assigned.</label>";
+                   } else {
+                       $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
+                                                              drxassessment_status
+                                                       FROM drxassessment_assessment
+                                                       WHERE drxassessment_domain = 'Accurate Calculation'
+                                                       ");
+                       $result->execute();
+                           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+                                  $drxassessmentdomainx = $row['drxassessment_domain'];
+                                  $drxassessment_question1 = $row['drxassessment_question1'];
+                                  $drxassessmentxstatus = $row['drxassessment_status'];
+                                  echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
+                            }
+                                  echo "<label style='color:green;'>Total Accurate Calculation: ".
+                                  $total_accurate_calculation."</label>";
+                   }
+                   ?>
+               </div>
+           </div>
+       </div>
+       <div class="col-md-4">
+           <div class="card" style="height: 470px;">
+               <div class="card-body">
+                   <h5 class="card-title">FLUENT CALCULATION</h5>
+                   <?php
+                   $drx_count = 0;
+                   $sql = "SELECT count(*) FROM drxassessment_assessment
+                           WHERE drxassessment_domain = 'Fluent Calculation'";
+                   $result = $connection->prepare($sql);
+                   $result->execute();
+                   $total_fluent_calculation = $result->fetchColumn();
+                   if ($total_fluent_calculation == 0) {
+                     echo "<label style='color:red;'>No assessment assigned.</label>";
+                   } else {
+                       $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
+                                                              drxassessment_status
+                                                       FROM drxassessment_assessment
+                                                       WHERE drxassessment_domain = 'Fluent Calculation'
+                                                       ");
+                       $result->execute();
+                           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+                                  $drxassessmentdomainx = $row['drxassessment_domain'];
+                                  $drxassessment_question1 = $row['drxassessment_question1'];
+                                  $drxassessmentxstatus = $row['drxassessment_status'];
+                                  echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
+                            }
+                                  echo "<label style='color:green;'>Total Fluent Calculation: ".
+                                  $total_fluent_calculation."</label>";
+                   }
+                   ?>
+               </div>
+           </div>
+       </div>
+       <div class="col-md-4">
+           <div class="card" style="height: 470px;">
+               <div class="card-body">
+                   <h5 class="card-title">MATHEMATICAL REASONING AND APPLICATION</h5>
+                   <?php
+                   $drx_count = 0;
+                   $sql = "SELECT count(*) FROM drxassessment_assessment
+                           WHERE drxassessment_domain = 'Mathematical Reasoning and Application'";
+                   $result = $connection->prepare($sql);
+                   $result->execute();
+                   $total_mathematical_reasoning_and_application = $result->fetchColumn();
+                   if ($total_mathematical_reasoning_and_application == 0) {
+                     echo "<label style='color:red;'>No assessment assigned.</label>";
+                   } else {
+                       $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
+                                                              drxassessment_status
+                                                       FROM drxassessment_assessment
+                                                       WHERE drxassessment_domain = 'Mathematical Reasoning and Application'
+                                                       ");
+                       $result->execute();
+                           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+                                  $drxassessmentdomainx = $row['drxassessment_domain'];
+                                  $drxassessment_question1 = $row['drxassessment_question1'];
+                                  $drxassessmentxstatus = $row['drxassessment_status'];
+                                  echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
+                            }
+                                  echo "<label style='color:green;'>Total Mathematical Reasoning & Application: ".
+                                  $total_mathematical_reasoning_and_application."</label>";
+                   }
+                   ?>
+               </div>
+           </div>
+       </div>
+     </div>
     </div>
 
         <!-- ============================================================== -->
@@ -383,7 +559,7 @@ if (isset($_POST['drx_btn_clear'])) {
 
 										<div class="form-group">
 												<label id="drx_question" class="col-sm-3 text-left control-label col-form-label"></label>
-                        <select class="select2 form-control custom-select" name="drxassessment_order" id="drxassessment_order">
+                        <select class="select2 form-control custom-select" name="drxassessment_order" id="drxassessment_order" required>
                           <option value="" disabled selected>Select Order</option>
                           <?php
                               $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -400,7 +576,7 @@ if (isset($_POST['drx_btn_clear'])) {
 
                     <div class="form-group">
 												<label class="col-sm-3 text-left control-label col-form-label">Domain</label>
-                        <select class="select2 form-control custom-select" name="drxassessment_domain" id="drxassessment_domain">
+                        <select class="select2 form-control custom-select" name="drxassessment_domain" id="drxassessment_domain" required>
                           <option value="" disabled selected>Select Domain</option>
                           <option value="Number Sense">Number Sense</option>
                           <option value="Memorization of Arithmetic Facts">Memorization of Arithmetic Facts</option>
