@@ -38,6 +38,12 @@ if (isset($_POST['drxassessment_domain'])) {
     $drxassessment_domain = "";
 }
 
+if (isset($_POST['drxassessment_question_total'])) {
+    $drxassessment_question_total = $_POST['drxassessment_question_total'];
+} else {
+    $drxassessment_question_total = "";
+}
+
 
 $drxassessment_status = 1;
 
@@ -47,6 +53,7 @@ if($drx_status == "sendorderassessment") {
                                     FROM drxassessment_order_roles
                                     WHERE drxassessment_order_no = '$drxassessment_order'");
     $result->execute();
+
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                $drxassessment_id = $row['drxassessment_id'];
                $drxassessmentordervalue = $row['drxassessment_order_value'];
@@ -59,32 +66,51 @@ if($drx_status == "sendorderassessment") {
                       'drxassessment_id'                       => $drxassessment_id
                       )
                   );
-    $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
-                                                 drxassessment_order = :drxassessment_order,
-                                                 drxassessment_order_value = :drxassessment_order_value,
-                                                 drxassessment_status = :drxassessment_status,
-                                                 drxassessment_domain = :drxassessment_domain
-                                           WHERE drxassessment_id = :drxassessment_id;");
-    $drx_statement->execute(
-        array(
-            'drxassessment_order'                   => $drxassessment_order,
-            'drxassessment_order_value'             => $drxassessmentordervalue,
-            'drxassessment_status'                  => $drxassessment_status,
-            'drxassessment_domain'                  => $drxassessment_domain,
-            'drxassessment_id'                      => $drx_key
-        )
-    );
+               $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
+                                                             drxassessment_order = :drxassessment_order,
+                                                             drxassessment_order_value = :drxassessment_order_value,
+                                                             drxassessment_status = :drxassessment_status,
+                                                             drxassessment_domain = :drxassessment_domain
+                                                       WHERE drxassessment_id = :drxassessment_id;");
+               $drx_statement->execute(
+                    array(
+                        'drxassessment_order'                   => $drxassessment_order,
+                        'drxassessment_order_value'             => $drxassessmentordervalue,
+                        'drxassessment_status'                  => $drxassessment_status,
+                        'drxassessment_domain'                  => $drxassessment_domain,
+                        'drxassessment_id'                      => $drx_key
+                    )
+                );
   }
-  // echo "<script>
-  //       $(function(){
-  //             toastr.success('Successfully Saved!', 'Success!');
-  //       });
-  //      </script>";
+
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $result_domain = $connection->prepare("SELECT drxassessment_question_total,drxassessment_domain_name
+                                         FROM drxassessment_assessment_domains 
+                                         WHERE drxassessment_domain_name = :drxassessment_domain_name");
+  $result_domain->execute(
+        array(
+            'drxassessment_domain_name'                   => $drxassessment_domain
+    ));
+
+        while ($row = $result_domain->fetch(PDO::FETCH_ASSOC)) {
+               $drxassessment_get_question_total = $row['drxassessment_question_total'];
+
+               $drxassessment_question_total = $drxassessment_get_question_total + 1;
+
+               $drx_domain_update = $connection->prepare("UPDATE drxassessment_assessment_domains SET
+                                                                drxassessment_question_total = :drxassessment_question_total
+                                                         WHERE drxassessment_domain_name = :drxassessment_domain_name");
+               $drx_domain_update->execute(
+                    array(
+                        'drxassessment_question_total'                   => $drxassessment_question_total,
+                        'drxassessment_domain_name'                      => $drxassessment_domain
+                    )
+                );
+        }
 }
 
 $drxassessment_order_valuez = "";
 $drxassessment_statuz = 0;
-// if ($drx_clear_status = "clearallassessment") {
 if (isset($_POST['drx_btn_clear'])) {
     $drx_statement_c_a = $connection->prepare("UPDATE drxassessment_assessment SET
                                                       drxassessment_status = :drxassessment_status,
@@ -105,6 +131,14 @@ if (isset($_POST['drx_btn_clear'])) {
     $drx_statement_c_a_r->execute(
         array(
             'drxassessment_status'                  => $drxassessment_statuz
+        )
+    );
+
+    $drx_domain_update = $connection->prepare("UPDATE drxassessment_assessment_domains SET
+                                                      drxassessment_question_total = :drxassessment_question_total");
+    $drx_domain_update->execute(
+        array(
+            'drxassessment_question_total'                   => $drxassessment_question_total
         )
     );
 }
@@ -555,6 +589,7 @@ if (isset($_POST['drx_btn_clear'])) {
 
 										<input type="hidden" id="drx_status" name="drx_status">
 										<input type="hidden" id="drx_key" name="drx_key">
+                                        <input type="hidden" name="drxassessment_question_total">
 
 
 										<div class="form-group">

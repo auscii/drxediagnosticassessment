@@ -181,220 +181,40 @@ if (!empty($_SESSION['drxassessmentname'])) {
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
-                                <thead>
-                                        <tr>
-                                                <th class="text-center">#</th>
-                                                <th class="text-center">Domain</th>
-                                                <th class="text-center">Total Question</th>
-                                                <th class="text-center">Action</th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">NUMBER SENSE</td>
-                                            <td class="text-center">
-                                            <?php 
+                                        <thead>
+                                                <tr>
+                                                        <th class="text-center">#</th>
+                                                        <th class="text-center">Domain</th>
+                                                        <th class="text-center">Total Question</th>
+                                                        <th class="text-center">Action</th>
+                                                </tr>
+                                        </thead>
+
+                                        <tbody>
+                                             <?php 
                                              $drx_count = 0;
-                                             $sql = "SELECT count(*) FROM drxassessment_assessment
-                                                     WHERE drxassessment_domain = 'Number Sense'";
-                                             $result = $connection->prepare($sql);
-                                             $result->execute();
-                                             $total_number_sense = $result->fetchColumn();
-                                             if ($total_number_sense == 0) {
-                                               echo "0";
-                                             } else {
-                                                 $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
-                                                                                        drxassessment_status
-                                                                                 FROM drxassessment_assessment
-                                                                                 WHERE drxassessment_domain = 'Number Sense'
-                                                                                 ");
+                                             $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains
+                                                                             ");
                                                  $result->execute();
                                                      while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                                             $drx_count++;
-                                                            $drxassessmentdomainx = $row['drxassessment_domain'];
-                                                            $drxassessment_question1 = $row['drxassessment_question1'];
-                                                            $drxassessmentxstatus = $row['drxassessment_status'];
-                                                            // echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
-                                                      }
-                                                            echo $total_number_sense;
-                                                  
-                                              }
-                                              ?>
-                                            </td>
-                                            <td class="text-center">
-                                                 <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                                  <i class="fas fa-arrow-right"></i> Start Exam
-                                                  </button>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="text-center">MEMORIZATION OF ARITHMETIC FACTS</td>
-                                            <td class="text-center">
-                                            <?php 
-                                             $drx_count = 0;
-                                             $sql = "SELECT count(*) FROM drxassessment_assessment
-                                                     WHERE drxassessment_domain = 'Memorization of Arithmetic Facts'";
-                                             $result = $connection->prepare($sql);
-                                             $result->execute();
-                                             $total_number_sense = $result->fetchColumn();
-                                             if ($total_number_sense == 0) {
-                                               echo "0";
-                                             } else {
-                                                 $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
-                                                                                        drxassessment_status
-                                                                                 FROM drxassessment_assessment
-                                                                                 WHERE drxassessment_domain = 'Memorization of Arithmetic Facts'
-                                                                                 ");
-                                                 $result->execute();
-                                                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                            $drx_count++;
-                                                            $drxassessmentdomainx = $row['drxassessment_domain'];
-                                                            $drxassessment_question1 = $row['drxassessment_question1'];
-                                                            $drxassessmentxstatus = $row['drxassessment_status'];
-                                                            // echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
-                                                      }
-                                                  echo $total_number_sense;
-                                              }
-                                              ?>
-                                            </td>
-                                            <td class="text-center">
-                                                 <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                                  <i class="fas fa-arrow-right"></i> Start Exam
-                                                  </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="text-center">ACCURATE CALCULATION</td>
-                                            <td class="text-center">
-                                            <?php 
-                                             $drx_count = 0;
-                                             $sql = "SELECT count(*) FROM drxassessment_assessment
-                                                     WHERE drxassessment_domain = 'Accurate Calculation'";
-                                             $result = $connection->prepare($sql);
-                                             $result->execute();
-                                             $total_number_sense = $result->fetchColumn();
-                                             if ($total_number_sense == 0) {
-                                               echo "0";
-                                             } else {
-                                                 $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
-                                                                                        drxassessment_status
-                                                                                 FROM drxassessment_assessment
-                                                                                 WHERE drxassessment_domain = 'Accurate Calculation'
-                                                                                 ");
-                                                 $result->execute();
-                                                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                            $drx_count++;
-                                                            $drxassessmentdomainx = $row['drxassessment_domain'];
-                                                            $drxassessment_question1 = $row['drxassessment_question1'];
-                                                            $drxassessmentxstatus = $row['drxassessment_status'];
-                                                            // echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
-                                                     }       
-                                                echo $total_number_sense;  
-                                              }
-                                              ?>
-                                            </td>
-                                            <td class="text-center">
-                                                 <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                                  <i class="fas fa-arrow-right"></i> Start Exam
-                                                  </button>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td class="text-center">FLUENT CALCULATION</td>
-                                            <td class="text-center">
-                                            <?php 
-                                             $drx_count = 0;
-                                             $sql = "SELECT count(*) FROM drxassessment_assessment
-                                                     WHERE drxassessment_domain = 'Fluent Calculation'";
-                                             $result = $connection->prepare($sql);
-                                             $result->execute();
-                                             $total_number_sense = $result->fetchColumn();
-                                             if ($total_number_sense == 0) {
-                                               echo "0";
-                                             } else {
-                                                 $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
-                                                                                        drxassessment_status
-                                                                                 FROM drxassessment_assessment
-                                                                                 WHERE drxassessment_domain = 'Fluent Calculation'
-                                                                                 ");
-                                                 $result->execute();
-                                                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                            $drx_count++;
-                                                            $drxassessmentdomainx = $row['drxassessment_domain'];
-                                                            $drxassessment_question1 = $row['drxassessment_question1'];
-                                                            $drxassessmentxstatus = $row['drxassessment_status'];
-                                                            // echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
-                                                      }      
-                                                      echo $total_number_sense;
-                                              }
-                                              ?>
-                                            </td>
-                                            <td class="text-center">
-                                                 <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                                  <i class="fas fa-arrow-right"></i> Start Exam
-                                                  </button>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td class="text-center">MATHEMATICAL REASONING AND APPLICATION</td>
-                                            <td class="text-center">
-                                            <?php 
-                                             $drx_count = 0;
-                                             $sql = "SELECT count(*) FROM drxassessment_assessment
-                                                     WHERE drxassessment_domain = 'Mathematical Reasoning and Application'";
-                                             $result = $connection->prepare($sql);
-                                             $result->execute();
-                                             $total_number_sense = $result->fetchColumn();
-                                             if ($total_number_sense == 0) {
-                                               echo "0";
-                                             } else {
-                                                 $result = $connection->prepare("SELECT drxassessment_domain, drxassessment_question1,
-                                                                                        drxassessment_status
-                                                                                 FROM drxassessment_assessment
-                                                                                 WHERE drxassessment_domain = 'Mathematical Reasoning and Application'
-                                                                                 ");
-                                                 $result->execute();
-                                                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                            $drx_count++;
-                                                            $drxassessmentdomainx = $row['drxassessment_domain'];
-                                                            $drxassessment_question1 = $row['drxassessment_question1'];
-                                                            $drxassessmentxstatus = $row['drxassessment_status'];
-                                                            // echo "<p>".$drx_count.".) ".$drxassessment_question1 ."</p>"."";
-                                                      }       
-                                                 echo $total_number_sense;
-                                                  
-                                              }
-                                              ?>
-                                            </td>
-                                            <td class="text-center">
-                                                 <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                                  <i class="fas fa-arrow-right"></i> Start Exam
-                                                  </button>
-                                            </td>
-                                        </tr>
-                                </tbody>
+                                                            $drxassessment_domain_name = $row['drxassessment_domain_name'];
+                                                            $drxassessment_question_total = $row['drxassessment_question_total'];
+                                             ?>
+                                            <tr>
+                                                <td class="text-center"><?php echo $drx_count; ?></td>
+                                                <td class="text-center"><?php echo $drxassessment_domain_name; ?></td>
+                                                <td class="text-center"><?php echo $drxassessment_question_total; ?></td>
+                                                <td class="text-center">
+                                                     <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+                                                      onclick="startExam('<?php echo $drxassessment_id ; ?>',
+                                                                         '<?php echo $drxassessmentanswer ; ?>');">
+                                                      <i class="fas fa-arrow-right"></i> Start Exam
+                                                      </button>
+                                                </td>
+                                            </tr>
+                                             <?php } ?>
+                                        </tbody>
                         </table>
                 </div>
             </div>
@@ -406,6 +226,92 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+
+    <!-- MODALS -->
+
+    <div class="modal fade" id="assessmentModal" tabindex="-1" role="dialog" aria-labelledby="assessmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="assessmentModalLabel"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form method="POST">
+
+                                <input type="hidden" id="drx_status" name="drx_status">
+                                <input type="hidden" id="drx_key" name="drx_key">
+
+                                <!-- <h4 class="card-title">Question</h4> -->
+                                <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
+                                        </div>
+                                </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
+                                        <div class="col-sm-9">
+                                                <select class="form-control" name="drxassessment_answer" id="drxassessment_answer" required>
+                                                    <option value="" disabled selected>--Select Answer--</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                    </div>
+
+
+
+                                <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">A.)</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
+                                        </div>
+                                </div>
+
+                                <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">B.)</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
+                                        </div>
+                                </div>
+
+                                <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">C.)</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
+                                        </div>
+                                </div>
+
+                                <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">D.)</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
+                                        </div>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                      <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                </div>
+           </div>
+        </div>
+
+    <!-- END OF MODALS -->
 
 
     <!-- ============================================================== -->
@@ -473,6 +379,10 @@ if (!empty($_SESSION['drxassessmentname'])) {
           $("#deleteusersModalLabel").html("Delete Admin/Teacher") ;
           $("#dr_delete_is_status").val("deleteuser") ;
           $("#drx_delete_is_key").val(key) ;
+    }
+
+    function startExam(){
+
     }
 
 
