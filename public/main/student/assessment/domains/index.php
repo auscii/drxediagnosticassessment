@@ -177,141 +177,60 @@ if (!empty($_SESSION['drxassessmentname'])) {
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="zero_config" class="table table-striped table-bordered">
-                                        <thead>
-                                                <tr>
-                                                        <th class="text-center">#</th>
-                                                        <th class="text-center">Domain</th>
-                                                        <th class="text-center">Total Question</th>
-                                                        <th class="text-center">Action</th>
-                                                </tr>
-                                        </thead>
-
-                                        <tbody>
-                                             <?php 
-                                             $drx_count = 0;
-                                             $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains
-                                                                             ");
-                                                 $result->execute();
-                                                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                            $drx_count++;
-                                                            $drxassessment_domain_name = $row['drxassessment_domain_name'];
-                                                            $drxassessment_question_total = $row['drxassessment_question_total'];
-                                             ?>
-                                            <tr>
-                                                <td class="text-center"><?php echo $drx_count; ?></td>
-                                                <td class="text-center"><?php echo $drxassessment_domain_name; ?></td>
-                                                <td class="text-center"><?php echo $drxassessment_question_total; ?></td>
-                                                <td class="text-center">
-                                                     <button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                                      onclick="startExam('<?php echo $drxassessment_id ; ?>',
-                                                                         '<?php echo $drxassessmentanswer ; ?>');">
-                                                      <i class="fas fa-arrow-right"></i> Start Exam
-                                                      </button>
-                                                </td>
-                                            </tr>
-                                             <?php } ?>
-                                        </tbody>
-                        </table>
-                </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
+  <div class="container-fluid">
+      <div class="card-body">
+          <div class="table-responsive">
+              <table id="zero_config" class="table table-striped table-bordered">
+                  <thead>
+                          <tr>
+                              <th class="text-center">#</th>
+                              <th class="text-center">Domain</th>
+                              <th class="text-center">Total Question</th>
+                              <th class="text-center">Action</th>
+                          </tr>
+                  </thead>
+                  <tbody>
+                       <?php
+                           $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains");
+                           $result->execute();
+                           $drx_count = 0;
+                           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+                                  $drxassessment_domain_name = $row['drxassessment_domain_name'];
+                                  $drxassessment_question_total = $row['drxassessment_question_total'];
+                                  $drxassessment_status = $row['drxassessment_status'];
+                       ?>
+                            <tr>
+                                <td class="text-center"><?php echo $drx_count; ?></td>
+                                <td class="text-center"><?php echo $drxassessment_domain_name; ?></td>
+                                <td class="text-center"><?php echo $drxassessment_question_total; ?></td>
+                                <td class="text-center">
+                                  <?php if ($drxassessment_status == 0) { ?>
+                                     <a class="btn btn-primary btn-mg" style="width: 120px;"
+                                        href="startexam/index.php?drxassessment_domain_name=<?php echo $drxassessment_domain_name; ?>"
+                                      >
+                                      <i class="fas fa-arrow-right"></i> Start Exam
+                                     </a>
+                                  <?php } else if ($drxassessment_status == 1) { ?>
+                                     <button class="btn btn-success btn-mg" style="width: 120px;" disabled>
+                                      <i class="fas fa-check-circle"></i> Done
+                                     </button>
+                                  <?php } ?>
+                                </td>
+                            </tr>
+                       <?php } ?>
+                  </tbody>
+              </table>
+      </div>
+  </div>
+</div>
+  <!-- ============================================================== -->
+  <!-- End Page wrapper  -->
+  <!-- ============================================================== -->
+</div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
-
-    <!-- MODALS -->
-
-    <div class="modal fade" id="assessmentModal" tabindex="-1" role="dialog" aria-labelledby="assessmentModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-                <div class="modal-content">
-
-                        <div class="modal-header">
-                                <h5 class="modal-title" id="assessmentModalLabel"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form method="POST">
-
-                                <input type="hidden" id="drx_status" name="drx_status">
-                                <input type="hidden" id="drx_key" name="drx_key">
-
-                                <!-- <h4 class="card-title">Question</h4> -->
-                                <div class="form-group row">
-                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
-                                        <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
-                                        </div>
-                                </div>
-
-                                    <div class="form-group row">
-                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
-                                        <div class="col-sm-9">
-                                                <select class="form-control" name="drxassessment_answer" id="drxassessment_answer" required>
-                                                    <option value="" disabled selected>--Select Answer--</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
-                                                </select>
-                                            </div>
-                                    </div>
-
-
-
-                                <div class="form-group row">
-                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">A.)</label>
-                                        <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">B.)</label>
-                                        <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">C.)</label>
-                                        <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">D.)</label>
-                                        <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
-                                        </div>
-                                </div>
-
-
-                                <div class="modal-footer">
-                                      <button type="submit" class="btn btn-success">Submit</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-                </div>
-           </div>
-        </div>
-
-    <!-- END OF MODALS -->
 
 
     <!-- ============================================================== -->
@@ -346,46 +265,6 @@ if (!empty($_SESSION['drxassessmentname'])) {
          *       Basic Table                   *
          ****************************************/
         $('#zero_config').DataTable();
-    </script>
-
-		<script>
-
-    function addUser(){
-      $("#usersModalLabel").html("Add New Admin/Teacher") ;
-      $("#drx_status").val("addnewuser") ;
-
-      $("#drxassessment_name").val("") ;
-      $("#drxassessment_contactnumber").val("") ;
-      $("#drxassessment_email").val("") ;
-      $("#drxassessment_username").val("") ;
-      $("#drxassessment_password").val("") ;
-    }
-
-    function editUser(key, name, contact, email, username, password)
-    {
-          $("#usersModalLabel").html("Edit Admin/Teacher") ;
-          $("#drx_status").val("edituser") ;
-          $("#drx_key").val(key) ;
-
-          $("#drxassessment_name").val(name) ;
-          $("#drxassessment_contactnumber").val(contact) ;
-          $("#drxassessment_email").val(email) ;
-          $("#drxassessment_username").val(username) ;
-          $("#drxassessment_password").val(password) ;
-    }
-
-    function deleteUser(key)
-    {
-          $("#deleteusersModalLabel").html("Delete Admin/Teacher") ;
-          $("#dr_delete_is_status").val("deleteuser") ;
-          $("#drx_delete_is_key").val(key) ;
-    }
-
-    function startExam(){
-
-    }
-
-
     </script>
 
 </body>

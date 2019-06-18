@@ -81,30 +81,30 @@ if (isset($_POST['drxassessment_regsubmit'])) {
             'drxassessment_created_at'      => $date_created_format
         )
     );
-		$drx_get_last_id = $connection->lastInsertId();
+		// $drx_get_last_id = $connection->lastInsertId();
 
     $drx->fetchAll();
 
 
 
-		$drxassessment_user_id = $drx_get_last_id;
+		// $drxassessment_user_id = $drx_get_last_id;
 
 		// For Student Assessment details
-		$drx_insert_assessment = $connection->prepare("INSERT INTO drxassessment_assessment_result (
-                                  drxassessment_user_id,
-                                  drxassessment_status
-                                  )
-                                  VALUES (
-                                  :drxassessment_user_id,
-                                  :drxassessment_status
-                                  )");
-    $drx_insert_assessment->execute(
-        array(
-            'drxassessment_user_id'            => $drxassessment_user_id,
-            'drxassessment_status'   					 => 0
-        )
-    );
-    $drx_insert_assessment->fetchAll();
+		// $drx_insert_assessment = $connection->prepare("INSERT INTO drxassessment_assessment_result (
+    //                               drxassessment_user_id,
+    //                               drxassessment_status
+    //                               )
+    //                               VALUES (
+    //                               :drxassessment_user_id,
+    //                               :drxassessment_status
+    //                               )");
+    // $drx_insert_assessment->execute(
+    //     array(
+    //         'drxassessment_user_id'            => $drxassessment_user_id,
+    //         'drxassessment_status'   					 => 0
+    //     )
+    // );
+    // $drx_insert_assessment->fetchAll();
 
 		echo "<script>alert('Successfuly Register!');</script>";
 }
