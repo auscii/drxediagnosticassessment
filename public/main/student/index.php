@@ -171,86 +171,42 @@ if (!empty($_SESSION['drxassessmentid'])) {
 
                               <?php
   	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment_result WHERE drxassessment_user_id = $drxassessmentid ");
+  	                          $result = $connection->prepare("SELECT t1.drxassessment_domain_name, t2.user_id,
+                                                                     t2.student_selected_domain
+                                                              FROM drxassessment_assessment_domains AS t1
+                                                              INNER JOIN drxassessment_assessment_result AS t2
+                                                              WHERE t2.user_id = $drxassessmentid");
   	                          $result->execute();
   	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-  	                                     $drxassessment_id = $row['drxassessment_id'];
-                                         $drxassessment_user_id = $row['drxassessment_user_id'];
-  	                                     // $drxassessment_numbersense_result = $row['drxassessment_numbersense_result'];
-  	                                     // $drxassessment_memorizationarithmethicfacts_result = $row['drxassessment_memorizationarithmethicfacts_result'];
-  	                                     // $drxassessment_accuratecalculation_result = $row['drxassessment_accuratecalculation_result'];
-  	                                     // $drxassessment_fluentcalculation_result = $row['drxassessment_fluentcalculation_result'];
-  	                                     // $drxassessment_mathemathicalreasoningapplication_result = $row['drxassessment_mathemathicalreasoningapplication_result'];
-                                         $drxassessment_status = $row['drxassessment_status'];
+  	                                     // $drxassessment_id = $row['drxassessment_id'];
+                                         $drxassessment_user_id = $row['user_id'];
+                                         // $student_selected_domain = $row['student_selected_domain'];
+                                         // $drxassessment_status = $row['student_status'];
+                                         $drxassessment_domain_name = $row['drxassessment_domain_name'];
                               ?>
 
-                              <?php if ($drxassessment_status == 0) { ?>
+                              <?php if (!empty($drxassessment_domain_name)) { ?>
 
-                              <?php echo "<br /><span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'><i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.</span>"; ?>
+                                <div class="m-t-20">
+                                    <div class="d-flex no-block align-items-center">
+                                        <span><?php echo $drxassessment_domain_name; ?></span>
+                                        <div class="ml-auto">
+                                            <span>81</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
 
-                              <?php } else {?>
+                            <?php } else { ?>
 
-                              <div class="m-t-20">
-                                  <div class="d-flex no-block align-items-center">
-                                      <span>Number Sense</span>
-                                      <div class="ml-auto">
-                                          <span>125</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
+                                <br />
+                                <span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
+                                  <i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.
+                                </span>
 
-
-                              <div class="m-t-20">
-                                  <div class="d-flex no-block align-items-center">
-                                      <span>Memorization of Arithmetic Facts</span>
-                                      <div class="ml-auto">
-                                          <span>125</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
-
-                              <div class="m-t-20">
-                                  <div class="d-flex no-block align-items-center">
-                                      <span>Accurate Calculation</span>
-                                      <div class="ml-auto">
-                                          <span>125</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
-
-                              <div class="m-t-20">
-                                  <div class="d-flex no-block align-items-center">
-                                      <span>Fluent Calculation</span>
-                                      <div class="ml-auto">
-                                          <span>125</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
-
-                              <div class="m-t-20">
-                                  <div class="d-flex no-block align-items-center">
-                                      <span>Mathematical Reasoning and Application</span>
-                                      <div class="ml-auto">
-                                          <span>125</span>
-                                      </div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </div>
-                              <?php } } ?>
+                            <?php } } ?>
 
                           </div>
                       </div>

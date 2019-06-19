@@ -78,25 +78,40 @@ if (isset($_POST['drx_btn_start_exam']))
               'student_selected_answer'			 => $drxassessmentAnswerStudentFinalValue[$i]
           )
        );
-       $drx_statement->fetchAll();
+    }
+       // $drx_statement->fetchAll();
 
-       if ($drx_statement) {
-         //
 
-         $drx_statement = $connection->prepare("UPDATE drxassessment_assessment_domains SET
-                                                       drxassessment_status = :drxassessment_status
-                                                WHERE drxassessment_domain_name = :drxassessment_domain_name");
-           $drx_statement->execute(
-              array(
-                  'drxassessment_status'                => 1,
-                  'drxassessment_domain_name'           => $drxassessment_domain_name
-              )
-           );
-           $drx_statement->fetchAll();
+           // $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           // $result_t = $connection->prepare("SELECT taken_count FROM drxassessment_assessment_taken");
+           // $result_t->execute();
+           //       while ($row = $result_t->fetch(PDO::FETCH_ASSOC)) {
+           //              $get_taken_count = $row['taken_count'];
+           //              $taken_count = $get_taken_count + 1;
 
-         header("Location: ../");
-       }
-  }
+                        $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
+                                                                          user_id,
+                                                                          user_domain,
+                                                                          user_name,
+                                                                          taken_count
+                                                                          )
+                                                                     VALUES (
+                                                                            :user_id,
+                                                                            :user_domain,
+                                                                            :user_name,
+                                                                            :taken_count
+                                                                            )");
+                         $drx_statement_taken->execute(
+                            array(
+                                'user_id'                     => $drxassessmentid,
+                                'user_domain'                 => $drxassessment_domain_name,
+                                'user_name'                   => $drxassessmentname,
+                                'taken_count'			            => 1
+                            )
+                         );
+                         // $drx_statement_taken->fetchAll();
+                         header("Location: ../");
+                  // }
 }
 // End - Student Assessment Result
 

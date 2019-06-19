@@ -9,6 +9,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = "";
 }
 
+if (!empty($_SESSION['drxassessmentid'])) {
+    $drxassessmentid = $_SESSION['drxassessmentid'];
+} else {
+    $drxassessmentid = "";
+}
+
 
 ?>
 
@@ -164,7 +170,7 @@ if (!empty($_SESSION['drxassessmentname'])) {
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../../">Assessment</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../">Assessment Instructions</a></li>
-                                     <li class="breadcrumb-item active" aria-current="page"><a href="../start/">Domains</a></li>
+                                     <li class="breadcrumb-item active" aria-current="page">Domains</li>
                                 </ol>
                             </nav>
                         </div>
@@ -186,6 +192,7 @@ if (!empty($_SESSION['drxassessmentname'])) {
                               <th class="text-center">#</th>
                               <th class="text-center">Domain</th>
                               <th class="text-center">Total Question</th>
+                              <th class="text-center">Retake</th>
                               <th class="text-center">Action</th>
                           </tr>
                   </thead>
@@ -199,23 +206,28 @@ if (!empty($_SESSION['drxassessmentname'])) {
                                   $drxassessment_domain_name = $row['drxassessment_domain_name'];
                                   $drxassessment_question_total = $row['drxassessment_question_total'];
                                   $drxassessment_status = $row['drxassessment_status'];
+
+                            // Count Retake of Student Assessment
+                            $rowCountQuery = "SELECT count(taken_count) AS takenCount, user_id, user_domain
+                                              FROM drxassessment_assessment_taken
+                                              WHERE user_id = :user_id
+                                              AND user_domain = :user_domain
+                                              ";
+                            $resultCount = $connection->prepare($rowCountQuery);
+                            $resultCount->execute(array('user_id'=>$drxassessmentid,'user_domain'=>$drxassessment_domain_name));
+                            $takenCount = $resultCount->fetchColumn();
                        ?>
                             <tr>
                                 <td class="text-center"><?php echo $drx_count; ?></td>
                                 <td class="text-center"><?php echo $drxassessment_domain_name; ?></td>
                                 <td class="text-center"><?php echo $drxassessment_question_total; ?></td>
+                                <td class="text-center"><?php echo $takenCount; ?></td>
                                 <td class="text-center">
-                                  <?php if ($drxassessment_status == 0) { ?>
-                                     <a class="btn btn-primary btn-mg" style="width: 120px;"
-                                        href="startexam/index.php?drxassessment_domain_name=<?php echo $drxassessment_domain_name; ?>"
-                                      >
-                                      <i class="fas fa-arrow-right"></i> Start Exam
-                                     </a>
-                                  <?php } else if ($drxassessment_status == 1) { ?>
-                                     <button class="btn btn-success btn-mg" style="width: 120px;" disabled>
-                                      <i class="fas fa-check-circle"></i> Done
-                                     </button>
-                                  <?php } ?>
+                                  <a class="btn btn-primary btn-mg" style="width: 120px;"
+                                     href="startexam/index.php?drxassessment_domain_name=<?php echo $drxassessment_domain_name; ?>"
+                                   >
+                                   <i class="fas fa-arrow-right"></i> Start Exam
+                                  </a>
                                 </td>
                             </tr>
                        <?php } ?>

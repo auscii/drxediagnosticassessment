@@ -83,9 +83,8 @@ if($drx_status == "sendorderassessment") {
                 );
   }
 
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $result_domain = $connection->prepare("SELECT drxassessment_question_total,drxassessment_domain_name
-                                         FROM drxassessment_assessment_domains 
+                                         FROM drxassessment_assessment_domains
                                          WHERE drxassessment_domain_name = :drxassessment_domain_name");
   $result_domain->execute(
         array(
