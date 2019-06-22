@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2019 at 08:23 AM
+-- Generation Time: Jun 19, 2019 at 08:19 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.3.5
 
@@ -57,9 +57,9 @@ INSERT INTO `drxassessment_assessment` (`drxassessment_id`, `drxassessment_quest
 (4, 'Question_4', 'C', 'Number Sense', 'q4_a', 'q4_b', 'q4_c', 'q4_d', 1, '1st', 1, '2019-06-01 05:25:30', '2019-06-09 10:20:28'),
 (5, 'Question_5', '', 'Accurate Calculation', 'q5_a', 'q5_b', 'q5_c', 'q5_d', 13, '13th	', 1, '2019-06-01 05:26:00', '2019-06-01 05:26:43'),
 (6, 'Question_6', '', 'Accurate Calculation', 'q6_a', 'q6_b', 'q6_c', 'q6_d', 11, '11th ', 1, '2019-06-01 05:27:02', '2019-06-01 05:27:43'),
-(7, 'Question_7', '', '', 'q7_a', 'q7_b', 'q7_c', 'q7_d', 0, '', 0, '2019-06-01 05:27:25', '2019-06-01 05:28:03'),
+(7, 'Question_7', '', 'Memorization of Arithmetic Facts', 'q7_a', 'q7_b', 'q7_c', 'q7_d', 4, '4th', 1, '2019-06-01 05:27:25', '2019-06-01 05:28:03'),
 (8, 'Question_8', '', '', 'q8_a', 'q8_b', 'q8_c', 'q8_d', 0, '', 0, '2019-06-01 05:28:29', '0000-00-00 00:00:00'),
-(9, 'Question_9', '', '', 'q9_a', 'q9_b', 'q9_c', 'q9_d', 0, '', 0, '2019-06-01 05:28:59', '0000-00-00 00:00:00'),
+(9, 'Question_9', '', 'Number Sense', 'q9_a', 'q9_b', 'q9_c', 'q9_d', 14, '14th', 1, '2019-06-01 05:28:59', '0000-00-00 00:00:00'),
 (10, 'Question_10', '', '', 'q10_a', 'q10_b', 'q10_c', 'q10_d', 0, '', 0, '2019-06-01 05:29:36', '0000-00-00 00:00:00'),
 (11, 'Question_11', '', 'Fluent Calculation', 'q11_a', 'q11_b', 'q11_c', 'q11_d', 19, '19th', 1, '2019-06-01 05:29:52', '0000-00-00 00:00:00'),
 (12, 'Question_12', '', '', 'q12_a', 'q12_b', 'q12_c', 'q12_d', 0, '', 0, '2019-06-01 05:30:13', '0000-00-00 00:00:00'),
@@ -73,7 +73,7 @@ INSERT INTO `drxassessment_assessment` (`drxassessment_id`, `drxassessment_quest
 (20, 'Question_20', '', '', 'q20_a', 'q20_b', 'q20_c', 'q20_d', 0, '', 0, '2019-06-01 05:33:18', '0000-00-00 00:00:00'),
 (21, 'Question_21', '', '', 'q21_a', 'q21_b', 'q21_c', 'q21_d', 0, '', 0, '2019-06-01 05:34:24', '0000-00-00 00:00:00'),
 (22, 'Question_22', '', '', 'q22_a', 'q22_b', 'q22_c', 'q22_d', 0, '', 0, '2019-06-01 05:34:51', '2019-06-01 05:35:02'),
-(23, 'Question_23', '', '', 'q23_a', 'q23_b', 'q23_c', 'q23_d', 0, '', 0, '2019-06-01 05:35:37', '0000-00-00 00:00:00'),
+(23, 'Question_23', '', 'Accurate Calculation', 'q23_a', 'q23_b', 'q23_c', 'q23_d', 6, '6th ', 1, '2019-06-01 05:35:37', '0000-00-00 00:00:00'),
 (24, 'Question_24', '', '', 'q24_a', 'q24_b', 'q24_c', 'q24_d', 0, '', 0, '2019-06-01 05:35:50', '0000-00-00 00:00:00'),
 (25, 'Question_25', '', '', 'q25_a', 'q25_b', 'q25_c', 'q25_d', 0, '', 0, '2019-06-01 05:36:00', '0000-00-00 00:00:00'),
 (26, 'Question_26', '', '', 'q26_a', 'q26_b', 'q26_c', 'q26_d', 0, '', 0, '2019-06-01 05:36:43', '0000-00-00 00:00:00'),
@@ -121,9 +121,9 @@ CREATE TABLE `drxassessment_assessment_domains` (
 --
 
 INSERT INTO `drxassessment_assessment_domains` (`drxassessment_id`, `drxassessment_domain_name`, `drxassessment_question_total`, `drxassessment_status`, `drxassessment_created_at`) VALUES
-(1, 'Number Sense', 1, 0, '2019-06-16 11:51:12'),
-(2, 'Memorization of Arithmetic Facts', 1, 0, '2019-06-16 11:51:12'),
-(3, 'Accurate Calculation', 2, 1, '2019-06-16 11:52:06'),
+(1, 'Number Sense', 2, 0, '2019-06-16 11:51:12'),
+(2, 'Memorization of Arithmetic Facts', 2, 0, '2019-06-16 11:51:12'),
+(3, 'Accurate Calculation', 3, 0, '2019-06-16 11:52:06'),
 (4, 'Fluent Calculation', 3, 0, '2019-06-16 11:52:06'),
 (5, 'Mathematical Reasoning and Application', 1, 0, '2019-06-16 11:52:18');
 
@@ -138,7 +138,7 @@ CREATE TABLE `drxassessment_assessment_result` (
   `user_id` int(11) NOT NULL,
   `user_name` text NOT NULL,
   `user_email` text NOT NULL,
-  `student_selected_domain` varchar(25) NOT NULL,
+  `student_selected_domain` varchar(55) NOT NULL,
   `student_selected_question` varchar(25) NOT NULL,
   `student_selected_answer` varchar(55) NOT NULL,
   `student_sequence` int(11) NOT NULL,
@@ -151,8 +151,48 @@ CREATE TABLE `drxassessment_assessment_result` (
 --
 
 INSERT INTO `drxassessment_assessment_result` (`drxassessment_id`, `user_id`, `user_name`, `user_email`, `student_selected_domain`, `student_selected_question`, `student_selected_answer`, `student_sequence`, `student_status`, `created_at`) VALUES
-(1, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_5', 'q5_c', 0, 0, '2019-06-18 13:25:22'),
-(2, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_6', 'q6_d', 0, 0, '2019-06-18 13:25:22');
+(1, 10, 'XX', 'x@x.com', 'Memorization of Arithmetic Facts', 'Question_3', 'q3_c', 0, 0, '2019-06-19 12:31:50'),
+(2, 10, 'XX', 'x@x.com', 'Memorization of Arithmetic Facts', 'Question_7', 'q7_b', 0, 0, '2019-06-19 12:31:51'),
+(3, 10, 'XX', 'x@x.com', 'Memorization of Arithmetic Facts', 'Question_3', 'q3_c', 0, 0, '2019-06-19 12:39:11'),
+(4, 10, 'XX', 'x@x.com', 'Memorization of Arithmetic Facts', 'Question_7', 'q7_a', 0, 0, '2019-06-19 12:39:11'),
+(5, 10, 'XX', 'x@x.com', 'Number Sense', 'Question_4', 'q4_c', 0, 0, '2019-06-19 12:39:16'),
+(6, 10, 'XX', 'x@x.com', 'Number Sense', 'Question_9', 'q9_d', 0, 0, '2019-06-19 12:39:16'),
+(7, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_5', 'q5_c', 0, 0, '2019-06-19 13:18:01'),
+(8, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_6', 'q6_a', 0, 0, '2019-06-19 13:18:01'),
+(9, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_23', 'q23_c', 0, 0, '2019-06-19 13:18:01'),
+(10, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_2', 'q2_b', 0, 0, '2019-06-19 13:18:12'),
+(11, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_11', 'q11_d', 0, 0, '2019-06-19 13:18:13'),
+(12, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_18', 'q18_a', 0, 0, '2019-06-19 13:18:13'),
+(13, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_2', 'q2_c', 0, 0, '2019-06-19 13:18:22'),
+(14, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_11', 'q11_a', 0, 0, '2019-06-19 13:18:22'),
+(15, 10, 'XX', 'x@x.com', 'Fluent Calculation', 'Question_18', 'q18_d', 0, 0, '2019-06-19 13:18:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drxassessment_assessment_taken`
+--
+
+CREATE TABLE `drxassessment_assessment_taken` (
+  `drxassessment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_domain` varchar(55) NOT NULL,
+  `user_name` varchar(55) NOT NULL,
+  `taken_count` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drxassessment_assessment_taken`
+--
+
+INSERT INTO `drxassessment_assessment_taken` (`drxassessment_id`, `user_id`, `user_domain`, `user_name`, `taken_count`, `created_at`) VALUES
+(1, 10, 'Memorization of Arithmetic Facts', 'XX', 1, '2019-06-19 12:31:51'),
+(2, 10, 'Memorization of Arithmetic Facts', 'XX', 1, '2019-06-19 12:39:11'),
+(3, 10, 'Number Sense', 'XX', 1, '2019-06-19 12:39:16'),
+(4, 10, 'Accurate Calculation', 'XX', 1, '2019-06-19 13:18:01'),
+(5, 10, 'Fluent Calculation', 'XX', 1, '2019-06-19 13:18:13'),
+(6, 10, 'Fluent Calculation', 'XX', 1, '2019-06-19 13:18:22');
 
 -- --------------------------------------------------------
 
@@ -176,9 +216,9 @@ INSERT INTO `drxassessment_order_roles` (`drxassessment_id`, `drxassessment_orde
 (1, 1, '1st', 1, '2019-06-16 15:03:13'),
 (2, 2, '2nd ', 1, '2019-06-16 15:03:08'),
 (3, 3, '3rd ', 0, '2019-06-16 15:02:29'),
-(4, 4, '4th', 0, '2019-06-16 14:06:28'),
+(4, 4, '4th', 1, '2019-06-19 08:26:48'),
 (5, 5, '5th ', 0, '2019-06-16 15:02:29'),
-(6, 6, '6th ', 0, '2019-06-16 14:43:41'),
+(6, 6, '6th ', 1, '2019-06-19 08:26:43'),
 (7, 7, '7th', 0, '2019-06-16 15:02:29'),
 (8, 8, '8th ', 1, '2019-06-16 15:02:40'),
 (9, 9, '9th', 1, '2019-06-16 15:03:16'),
@@ -186,7 +226,7 @@ INSERT INTO `drxassessment_order_roles` (`drxassessment_id`, `drxassessment_orde
 (11, 11, '11th ', 1, '2019-06-16 15:03:24'),
 (12, 12, '12th', 1, '2019-06-16 15:03:44'),
 (13, 13, '13th	', 1, '2019-06-16 15:03:30'),
-(14, 14, '14th', 0, '2019-06-16 15:02:29'),
+(14, 14, '14th', 1, '2019-06-19 08:26:53'),
 (15, 15, '15th', 0, '2019-06-16 15:02:29'),
 (16, 16, '16th	', 0, '2019-06-16 11:53:02'),
 (17, 17, '17th	', 0, '2019-06-09 17:16:37'),
@@ -278,6 +318,12 @@ ALTER TABLE `drxassessment_assessment_result`
   ADD PRIMARY KEY (`drxassessment_id`);
 
 --
+-- Indexes for table `drxassessment_assessment_taken`
+--
+ALTER TABLE `drxassessment_assessment_taken`
+  ADD PRIMARY KEY (`drxassessment_id`);
+
+--
 -- Indexes for table `drxassessment_order_roles`
 --
 ALTER TABLE `drxassessment_order_roles`
@@ -309,7 +355,13 @@ ALTER TABLE `drxassessment_assessment_domains`
 -- AUTO_INCREMENT for table `drxassessment_assessment_result`
 --
 ALTER TABLE `drxassessment_assessment_result`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `drxassessment_assessment_taken`
+--
+ALTER TABLE `drxassessment_assessment_taken`
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_order_roles`

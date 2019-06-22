@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2019 at 01:58 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Jun 18, 2019 at 08:23 AM
+-- Server version: 10.1.39-MariaDB
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -123,7 +123,7 @@ CREATE TABLE `drxassessment_assessment_domains` (
 INSERT INTO `drxassessment_assessment_domains` (`drxassessment_id`, `drxassessment_domain_name`, `drxassessment_question_total`, `drxassessment_status`, `drxassessment_created_at`) VALUES
 (1, 'Number Sense', 1, 0, '2019-06-16 11:51:12'),
 (2, 'Memorization of Arithmetic Facts', 1, 0, '2019-06-16 11:51:12'),
-(3, 'Accurate Calculation', 2, 0, '2019-06-16 11:52:06'),
+(3, 'Accurate Calculation', 2, 1, '2019-06-16 11:52:06'),
 (4, 'Fluent Calculation', 3, 0, '2019-06-16 11:52:06'),
 (5, 'Mathematical Reasoning and Application', 1, 0, '2019-06-16 11:52:18');
 
@@ -135,21 +135,24 @@ INSERT INTO `drxassessment_assessment_domains` (`drxassessment_id`, `drxassessme
 
 CREATE TABLE `drxassessment_assessment_result` (
   `drxassessment_id` int(11) NOT NULL,
-  `drxassessment_user_id` int(11) NOT NULL,
-  `drxassessment_status` int(1) NOT NULL,
-  `drxassessment_student_answer` text NOT NULL,
-  `drxassessment_domain` text NOT NULL,
-  `drxassessment_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `user_id` int(11) NOT NULL,
+  `user_name` text NOT NULL,
+  `user_email` text NOT NULL,
+  `student_selected_domain` varchar(25) NOT NULL,
+  `student_selected_question` varchar(25) NOT NULL,
+  `student_selected_answer` varchar(55) NOT NULL,
+  `student_sequence` int(11) NOT NULL,
+  `student_status` int(1) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `drxassessment_assessment_result`
 --
 
-INSERT INTO `drxassessment_assessment_result` (`drxassessment_id`, `drxassessment_user_id`, `drxassessment_status`, `drxassessment_student_answer`, `drxassessment_domain`, `drxassessment_created_at`) VALUES
-(1, 10, 1, '0', '0', '2019-06-09 12:22:37'),
-(2, 11, 0, '0', '0', '2019-06-09 12:23:16'),
-(3, 12, 0, '0', '0', '2019-06-09 12:24:32');
+INSERT INTO `drxassessment_assessment_result` (`drxassessment_id`, `user_id`, `user_name`, `user_email`, `student_selected_domain`, `student_selected_question`, `student_selected_answer`, `student_sequence`, `student_status`, `created_at`) VALUES
+(1, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_5', 'q5_c', 0, 0, '2019-06-18 13:25:22'),
+(2, 10, 'XX', 'x@x.com', 'Accurate Calculation', 'Question_6', 'q6_d', 0, 0, '2019-06-18 13:25:22');
 
 -- --------------------------------------------------------
 
@@ -306,7 +309,7 @@ ALTER TABLE `drxassessment_assessment_domains`
 -- AUTO_INCREMENT for table `drxassessment_assessment_result`
 --
 ALTER TABLE `drxassessment_assessment_result`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_order_roles`

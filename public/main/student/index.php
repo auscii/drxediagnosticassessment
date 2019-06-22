@@ -170,19 +170,24 @@ if (!empty($_SESSION['drxassessmentid'])) {
                               <h4 class="card-title m-b-0">Assessment Results</h4>
 
                               <?php
-  	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  	                          $result = $connection->prepare("SELECT t1.drxassessment_domain_name, t2.user_id,
-                                                                     t2.student_selected_domain
-                                                              FROM drxassessment_assessment_domains AS t1
-                                                              INNER JOIN drxassessment_assessment_result AS t2
-                                                              WHERE t2.user_id = $drxassessmentid");
-  	                          $result->execute();
-  	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-  	                                     // $drxassessment_id = $row['drxassessment_id'];
-                                         $drxassessment_user_id = $row['user_id'];
-                                         // $student_selected_domain = $row['student_selected_domain'];
-                                         // $drxassessment_status = $row['student_status'];
+                                  $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains");
+                                  $result->execute();
+                                  $drx_count = 0;
+                                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                         $drx_count++;
                                          $drxassessment_domain_name = $row['drxassessment_domain_name'];
+                                         $drxassessment_question_total = $row['drxassessment_question_total'];
+                                         $drxassessment_status = $row['drxassessment_status'];
+
+                                   // Count Retake of Student Assessment
+                                   $rowCountQuery = "SELECT count(taken_count) AS takenCount, user_id, user_domain
+                                                     FROM drxassessment_assessment_taken
+                                                     WHERE user_id = :user_id
+                                                     AND user_domain = :user_domain
+                                                     ";
+                                   $resultCount = $connection->prepare($rowCountQuery);
+                                   $resultCount->execute(array('user_id'=>$drxassessmentid,'user_domain'=>$drxassessment_domain_name));
+                                   $takenCount = $resultCount->fetchColumn();
                               ?>
 
                               <?php if (!empty($drxassessment_domain_name)) { ?>

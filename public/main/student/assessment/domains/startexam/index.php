@@ -50,15 +50,80 @@ if (isset($_POST['drx_btn_start_exam']))
   $drxassessmentQuestionStudentFinalValue = explode(" ", $drxassessment_question_student);
   $drxassessmentAnswerStudentFinalValue = explode(" ", $drxassessment_student_answer);
 
+  $splitQuestion = preg_split("/[\s,]+/", $drxassessment_question_student);
+  $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
+  // print_r( $splitAnswer );
+  // exit();
+
+
+
+//   SELECT drxassessment_answer_value, drxassessment_question1,
+//
+// 	 IF(drxassessment_answer_value = 'q3_a', '1',
+//
+//   IF(drxassessment_answer_value = 'q7_b', 1, 0)) AS result_answer
+//
+//   FROM drxassessment_assessment
+//
+//   WHERE drxassessment_question1 IN( 'Question_3','Question_7')
+
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1,
+                                           IF(drxassessment_answer_value = :drxassessment_answer_value, '1',
+                                           IF(drxassessment_answer_value = ':drxassessment_answer_value', 1, 0)) AS result_answer
+                                    FROM drxassessment_assessment
+                                    WHERE drxassessment_question1 IN(:drxassessment_question1)");
+                                    // WHERE drxassessment_question1 IN(:drxassessment_question1)
+// foreach ($splitAnswer as $i => $answerValue) {
+//   foreach ($splitQuestion as $k => $questionValue) {
+    for ($r=0; $r < count($splitAnswer); $r++) {
+      for ($r=0; $r < count($splitQuestion); $r++) {
+
+
+        $answerValue = $splitAnswer[$r] . ' ';
+        $questionValue = $splitQuestion[$r] . ' ';
+        // echo $questionValue;
+
+        echo $answerValue;
+        // exit();
+
+        $result->execute(
+            array(
+                  'drxassessment_answer_value' => $answerValue,
+                  'drxassessment_question1' => $questionValue
+                 )
+        );
+
+        $countEntry = count($splitQuestion);
+
+      }
+    }
+
+
+
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+           $drxassessment_answer_value = $row['drxassessment_answer_value'];
+           $drxassessment_question1 = $row['drxassessment_question1'];
+           $result_answer = $row['result_answer'];
+
+   exit();
+
   for ($i=0; $i<count($drxassessmentQuestionStudentFinalValue); $i++)
   {
+
+     // exit();
+
+     // echo $result_answer;
+
      $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
                                                         user_id,
                                                         user_name,
                                                         user_email,
                                                         student_selected_domain,
                                                         student_selected_question,
-                                                        student_selected_answer
+                                                        student_selected_answer,
+                                                        assessment_correct_answer
                                                         )
                                                  VALUES (
                                                         :user_id,
@@ -66,7 +131,8 @@ if (isset($_POST['drx_btn_start_exam']))
                                                         :user_email,
                                                         :student_selected_domain,
                                                         :student_selected_question,
-                                                        :student_selected_answer
+                                                        :student_selected_answer,
+                                                        :assessment_correct_answer
                                                         )");
        $drx_statement->execute(
           array(
@@ -75,43 +141,36 @@ if (isset($_POST['drx_btn_start_exam']))
               'user_email'                   => $drxassessmentemail,
               'student_selected_domain'			 => $drxassessment_domain_name,
               'student_selected_question'		 => $drxassessmentQuestionStudentFinalValue[$i],
-              'student_selected_answer'			 => $drxassessmentAnswerStudentFinalValue[$i]
+              'student_selected_answer'			 => $drxassessmentAnswerStudentFinalValue[$i],
+              'assessment_correct_answer'    => $result_answer
+
           )
        );
-    }
-       // $drx_statement->fetchAll();
+  }
+}
 
 
-           // $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           // $result_t = $connection->prepare("SELECT taken_count FROM drxassessment_assessment_taken");
-           // $result_t->execute();
-           //       while ($row = $result_t->fetch(PDO::FETCH_ASSOC)) {
-           //              $get_taken_count = $row['taken_count'];
-           //              $taken_count = $get_taken_count + 1;
-
-                        $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
-                                                                          user_id,
-                                                                          user_domain,
-                                                                          user_name,
-                                                                          taken_count
-                                                                          )
-                                                                     VALUES (
-                                                                            :user_id,
-                                                                            :user_domain,
-                                                                            :user_name,
-                                                                            :taken_count
-                                                                            )");
-                         $drx_statement_taken->execute(
-                            array(
-                                'user_id'                     => $drxassessmentid,
-                                'user_domain'                 => $drxassessment_domain_name,
-                                'user_name'                   => $drxassessmentname,
-                                'taken_count'			            => 1
-                            )
-                         );
-                         // $drx_statement_taken->fetchAll();
-                         header("Location: ../");
-                  // }
+        $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
+                                                          user_id,
+                                                          user_domain,
+                                                          user_name,
+                                                          taken_count
+                                                          )
+                                                     VALUES (
+                                                            :user_id,
+                                                            :user_domain,
+                                                            :user_name,
+                                                            :taken_count
+                                                            )");
+         $drx_statement_taken->execute(
+            array(
+                'user_id'                     => $drxassessmentid,
+                'user_domain'                 => $drxassessment_domain_name,
+                'user_name'                   => $drxassessmentname,
+                'taken_count'			            => 1
+            )
+         );
+         header("Location: ../");
 }
 // End - Student Assessment Result
 
@@ -286,7 +345,6 @@ if (isset($_POST['drx_btn_start_exam']))
             <!-- ============================================================== -->
         <div class="container-fluid">
             <div class="card-body">
-                <div class="table-responsive">
                     <form method="POST" enctype="multipart/form-data">
 
                         <input type="hidden" id="drx_status" name="drx_status">
@@ -309,7 +367,7 @@ if (isset($_POST['drx_btn_start_exam']))
                                         $drxassessment_q1_answer_4 = $row2['drxassessment_q1_answer_4'];
                                         $drxassessment_order = $row2['drxassessment_order'];
                                         $drxassessment_status = $row2['drxassessment_status'];
-                        ?>
+                        ?> <br /> <br />
 
                             <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
@@ -336,11 +394,9 @@ if (isset($_POST['drx_btn_start_exam']))
 
                         <div class="modal-footer">
                               <button type="submit" name="drx_btn_start_exam" class="btn btn-success">Submit</button>
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
 
                     </form>
-            </div>
         </div>
     </div>
         <!-- ============================================================== -->

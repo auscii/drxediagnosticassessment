@@ -105,6 +105,23 @@ if($drx_status == "addnewassessment"){
 }
 
 if($drx_status == "editassessment"){
+  
+    if ($drxassessment_answer === "A") {
+        $drxassessment_answer_value = $drxassessment_q1_answer_1;
+    }
+
+    if ($drxassessment_answer === "B") {
+        $drxassessment_answer_value = $drxassessment_q1_answer_2;
+    }
+
+    if ($drxassessment_answer === "C") {
+        $drxassessment_answer_value = $drxassessment_q1_answer_3;
+    }
+
+    if ($drxassessment_answer === "D") {
+        $drxassessment_answer_value = $drxassessment_q1_answer_4;
+    }
+
     $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
                                                  drxassessment_question1        = :drxassessment_question1,
                                                  drxassessment_q1_answer_1      = :drxassessment_q1_answer_1,
@@ -112,7 +129,8 @@ if($drx_status == "editassessment"){
 																								 drxassessment_q1_answer_3      = :drxassessment_q1_answer_3,
 																								 drxassessment_q1_answer_4      = :drxassessment_q1_answer_4,
 																								 drxassessment_updated_at       = :drxassessment_updated_at,
-                                                 drxassessment_answer           = :drxassessment_answer
+                                                 drxassessment_answer           = :drxassessment_answer,
+                                                 drxassessment_answer_value     = :drxassessment_answer_value
                                            WHERE drxassessment_id = $drx_key;");
     $drx_statement->execute(
         array(
@@ -122,7 +140,8 @@ if($drx_status == "editassessment"){
 						'drxassessment_q1_answer_3'						  => $drxassessment_q1_answer_3,
 						'drxassessment_q1_answer_4'						  => $drxassessment_q1_answer_4,
 						'drxassessment_updated_at'						  => $date_created_format,
-            'drxassessment_answer'                  => $drxassessment_answer
+            'drxassessment_answer'                  => $drxassessment_answer,
+            'drxassessment_answer_value'            => $drxassessment_answer_value
         )
     );
     $drx_statement->fetchAll();
@@ -415,14 +434,14 @@ if($dr_delete_is_status == "deleteassessment"){
 										<div class="form-group row">
 												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
 												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
+														<input type="text" class="form-control is-valid" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
 												</div>
 										</div>
 
                     <div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
+												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Answer</label>
 												<div class="col-sm-9">
-														<select class="form-control" name="drxassessment_answer" id="drxassessment_answer" required>
+														<select class="form-control is-valid" name="drxassessment_answer" id="drxassessment_answer" required>
                                 <option value="" disabled selected>--Select Answer--</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -437,28 +456,28 @@ if($dr_delete_is_status == "deleteassessment"){
 										<div class="form-group row">
 												<label for="fname" class="col-sm-3 text-right control-label col-form-label">A.)</label>
 												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
+														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
 												</div>
 										</div>
 
 										<div class="form-group row">
 												<label for="lname" class="col-sm-3 text-right control-label col-form-label">B.)</label>
 												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
+														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
 												</div>
 										</div>
 
 										<div class="form-group row">
 												<label for="lname" class="col-sm-3 text-right control-label col-form-label">C.)</label>
 												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
+														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
 												</div>
 										</div>
 
 										<div class="form-group row">
 												<label for="lname" class="col-sm-3 text-right control-label col-form-label">D.)</label>
 												<div class="col-sm-9">
-														<input type="text" class="form-control" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
+														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
 												</div>
 										</div>
 
