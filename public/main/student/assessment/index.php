@@ -251,10 +251,25 @@ if (!empty($_SESSION['drxassessmentname'])) {
                            <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
                              <a href="domains/" title="Start Assessment" style="color: #fff;">
                                <div class="card card-hover">
+                                 <?php
+                                 $result = $connection->prepare("SELECT * FROM drxassessment_assessment");
+                                 $result->execute();
+                                 $drx_count = 0;
+                                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                         $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
+                                         $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
+                                         $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
+                                         $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
+                                         $drxassessment_answer_value = $row['drxassessment_answer_value'];
+                                         $drxassessment_domain = $row['drxassessment_domain'];
+                                         $drxassessment_order = $row['drxassessment_order'];
+                                         $drxassessment_status = $row['drxassessment_status'];
+                                 ?>
                                    <div class="box bg-primary text-center">
                                        <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>
                                        <h6 class="text-white">PROCEED TO ASSESSMENT</h6>
                                    </div>
+                                 <?php } ?>
                                </div>
                              </a>
                            </div>

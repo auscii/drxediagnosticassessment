@@ -25,152 +25,139 @@ if (!empty($_SESSION['drxassessmentemail'])) {
 // End - User Info
 
 // Start - Student Assessment Result
-if (!empty($_GET['drxassessment_domain_name'])) {
-    $drxassessment_domain_name = $_GET['drxassessment_domain_name'];
+if (!empty($_GET['getdrxassessment_domain_name'])) {
+    $getdrxassessment_domain_name = $_GET['getdrxassessment_domain_name'];
 } else {
-    $drxassessment_domain_name = "";
+    $getdrxassessment_domain_name = "";
 }
 
-if (!empty($_POST['drxassessment_question_student'])) {
-    $drxassessment_question_student = $_POST['drxassessment_question_student'];
-    $drxassessment_question_student = implode(" ", $_POST['drxassessment_question_student']);
+if (!empty($_GET['getdrxassessment_q1_answer_1'])) {
+    $getdrxassessment_q1_answer_1 = $_GET['getdrxassessment_q1_answer_1'];
 } else {
-    $drxassessment_question_student = "";
+    $getdrxassessment_q1_answer_1 = "";
 }
+
+if (!empty($_GET['getdrxassessment_q1_answer_2'])) {
+    $getdrxassessment_q1_answer_2 = $_GET['getdrxassessment_q1_answer_2'];
+} else {
+    $getdrxassessment_q1_answer_2 = "";
+}
+
+if (!empty($_GET['getdrxassessment_q1_answer_3'])) {
+    $getdrxassessment_q1_answer_3 = $_GET['getdrxassessment_q1_answer_3'];
+} else {
+    $getdrxassessment_q1_answer_3 = "";
+}
+
+if (!empty($_GET['getdrxassessment_q1_answer_4'])) {
+    $getdrxassessment_q1_answer_4 = $_GET['getdrxassessment_q1_answer_4'];
+} else {
+    $getdrxassessment_q1_answer_4 = "";
+}
+
 
 if (!empty($_POST['drxassessment_student_answer'])) {
     $drxassessment_student_answer = $_POST['drxassessment_student_answer'];
-    $drxassessment_student_answer = implode(" ", $_POST['drxassessment_student_answer']);
 } else {
     $drxassessment_student_answer = "";
 }
 
+
+
+
+
+// if (!empty($_POST['drxassessment_question_student'])) {
+//     $drxassessment_question_student = $_POST['drxassessment_question_student'];
+//     $drxassessment_question_student = implode(" ", $_POST['drxassessment_question_student']);
+// } else {
+//     $drxassessment_question_student = "";
+// }
+//
+// if (!empty($_POST['drxassessment_student_answer'])) {
+//     $drxassessment_student_answer = $_POST['drxassessment_student_answer'];
+//     $drxassessment_student_answer = implode(" ", $_POST['drxassessment_student_answer']);
+// } else {
+//     $drxassessment_student_answer = "";
+// }
+
+
+
+
+
+
+
+
 if (isset($_POST['drx_btn_start_exam']))
 {
-  $drxassessmentQuestionStudentFinalValue = explode(" ", $drxassessment_question_student);
-  $drxassessmentAnswerStudentFinalValue = explode(" ", $drxassessment_student_answer);
 
-  $splitQuestion = preg_split("/[\s,]+/", $drxassessment_question_student);
-  $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
-  // print_r( $splitAnswer );
-  // exit();
+  echo $drxassessment_student_answer;
+  exit();
 
+    // $drxassessmentQuestionStudentFinalValue = explode(" ", $drxassessment_question_student);
+    // $drxassessmentAnswerStudentFinalValue = explode(" ", $drxassessment_student_answer);
 
+    // if ($output) {
+    //     $result_answer = 1;
+    // } else {
+    //     $result_answer = 0;
+    // }
 
-//   SELECT drxassessment_answer_value, drxassessment_question1,
-//
-// 	 IF(drxassessment_answer_value = 'q3_a', '1',
-//
-//   IF(drxassessment_answer_value = 'q7_b', 1, 0)) AS result_answer
-//
-//   FROM drxassessment_assessment
-//
-//   WHERE drxassessment_question1 IN( 'Question_3','Question_7')
-
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1,
-                                           IF(drxassessment_answer_value = :drxassessment_answer_value, '1',
-                                           IF(drxassessment_answer_value = ':drxassessment_answer_value', 1, 0)) AS result_answer
-                                    FROM drxassessment_assessment
-                                    WHERE drxassessment_question1 IN(:drxassessment_question1)");
-                                    // WHERE drxassessment_question1 IN(:drxassessment_question1)
-// foreach ($splitAnswer as $i => $answerValue) {
-//   foreach ($splitQuestion as $k => $questionValue) {
-    for ($r=0; $r < count($splitAnswer); $r++) {
-      for ($r=0; $r < count($splitQuestion); $r++) {
-
-
-        $answerValue = $splitAnswer[$r] . ' ';
-        $questionValue = $splitQuestion[$r] . ' ';
-        // echo $questionValue;
-
-        echo $answerValue;
-        // exit();
-
-        $result->execute(
-            array(
-                  'drxassessment_answer_value' => $answerValue,
-                  'drxassessment_question1' => $questionValue
-                 )
-        );
-
-        $countEntry = count($splitQuestion);
-
-      }
-    }
-
-
-
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-
-           $drxassessment_answer_value = $row['drxassessment_answer_value'];
-           $drxassessment_question1 = $row['drxassessment_question1'];
-           $result_answer = $row['result_answer'];
-
-   exit();
-
-  for ($i=0; $i<count($drxassessmentQuestionStudentFinalValue); $i++)
-  {
-
+    // for ($i=0; $i<count($drxassessmentQuestionStudentFinalValue); $i++)
+    // {
+    //    $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
+    //                                                       user_id,
+    //                                                       user_name,
+    //                                                       user_email,
+    //                                                       student_selected_domain,
+    //                                                       student_selected_question,
+    //                                                       student_selected_answer,
+    //                                                       assessment_correct_answer
+    //                                                       )
+    //                                                VALUES (
+    //                                                       :user_id,
+    //                                                       :user_name,
+    //                                                       :user_email,
+    //                                                       :student_selected_domain,
+    //                                                       :student_selected_question,
+    //                                                       :student_selected_answer,
+    //                                                       :assessment_correct_answer
+    //                                                       )");
+    //      $drx_statement->execute(
+    //         array(
+    //             'user_id'                      => $drxassessmentid,
+    //             'user_name'                    => $drxassessmentname,
+    //             'user_email'                   => $drxassessmentemail,
+    //             'student_selected_domain'			 => $drxassessment_domain_name,
+    //             'student_selected_question'		 => $drxassessmentQuestionStudentFinalValue[$i],
+    //             'student_selected_answer'			 => $drxassessmentAnswerStudentFinalValue[$i],
+    //             'assessment_correct_answer'    => $result_answer
+    //
+    //         )
+    //      );
+    // }
+    //
+    // $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
+    //                                                   user_id,
+    //                                                   user_domain,
+    //                                                   user_name,
+    //                                                   taken_count
+    //                                                   )
+    //                                              VALUES (
+    //                                                     :user_id,
+    //                                                     :user_domain,
+    //                                                     :user_name,
+    //                                                     :taken_count
+    //                                                     )");
+    //  $drx_statement_taken->execute(
+    //     array(
+    //         'user_id'                     => $drxassessmentid,
+    //         'user_domain'                 => $drxassessment_domain_name,
+    //         'user_name'                   => $drxassessmentname,
+    //         'taken_count'			            => 1
+    //     )
+    //  );
      // exit();
-
-     // echo $result_answer;
-
-     $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
-                                                        user_id,
-                                                        user_name,
-                                                        user_email,
-                                                        student_selected_domain,
-                                                        student_selected_question,
-                                                        student_selected_answer,
-                                                        assessment_correct_answer
-                                                        )
-                                                 VALUES (
-                                                        :user_id,
-                                                        :user_name,
-                                                        :user_email,
-                                                        :student_selected_domain,
-                                                        :student_selected_question,
-                                                        :student_selected_answer,
-                                                        :assessment_correct_answer
-                                                        )");
-       $drx_statement->execute(
-          array(
-              'user_id'                      => $drxassessmentid,
-              'user_name'                    => $drxassessmentname,
-              'user_email'                   => $drxassessmentemail,
-              'student_selected_domain'			 => $drxassessment_domain_name,
-              'student_selected_question'		 => $drxassessmentQuestionStudentFinalValue[$i],
-              'student_selected_answer'			 => $drxassessmentAnswerStudentFinalValue[$i],
-              'assessment_correct_answer'    => $result_answer
-
-          )
-       );
-  }
-}
-
-
-        $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
-                                                          user_id,
-                                                          user_domain,
-                                                          user_name,
-                                                          taken_count
-                                                          )
-                                                     VALUES (
-                                                            :user_id,
-                                                            :user_domain,
-                                                            :user_name,
-                                                            :taken_count
-                                                            )");
-         $drx_statement_taken->execute(
-            array(
-                'user_id'                     => $drxassessmentid,
-                'user_domain'                 => $drxassessment_domain_name,
-                'user_name'                   => $drxassessmentname,
-                'taken_count'			            => 1
-            )
-         );
-         header("Location: ../");
+     // header("Location: ../");
 }
 // End - Student Assessment Result
 
@@ -345,17 +332,17 @@ if (isset($_POST['drx_btn_start_exam']))
             <!-- ============================================================== -->
         <div class="container-fluid">
             <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
+
 
                         <input type="hidden" id="drx_status" name="drx_status">
                         <input type="hidden" id="drx_key" name="drx_key">
 
-                        <h4 class="text-center"><?php echo $drxassessment_domain_name; ?></h4>
+                        <h4 class="text-center"><?php echo $getdrxassessment_domain_name; ?></h4>
 
                         <?php
                          // ORDER BY drxassessment_order DESC
                         $result2 = $connection->prepare("SELECT * FROM drxassessment_assessment WHERE drxassessment_domain = :drxassessment_domain");
-                        $result2->execute( array( 'drxassessment_domain' => $drxassessment_domain_name) );
+                        $result2->execute( array( 'drxassessment_domain' => $getdrxassessment_domain_name) );
                                  while ($row2 = $result2->fetch(PDO::FETCH_ASSOC))
                                  {
                                         $drxassessment_question1 = $row2['drxassessment_question1'];
@@ -369,6 +356,8 @@ if (isset($_POST['drx_btn_start_exam']))
                                         $drxassessment_status = $row2['drxassessment_status'];
                         ?> <br /> <br />
 
+                        <form action="" method="GET" enctype="multipart/form-data">
+
                             <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
                                     <div class="col-sm-9">
@@ -380,7 +369,7 @@ if (isset($_POST['drx_btn_start_exam']))
                                 <label for="fname" class="col-sm-3 text-right control-label col-form-label">Choices</label>
                                     <div class="col-sm-9">
                                       <!-- multiple="multiple" -->
-                                        <select class="form-control" name="drxassessment_student_answer[]" id="drxassessment_student_answer" required>
+                                        <select class="form-control" name="drxassessment_student_answer" id="drxassessment_student_answer" required>
                                             <option value="" disabled selected>--Select Your Answer---</option>
                                             <option value="<?php echo $drxassessment_q1_answer_1; ?>"><?php echo $drxassessment_q1_answer_1; ?></option>
                                             <option value="<?php echo $drxassessment_q1_answer_2; ?>"><?php echo $drxassessment_q1_answer_2; ?></option>
@@ -390,13 +379,15 @@ if (isset($_POST['drx_btn_start_exam']))
                                     </div>
                             </div> <br /> <br />
 
+                            </form>
+
                         <?php } ?>
 
                         <div class="modal-footer">
-                              <button type="submit" name="drx_btn_start_exam" class="btn btn-success">Submit</button>
+                              <button type="button" name="drx_btn_start_exam" class="btn btn-success">Submit</button>
                         </div>
 
-                    </form>
+
         </div>
     </div>
         <!-- ============================================================== -->

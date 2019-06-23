@@ -198,14 +198,28 @@ if (!empty($_SESSION['drxassessmentid'])) {
                   </thead>
                   <tbody>
                        <?php
-                           $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains");
+                           $result = $connection->prepare("SELECT t1.drxassessment_domain_name, t1.drxassessment_question_total,
+                                                                  t2.drxassessment_q1_answer_1, t2.drxassessment_q1_answer_2,
+                                                                  t2.drxassessment_q1_answer_3, t2.drxassessment_q1_answer_4,
+                                                                  t2.drxassessment_answer_value, t2.drxassessment_domain
+                                                          FROM drxassessment_assessment_domains AS t1
+                                                          INNER JOIN drxassessment_assessment AS t2
+                                                          ON t1.drxassessment_domain_name = t2.drxassessment_domain
+                                                          GROUP BY t1.drxassessment_domain_name");
                            $result->execute();
                            $drx_count = 0;
                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                   $drx_count++;
                                   $drxassessment_domain_name = $row['drxassessment_domain_name'];
                                   $drxassessment_question_total = $row['drxassessment_question_total'];
-                                  $drxassessment_status = $row['drxassessment_status'];
+                                  // $drxassessment_status = $row['drxassessment_status'];
+
+                                  $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
+                                  $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
+                                  $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
+                                  $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
+                                  $drxassessment_answer_value = $row['drxassessment_answer_value'];
+                                  $drxassessment_domain = $row['drxassessment_domain'];
 
                             // Count Retake of Student Assessment
                             $rowCountQuery = "SELECT count(taken_count) AS takenCount, user_id, user_domain
@@ -224,7 +238,7 @@ if (!empty($_SESSION['drxassessmentid'])) {
                                 <td class="text-center"><?php echo $takenCount; ?></td>
                                 <td class="text-center">
                                   <a class="btn btn-primary btn-mg" style="width: 120px;"
-                                     href="startexam/index.php?drxassessment_domain_name=<?php echo $drxassessment_domain_name; ?>"
+                                     href="startexam/index.php?getdrxassessment_domain_name=<?php echo $drxassessment_domain_name; ?>&getdrxassessment_q1_answer_1=<?php echo $drxassessment_q1_answer_1; ?>&getdrxassessment_q1_answer_2=<?php echo $drxassessment_q1_answer_2; ?>&getdrxassessment_q1_answer_3=<?php echo $drxassessment_q1_answer_3; ?>&getdrxassessment_q1_answer_4=<?php echo $drxassessment_q1_answer_4; ?>"
                                    >
                                    <i class="fas fa-arrow-right"></i> Start Exam
                                   </a>
