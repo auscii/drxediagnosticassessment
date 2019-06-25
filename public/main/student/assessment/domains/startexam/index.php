@@ -51,19 +51,22 @@ if (isset($_POST['drx_btn_start_exam']))
     $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
     $questionValue = join("','",$splitQuestion);
     $answerValue = join("' OR drxassessment_answer_value ='",$splitAnswer);
-    // echo $answerValue;
-    // exit();
+
+
     $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1,
                                            IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer
                                     FROM drxassessment_assessment
                                     WHERE drxassessment_question1 IN('$questionValue')
                                   ");
     $result->execute();
+    $count_correct_answer = "";
+    $assessment_correct_answer2 = "";
     while($row = $result->fetch(PDO::FETCH_ASSOC))
     {
       // $drxassessment_answer_value = $row['drxassessment_answer_value'];
       $drxassessment_question1 = $row['drxassessment_question1'];
       $assessment_correct_answer = $row['assessment_correct_answer'];
+      $assessment_correct_answer2 .= $row['assessment_correct_answer'] . " ";
       // echo "<script>alert('$drxassessment_answer_value')</script>";
 
       $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
@@ -96,27 +99,68 @@ if (isset($_POST['drx_btn_start_exam']))
         );
         // 'student_selected_answer'			 => $drxassessment_answer_value,
     }
-        $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
-                                                          user_id,
-                                                          user_domain,
-                                                          user_name,
-                                                          taken_count
-                                                          )
-                                                     VALUES (
-                                                            :user_id,
-                                                            :user_domain,
-                                                            :user_name,
-                                                            :taken_count
-                                                            )");
-         $drx_statement_taken->execute(
-            array(
-                'user_id'                     => $drxassessmentid,
-                'user_domain'                 => $drxassessment_domain_name,
-                'user_name'                   => $drxassessmentname,
-                'taken_count'			            => 1
-            )
-         );
-         header("Location: ../");
+
+
+    // For History Assessment
+    $drxassessment_student_answer_history = implode(", ", $_POST['drxassessment_student_answer']);
+    $drxassessment_student_question_history = implode(", ", $_POST['drxassessment_question_student']);
+    $countCorrectAnswer = substr_count($assessment_correct_answer2,'1');
+
+    $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_history (
+                                                       user_id,
+                                                       user_name,
+                                                       user_email,
+                                                       domain_name,
+                                                       questions,
+                                                       answer,
+                                                       total_correct_answer
+                                                       )
+                                                VALUES (
+                                                       :user_id,
+                                                       :user_name,
+                                                       :user_email,
+                                                       :domain_name,
+                                                       :questions,
+                                                       :answer,
+                                                       :total_correct_answer
+                                                       )");
+      $drx_statement->execute(
+         array(
+             'user_id'                       => $drxassessmentid,
+             'user_name'                     => $drxassessmentname,
+             'user_email'                    => $drxassessmentemail,
+             'domain_name'			             => $drxassessment_domain_name,
+             'questions'		                 => $drxassessment_student_question_history,
+             'answer'                        => $drxassessment_student_answer_history,
+             'total_correct_answer'          => $countCorrectAnswer
+         )
+      );
+      // End History Assessment
+
+      // Retake Assessment
+      $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
+                                                        user_id,
+                                                        user_domain,
+                                                        user_name,
+                                                        taken_count
+                                                        )
+                                                   VALUES (
+                                                          :user_id,
+                                                          :user_domain,
+                                                          :user_name,
+                                                          :taken_count
+                                                          )");
+       $drx_statement_taken->execute(
+          array(
+              'user_id'                     => $drxassessmentid,
+              'user_domain'                 => $drxassessment_domain_name,
+              'user_name'                   => $drxassessmentname,
+              'taken_count'			            => 1
+          )
+       );
+       // End Retake Assessment
+
+       header("Location: ../");
 }
 // End - Student Assessment Result
 
@@ -244,9 +288,9 @@ if (isset($_POST['drx_btn_start_exam']))
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
 
-												<li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
+												<li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
 

@@ -2,6 +2,7 @@
 session_start();
 include("../../../../config/common/asdasf9z09x0c90zx90123.php");
 $date_created_format = date('Y-m-d g:i:s');
+$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
@@ -9,6 +10,11 @@ if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = "";
 }
 
+if (!empty($_SESSION['drxassessmentemail'])) {
+    $drxassessmentemail = $_SESSION['drxassessmentemail'];
+} else {
+    $drxassessmentemail = "";
+}
 
 ?>
 
@@ -133,9 +139,9 @@ if (!empty($_SESSION['drxassessmentname'])) {
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
 
-												<li class="active sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
+												<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="active sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
 
@@ -158,12 +164,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Assessment Instructions</h4>
+                        <h4 class="page-title">History Assessment</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                   <li class="breadcrumb-item active" aria-current="page">Assessment</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../assessment/">Assessment Instructions</a></li>
+                                   <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../history/">History Assessment</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -177,91 +183,59 @@ if (!empty($_SESSION['drxassessmentname'])) {
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+								<div class="card">
 
+									<div class="table-responsive">
+											<table id="zero_config" class="table table-striped table-bordered">
+													<thead>
+															<tr>
+																	<th class="text-center">#</th>
+  																<th class="text-center">Domain</th>
+																	<th class="text-center">Total Correct Answer</th>
+																	<th class="text-center">Status</th>
+																	<th class="text-center">Date of Assessment</th>
+																	<!-- <th class="text-center">Action</th> -->
+															</tr>
+													</thead>
+													<tbody>
+														<?php
+	                          $drx_count = 0;
+	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment_history
+																														WHERE user_email = :user_email");
+													  $result->execute( array('user_email' => $drxassessmentemail));
+	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	                                     $drx_count++;
+																			 $user_id = $row['user_id'];
+																			 $questions = $row['questions'];
+																			 $answer = $row['answer'];
+																			 $domain_name = $row['domain_name'];
+																			 $created_at = $row['created_at'];
+																			 $total_correct_answer = $row['total_correct_answer'];
+	                          ?>
+															<tr>
+																<td class="text-center"><?php echo $drx_count; ?></td>
+																<td class="text-center"><?php echo $domain_name; ?></td>
+																<td class="text-center"><?php echo $total_correct_answer; ?></td>
+																<td class="text-center">
+																	<?php
+																	if ($total_correct_answer <= 9)
+																	{
+																		  echo "Failed";
+																	} else if ($total_correct_answer >= 10)
+																	{
+																			echo "Passed";
+																	}
+																	?>
+																</td>
+																<td class="text-center"><?php echo $created_at; ?></td>
+															</tr>
+														<?php } ?>
+													</tbody>
+											</table>
+									</div>
 
-							<div class="card">
-									 <ul class="list-style-none">
-											 <li class="d-flex no-block card-body">
-													 <i class="fa fa-check-circle w-30px m-t-5"></i>
-													 <div>
-															 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit adipiscing</span>
-													 </div>
-													 <div class="ml-auto">
-															 <div class="tetx-right">
-																	 <h5 class="text-muted m-b-0">Step</h5>
-																	 <span class="text-muted font-16">01</span>
-															 </div>
-													 </div>
-											 </li>
-											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-gift w-30px m-t-5"></i>
-													 <div>
-															 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur</span>
-													 </div>
-													 <div class="ml-auto">
-															 <div class="tetx-right">
-																	 <h5 class="text-muted m-b-0">Step</h5>
-																	 <span class="text-muted font-16">02</span>
-															 </div>
-													 </div>
-											 </li>
-											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-plus w-30px m-t-5"></i>
-													 <div>
-														 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur rnas</span>
-													 </div>
-													 <div class="ml-auto">
-															 <div class="tetx-right">
-																 <h5 class="text-muted m-b-0">Step</h5>
-																	 <span class="text-muted font-16">03</span>
-															 </div>
-													 </div>
-											 </li>
-											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-leaf w-30px m-t-5"></i>
-													 <div>
-														 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum adipiscing elit lumpis</a>
-															 <span class="text-muted">Lorem ipsum amet, consectetur rnas elit</span>
-													 </div>
-													 <div class="ml-auto">
-															 <div class="tetx-right">
-																 <h5 class="text-muted m-b-0">Step</h5>
-																 <span class="text-muted font-16">04</span>
-															 </div>
-													 </div>
-											 </li>
-											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-question-circle w-30px m-t-5"></i>
-													 <div>
-														 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-															 <span class="text-muted">we Lorem ipsum dolor</span>
-													 </div>
-													 <div class="ml-auto">
-															 <div class="tetx-right">
-																 <h5 class="text-muted m-b-0">Step</h5>
-																 <span class="text-muted font-16">05</span>
-															 </div>
-													 </div>
-											 </li>
-
-											 <div class="row">
-                           <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
-                             <a href="domains/" title="Start Assessment" style="color: #fff;">
-                               <div class="card card-hover">
-                                   <div class="box bg-primary text-center">
-                                       <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>
-                                       <h6 class="text-white">PROCEED TO ASSESSMENT</h6>
-                                   </div>
-                               </div>
-                             </a>
-                           </div>
-                       </div>
-
-									 </ul>
-							 </div>
+							 	</div>
+				  	</div>
 
 
             </div>

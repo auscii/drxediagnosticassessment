@@ -8,6 +8,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = "";
 }
 
+if (!empty($_SESSION['drxassessmentemail'])) {
+    $drxassessmentemail = $_SESSION['drxassessmentemail'];
+} else {
+    $drxassessmentemail = "";
+}
+
 if (!empty($_SESSION['drxassessmentid'])) {
     $drxassessmentid = $_SESSION['drxassessmentid'];
 } else {
@@ -140,7 +146,7 @@ if (!empty($_SESSION['drxassessmentid'])) {
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
 
@@ -185,30 +191,34 @@ if (!empty($_SESSION['drxassessmentid'])) {
                           else
                           {
                                 $result = $connection->prepare("SELECT t1.drxassessment_domain_name,
-                                                                       t1.drxassessment_status, t2.student_selected_domain, COUNT(t2.assessment_correct_answer) AS count_correct_answer
+                                                                       t1.drxassessment_status, t1.drxassessment_question_total, t2.student_selected_domain,
+                                                                       t2.user_email, COUNT(t2.assessment_correct_answer) AS count_correct_answer
                                                                 FROM drxassessment_assessment_domains AS t1
                                                                 INNER JOIN drxassessment_assessment_result AS t2
                                                                 ON t1.drxassessment_domain_name = t2.student_selected_domain
+                                                                WHERE t2.user_email = :user_email
                                                                 GROUP BY t1.drxassessment_domain_name");
-                                $result->execute();
+                                $result->execute(array('user_email' => $drxassessmentemail ));
                                 $drx_count = 0;
                                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                        $drx_count++;
                                        $drxassessment_domain_name = $row['drxassessment_domain_name'];
                                        $drxassessment_status = $row['drxassessment_status'];
                                        $count_correct_answer = $row['count_correct_answer'];
-                                       // t1.drxassessment_question_total
-                                       // $drxassessment_question_total = $row['drxassessment_question_total'];
+                                       $drxassessment_question_total = $row['drxassessment_question_total'];
+                                       $assessmentProgress = ($count_correct_answer/$drxassessment_question_total)*50+50;
+                                       // **FORMULA** === Score/50 x 50 +50 OR === Score/50 x 100
+                                       // echo $drxassessment_question_total;
                       ?>
                               <div class="m-t-20">
                                   <div class="d-flex no-block align-items-center">
                                       <span><?php echo $drxassessment_domain_name; ?></span>
                                       <div class="ml-auto">
-                                          <span><?php echo $count_correct_answer; ?>%</span>
+                                          <span><?php echo $assessmentProgress; ?>%</span>
                                       </div>
                                   </div>
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?php echo $count_correct_answer; ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?php echo $assessmentProgress; ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
                         <?php } } ?>
