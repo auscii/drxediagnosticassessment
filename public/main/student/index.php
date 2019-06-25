@@ -156,99 +156,98 @@ if (!empty($_SESSION['drxassessmentid'])) {
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-              <div class="row">
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+          <div class="row">
 
-                  <div class="col-md-12">
-                       <!-- card -->
-                      <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title m-b-0">Assessment Results</h4>
+              <div class="col-md-12">
+                   <!-- card -->
+                  <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title m-b-0">Assessment Results</h4>
 
-                              <?php
-                                  $result = $connection->prepare("SELECT * FROM drxassessment_assessment_domains");
-                                  $result->execute();
-                                  $drx_count = 0;
-                                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                         $drx_count++;
-                                         $drxassessment_domain_name = $row['drxassessment_domain_name'];
-                                         $drxassessment_question_total = $row['drxassessment_question_total'];
-                                         $drxassessment_status = $row['drxassessment_status'];
-
-                                   // Count Retake of Student Assessment
-                                   $rowCountQuery = "SELECT count(taken_count) AS takenCount, user_id, user_domain
-                                                     FROM drxassessment_assessment_taken
-                                                     WHERE user_id = :user_id
-                                                     AND user_domain = :user_domain
-                                                     ";
-                                   $resultCount = $connection->prepare($rowCountQuery);
-                                   $resultCount->execute(array('user_id'=>$drxassessmentid,'user_domain'=>$drxassessment_domain_name));
-                                   $takenCount = $resultCount->fetchColumn();
-                              ?>
-
-                              <?php if (!empty($drxassessment_domain_name)) { ?>
-
-                                <div class="m-t-20">
-                                    <div class="d-flex no-block align-items-center">
-                                        <span><?php echo $drxassessment_domain_name; ?></span>
-                                        <div class="ml-auto">
-                                            <span>81</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-
-                            <?php } else { ?>
-
-                                <br />
-                                <span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
-                                  <i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.
-                                </span>
-
-                            <?php } } ?>
-
-                          </div>
-                      </div>
-
-                      <div class="row">
-                          <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
-                            <a href="assessment/" title="Start Assessment" style="color: #fff;">
-                              <div class="card card-hover">
-                                  <div class="box bg-success text-center">
-                                      <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>
-                                      <h6 class="text-white">START ASSSESSMENT</h6>
+                      <?php
+                          $checkEmptyTable = "SELECT COUNT(*) FROM drxassessment_assessment_result WHERE user_name = :user_name";
+                          $resultEmpty = $connection->prepare($checkEmptyTable);
+                          $resultEmpty->execute( array('user_name' => $drxassessmentname));
+                          $checkAssessment = $resultEmpty->fetchColumn();
+                          if ($checkAssessment === '0')
+                          {
+                            echo "<br />
+                                  <span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
+                                    <i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.
+                                  </span>
+                                 ";
+                          }
+                          else
+                          {
+                                $result = $connection->prepare("SELECT t1.drxassessment_domain_name,
+                                                                       t1.drxassessment_status, t2.student_selected_domain, COUNT(t2.assessment_correct_answer) AS count_correct_answer
+                                                                FROM drxassessment_assessment_domains AS t1
+                                                                INNER JOIN drxassessment_assessment_result AS t2
+                                                                ON t1.drxassessment_domain_name = t2.student_selected_domain
+                                                                GROUP BY t1.drxassessment_domain_name");
+                                $result->execute();
+                                $drx_count = 0;
+                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                       $drx_count++;
+                                       $drxassessment_domain_name = $row['drxassessment_domain_name'];
+                                       $drxassessment_status = $row['drxassessment_status'];
+                                       $count_correct_answer = $row['count_correct_answer'];
+                                       // t1.drxassessment_question_total
+                                       // $drxassessment_question_total = $row['drxassessment_question_total'];
+                      ?>
+                              <div class="m-t-20">
+                                  <div class="d-flex no-block align-items-center">
+                                      <span><?php echo $drxassessment_domain_name; ?></span>
+                                      <div class="ml-auto">
+                                          <span><?php echo $count_correct_answer; ?>%</span>
+                                      </div>
+                                  </div>
+                                  <div class="progress">
+                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?php echo $count_correct_answer; ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                               </div>
-                            </a>
-                          </div>
+                        <?php } } ?>
                       </div>
+                  </div> <br /> <br />
 
+                  <div class="row">
+                      <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
+                        <a href="assessment/" title="Start Assessment" style="color: #fff;">
+                          <div class="card card-hover">
+                              <div class="box bg-success text-center">
+                                  <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>
+                                  <h6 class="text-white">START ASSSESSMENT</h6>
+                              </div>
+                          </div>
+                        </a>
+                      </div>
                   </div>
+
               </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                All Rights Reserved by <a href="#"> E-Diagnostic Assessment </a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+          </div>
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer text-center">
+            All Rights Reserved by <a href="#"> E-Diagnostic Assessment </a>
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
         <!-- ============================================================== -->
     </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->

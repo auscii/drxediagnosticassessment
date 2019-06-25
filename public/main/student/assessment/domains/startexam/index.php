@@ -51,7 +51,8 @@ if (isset($_POST['drx_btn_start_exam']))
     $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
     $questionValue = join("','",$splitQuestion);
     $answerValue = join("' OR drxassessment_answer_value ='",$splitAnswer);
-
+    // echo $answerValue;
+    // exit();
     $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1,
                                            IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer
                                     FROM drxassessment_assessment
@@ -60,9 +61,10 @@ if (isset($_POST['drx_btn_start_exam']))
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC))
     {
-      $drxassessment_answer_value = $row['drxassessment_answer_value'];
+      // $drxassessment_answer_value = $row['drxassessment_answer_value'];
       $drxassessment_question1 = $row['drxassessment_question1'];
       $assessment_correct_answer = $row['assessment_correct_answer'];
+      // echo "<script>alert('$drxassessment_answer_value')</script>";
 
       $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
                                                          user_id,
@@ -70,7 +72,6 @@ if (isset($_POST['drx_btn_start_exam']))
                                                          user_email,
                                                          student_selected_domain,
                                                          student_selected_question,
-                                                         student_selected_answer,
                                                          assessment_correct_answer
                                                          )
                                                   VALUES (
@@ -79,9 +80,10 @@ if (isset($_POST['drx_btn_start_exam']))
                                                          :user_email,
                                                          :student_selected_domain,
                                                          :student_selected_question,
-                                                         :student_selected_answer,
                                                          :assessment_correct_answer
                                                          )");
+                                                         // student_selected_answer,
+                                                         // :student_selected_answer,
         $drx_statement->execute(
            array(
                'user_id'                       => $drxassessmentid,
@@ -89,10 +91,10 @@ if (isset($_POST['drx_btn_start_exam']))
                'user_email'                    => $drxassessmentemail,
                'student_selected_domain'			 => $drxassessment_domain_name,
                'student_selected_question'		 => $drxassessment_question1,
-               'student_selected_answer'			 => $drxassessment_answer_value,
                'assessment_correct_answer'     => $assessment_correct_answer
            )
         );
+        // 'student_selected_answer'			 => $drxassessment_answer_value,
     }
         $drx_statement_taken = $connection->prepare("INSERT INTO drxassessment_assessment_taken (
                                                           user_id,
