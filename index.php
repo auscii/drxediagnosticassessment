@@ -49,7 +49,7 @@ if (!empty($_POST['drxassessment_confirm_password'])) {
 }
 
 $date_created_format = date('Y-m-d g:i:s');
-
+$profile_pic = "user.jpg";
 if (isset($_POST['drxassessment_regsubmit'])) {
 
     $drx = $connection->prepare("INSERT INTO drxassessment_users (
@@ -59,7 +59,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
                                   drxassessment_username,
                                   drxassessment_password,
                                   drxassessment_position,
-																	drxassessment_created_at
+																	drxassessment_created_at,
+																	drxassessment_profile_pic
                                   )
                                   VALUES (
                                   :drxassessment_name,
@@ -68,7 +69,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
                                   :drxassessment_username,
                                   :drxassessment_password,
                                   :drxassessment_position,
-																	:drxassessment_created_at
+																	:drxassessment_created_at,
+																	:drxassessment_profile_pic
                                   )");
     $drx->execute(
         array(
@@ -78,7 +80,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
             'drxassessment_username'        => $drxassessment_username,
             'drxassessment_password'        => $drxassessment_password,
             'drxassessment_position'        => $drxassessment_position,
-            'drxassessment_created_at'      => $date_created_format
+            'drxassessment_created_at'      => $date_created_format,
+            'drxassessment_profile_pic'     => $profile_pic
         )
     );
 		// $drx_get_last_id = $connection->lastInsertId();
@@ -244,8 +247,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 									<input class="form-control" placeholder="Enter Username" name="drxassessment_username" type="text" required>
                   <input class="form-control" placeholder="Enter Password" name="drxassessment_password" type="password" required>
 									<input class="form-control" placeholder="Confirm Password" name="drxassessment_confirm_password" type="password" required>
-									<button type="submit" name="drxassessment_regsubmit" class="btn"> Register</button>
-									<span>Already have an account? <a href="public/"> Sign in</a></span>
+									<button type="submit" name="drxassessment_regsubmit" class="btn" style="margin-bottom: 5%;"> Register</button>
+									<span style="font-size: 19px;">Already have an account? <a href="public/"> Log-in here</a></span>
 									<!-- <span>By registering, you agree to our <a href="#">Terms & Conditions.</a></span> -->
 								</div>
 							</form>

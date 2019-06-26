@@ -15,6 +15,11 @@ if (!empty($_SESSION['drxassessmentid'])) {
     $drxassessmentid = "";
 }
 
+if (!empty($_SESSION['drxassessmentprofilepic'])) {
+    $drxassessmentprofilepic = $_SESSION['drxassessmentprofilepic'];
+} else {
+    $drxassessmentprofilepic = "";
+}
 
 ?>
 
@@ -109,9 +114,9 @@ if (!empty($_SESSION['drxassessmentid'])) {
 
                         <li class="nav-item dropdown">
                           <span style="color: #fff;">Welcome, <?php echo $drxassessmentname; ?></span>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../../assets/images/<?php echo $drxassessmentprofilepic; ?>" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="../../profile/"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../../../../config/savage/"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -143,7 +148,7 @@ if (!empty($_SESSION['drxassessmentid'])) {
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../profile/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
 
                     </ul>
                 </nav>

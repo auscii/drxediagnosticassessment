@@ -30,6 +30,7 @@ if (isset($_POST['drx_login_submit'])) {
   );
   // $m364->fetchAll();
 	$row = $m364->fetch(PDO::FETCH_ASSOC);
+  $drxassessment_status = $row['drxassessment_status'];
 
   	if ($row) {
        $_SESSION['drx_welcome'] = 1;
@@ -41,15 +42,20 @@ if (isset($_POST['drx_login_submit'])) {
        $_SESSION['drxassessmentusername']=$row['drxassessment_username'] ;
        $_SESSION['drxassessmentpassword']=$row['drxassessment_password'] ;
        $_SESSION['drxassessmentposition']=$row['drxassessment_position'];
+       $_SESSION['drxassessmentprofilepic']=$row['drxassessment_profile_pic'];
        $_SESSION['drxch3ck5ecur1ty']="z01nxc98zxncnzx12131102930190293019203910920391";
        $position = $row['drxassessment_position'];
 
-       if ($position === "4dm1n15t4t0r") {
-           header("Location: main/teacher");
-      		 exit();
-       } else if ($position === "5tud3nt"){
-           header("Location: main/student");
-      		 exit();
+       if ($drxassessment_status == 1) {
+           if ($position === "4dm1n15t4t0r") {
+               header("Location: main/teacher");
+          		 exit();
+           } else if ($position === "5tud3nt"){
+               header("Location: main/student");
+          		 exit();
+           }
+       } else {
+           echo "<script>alert('User are not yet activated. Please contact Administrator.');</script>";
        }
 
   	} else {

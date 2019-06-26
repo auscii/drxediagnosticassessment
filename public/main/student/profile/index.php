@@ -1,11 +1,120 @@
 <?php
 session_start();
 include("../../../../config/common/asdasf9z09x0c90zx90123.php");
+$date_created_format = date('Y-m-d g:i:s');
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
 } else {
     $drxassessmentname = "";
+}
+
+if (!empty($_SESSION['drxassessmentemail'])) {
+    $drxassessmentemail = $_SESSION['drxassessmentemail'];
+} else {
+    $drxassessmentemail = "";
+}
+
+if (!empty($_SESSION['drxassessmentid'])) {
+    $drxassessmentid = $_SESSION['drxassessmentid'];
+} else {
+    $drxassessmentid = "";
+}
+
+if (!empty($_SESSION['drxassessmentcontactnumber'])) {
+    $drxassessmentcontactnumber = $_SESSION['drxassessmentcontactnumber'];
+} else {
+    $drxassessmentcontactnumber = "";
+}
+
+if (!empty($_SESSION['drxassessmentusername'])) {
+    $drxassessmentusername = $_SESSION['drxassessmentusername'];
+} else {
+    $drxassessmentusername = "";
+}
+
+if (!empty($_SESSION['drxassessmentpassword'])) {
+    $drxassessmentpassword = $_SESSION['drxassessmentpassword'];
+} else {
+    $drxassessmentpassword = "";
+}
+
+if (!empty($_SESSION['drxassessmentprofilepic'])) {
+    $drxassessmentprofilepic = $_SESSION['drxassessmentprofilepic'];
+} else {
+    $drxassessmentprofilepic = "";
+}
+
+
+if (!empty($_POST['fullname'])) {
+	  $fullname = $_POST['fullname'];
+} else {
+		$fullname = "";
+}
+
+if (!empty($_POST['email'])) {
+	  $email = $_POST['email'];
+} else {
+		$email = "";
+}
+
+if (!empty($_POST['contactnumber'])) {
+	  $contactnumber = $_POST['contactnumber'];
+} else {
+		$contactnumber = "";
+}
+
+if (!empty($_POST['password'])) {
+	  $password = $_POST['password'];
+} else {
+		$password = "";
+}
+
+if (!empty($_POST['confirmpassword'])) {
+	  $confirmpassword = $_POST['confirmpassword'];
+} else {
+		$confirmpassword = "";
+}
+
+if (!empty($_FILES['profile_pic'])) {
+		move_uploaded_file($_FILES["profile_pic"]["tmp_name"],"../../../assets/images/" . $_FILES["profile_pic"]["name"]);
+		$profile_pic = $_FILES["profile_pic"]["name"];
+} else {
+		$profile_pic = $drxassessmentprofilepic;
+}
+
+
+if (isset($_POST['update_profile'])) {
+
+
+		if ($password != $confirmpassword)
+		{
+				echo "<script>alert('Password Mismatched! Please try again.')</script>";
+		}
+		else
+		{
+			$update_statement = $connection->prepare("UPDATE drxassessment_users SET
+																								drxassessment_profile_pic = :drxassessment_profile_pic,
+																								drxassessment_name = :drxassessment_name,
+																								drxassessment_contactnumber = :drxassessment_contactnumber,
+																								drxassessment_email = :drxassessment_email,
+																								drxassessment_password = :drxassessment_password
+																								WHERE drxassessment_id = $drxassessmentid;
+																			");
+			$update_statement->execute(
+					array(
+							'drxassessment_profile_pic'           => $profile_pic,
+							'drxassessment_name'   							  => $fullname,
+							'drxassessment_contactnumber'   			=> $contactnumber,
+							'drxassessment_email'      					  => $email,
+							'drxassessment_password'     			 		=> $password
+					)
+			);
+				  // echo "<script>alert('Profile Successfully Update! You will automatically logout for updating profile.')</script>";
+					header("Location: ../../../../config/savage/");
+			// $update_statement->fetchAll();
+		}
 }
 ?>
 
@@ -100,9 +209,9 @@ if (!empty($_SESSION['drxassessmentname'])) {
 
                         <li class="nav-item dropdown">
                           <span style="color: #fff;">Welcome, <?php echo $drxassessmentname; ?></span>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../assets/images/<?php echo $drxassessmentprofilepic; ?>" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="../profile/"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../../../config/savage/"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -125,25 +234,16 @@ if (!empty($_SESSION['drxassessmentname'])) {
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+								<nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
 
-                        <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
-                                <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
-                            </ul>
-                        </li>
+												<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
-                        <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                        <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../profile" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Profile</span></a></li>
 
                     </ul>
                 </nav>
@@ -164,12 +264,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Users Management</h4>
+                        <h4 class="page-title">Update Profile</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Users Management</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../usersmanagement/">Choose Users</a></li>
+                                   <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../profile/">Profile</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -183,49 +283,78 @@ if (!empty($_SESSION['drxassessmentname'])) {
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+								<div class="card">
+									<form method="POST" enctype="multipart/form-data" class="form-horizontal">
 
-							<div class="card-body">
+											<?php if (!empty($drxassessmentprofilepic)) { ?>
+												<img class="img-circle" width="120px" height="120px" style="border-radius: 25px;" src="../../../assets/images/<?php echo $drxassessmentprofilepic; ?>" id="image_source" />
+											<?php }  else { ?>
+												<img class="img-circle" width="120px" height="120px" style="border-radius: 25px;" src="../../../assets/images/noimage.png" id="image_source" />
+											<?php } ?>
 
-								<div class="row el-element-overlay">
+											<div class="card-body" style="margin-top: -10%;">
+													<!-- <h4 class="card-title">Update Profile</h4> -->
 
-										<div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../../../assets/images/teacher_icon.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a title="Manage Admin/Teacher" class="btn default btn-outline image-popup-vertical-fit el-link" href="admin/"><i class="mdi mdi-arrow-compress"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Admin/Teacher</h4> <span class="text-muted">Manage User</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+													<input type="hidden" value="<?php echo $drxassessmentid; ?>">
 
-										<div class="col-lg-3 col-md-6">
-												<div class="card">
-														<div class="el-card-item">
-																<div class="el-card-avatar el-overlay-1"> <img src="../../../assets/images/student_icon.jpg" alt="user" />
-																		<div class="el-overlay">
-																				<ul class="list-style-none el-info">
-																					<li class="el-item"><a title="Manage Student" class="btn default btn-outline image-popup-vertical-fit el-link" href="student/"><i class="mdi mdi-arrow-compress"></i></a></li>
-																				</ul>
-																		</div>
-																</div>
-																<div class="el-card-content">
-																	<h4 class="m-b-0">Student</h4> <span class="text-muted">Manage User</span>
-																</div>
-														</div>
-												</div>
-										</div>
+													<div class="form-group row">
+															<label for="updateProfile" class="col-sm-3 text-right control-label col-form-label">User Profile Pic</label>
+															<div class="col-sm-9">
+																	<input type="file" class="form-control" name="profile_pic" onchange="readURL(this);">
+															</div>
+													</div>
 
-								</div>
+													<div class="form-group row">
+															<label for="updateProfile" class="col-sm-3 text-right control-label col-form-label">Fullname</label>
+															<div class="col-sm-9">
+																	<input type="text" class="form-control" name="fullname" value="<?php echo $drxassessmentname; ?>" required>
+															</div>
+													</div>
 
-							</div>
+													<div class="form-group row">
+															<label for="lname" class="col-sm-3 text-right control-label col-form-label">Email</label>
+															<div class="col-sm-9">
+																	<input type="email" class="form-control" name="email" value="<?php echo $drxassessmentemail; ?>" required>
+															</div>
+													</div>
 
+													<div class="form-group row">
+															<label for="lname" class="col-sm-3 text-right control-label col-form-label">Contact Numbeer</label>
+															<div class="col-sm-9">
+																	<input type="number" class="form-control" name="contactnumber" value="<?php echo $drxassessmentcontactnumber; ?>" required>
+															</div>
+													</div>
+
+													<div class="form-group row">
+															<label for="email1" class="col-sm-3 text-right control-label col-form-label">Username</label>
+															<div class="col-sm-9">
+																	<input type="text" class="form-control" id="username" value="<?php echo $drxassessmentusername; ?>" disabled>
+															</div>
+													</div>
+
+													<div class="form-group row">
+															<label for="cono1" class="col-sm-3 text-right control-label col-form-label">Password</label>
+															<div class="col-sm-9">
+																	<input type="password" class="form-control" name="password" placeholder="Enter your Password" required>
+															</div>
+													</div>
+
+													<div class="form-group row">
+															<label for="cono1" class="col-sm-3 text-right control-label col-form-label">Confirm Password</label>
+															<div class="col-sm-9">
+																	<input type="password" class="form-control" name="confirmpassword" placeholder="Re-enter your Password" required>
+															</div>
+													</div>
+
+											</div>
+											<div class="border-top">
+													<div class="card-body">
+															<button type="submit" name="update_profile" class="btn btn-success"><i class="fa fa-check-circle"></i> Update</button>
+													</div>
+											</div>
+									</form>
+
+            		</div>
         		</div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -235,10 +364,28 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <!-- End Wrapper -->
     <!-- ============================================================== -->
 
+
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../../../assets/libs/jquery/dist/jquery.min.js"></script>
+		<script>
+
+    function readURL(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#image_source')
+                   .attr('src', e.target.result);
+                   // .width(150)
+                   // .height(200);
+           };
+
+           reader.readAsDataURL(input.files[0]);
+       }
+    }
+		</script>
     <script src="../../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
@@ -254,6 +401,10 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <script src="../../../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../../../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../../../dist/js/pages/chart/chart-page-init.js"></script>
+
+		<script src="../../../assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="../../../assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+    <script src="../../../assets/extra-libs/DataTables/datatables.min.js"></script>
 
 </body>
 

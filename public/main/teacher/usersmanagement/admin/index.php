@@ -9,6 +9,12 @@ if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = "";
 }
 
+if (!empty($_SESSION['drxassessmentid'])) {
+    $drxassessmentid = $_SESSION['drxassessmentid'];
+} else {
+    $drxassessmentid = "";
+}
+
 
 
 if(isset($_POST['drxassessment_name'])){
@@ -78,7 +84,9 @@ if($drx_status == "addnewuser"){
 																				drxassessment_username,
 																				drxassessment_password,
                                         drxassessment_position,
-                                        drxassessment_created_at
+                                        drxassessment_created_at,
+                                        drxassessment_status,
+                                        drxassessment_profile_pic
                                         )
                                         VALUES (
                                         :drxassessment_name,
@@ -87,7 +95,9 @@ if($drx_status == "addnewuser"){
       																	:drxassessment_username,
       																	:drxassessment_password,
                                         :drxassessment_position,
-                                        :drxassessment_created_at
+                                        :drxassessment_created_at,
+                                        :drxassessment_status,
+                                        :drxassessment_profile_pic
                                         )");
     $drx_statement->execute(
         array(
@@ -97,7 +107,9 @@ if($drx_status == "addnewuser"){
 						'drxassessment_username'						  => $drxassessment_username,
 						'drxassessment_password'						  => $drxassessment_password,
 						'drxassessment_position'						  => $drxassessment_position,
-						'drxassessment_created_at'					  => $date_created_format
+						'drxassessment_created_at'					  => $date_created_format,
+            'drxassessment_status'                => 1,
+            'drxassessment_profile_pic'           => 'user.jpg'
         )
     );
     $drx_statement->fetchAll();
@@ -323,7 +335,7 @@ if($dr_delete_is_status == "deleteuser"){
 											<table id="zero_config" class="table table-striped table-bordered">
 													<thead>
 															<tr>
-																	<th class="text-center">#</th>
+																	<th class="text-center">ID</th>
 																	<th class="text-center">Fullname</th>
 																	<th class="text-center">Email</th>
 																	<th class="text-center">Date Created</th>
@@ -345,9 +357,11 @@ if($dr_delete_is_status == "deleteuser"){
 	                                     $drxassessment_username = $row['drxassessment_username'];
                                        $drxassessment_password = $row['drxassessment_password'];
 	                                     $drxassessment_created_at = $row['drxassessment_created_at'];
+
+                                       if ($drxassessment_id != $drxassessmentid) {
 	                          ?>
 															<tr>
-																<td class="text-center"><?php echo $drx_count; ?></td>
+																<td class="text-center"><?php echo $drxassessment_id; ?></td>
 																<td class="text-center"><?php echo $drxassessment_name; ?></td>
 																<td class="text-center"><?php echo $drxassessment_email; ?></td>
 																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
@@ -368,7 +382,7 @@ if($dr_delete_is_status == "deleteuser"){
                                   </button>
 																</td>
 															</tr>
-														<?php } ?>
+														<?php } } ?>
 													</tbody>
 											</table>
 									</div>
