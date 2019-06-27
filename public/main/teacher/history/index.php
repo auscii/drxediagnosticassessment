@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../../../config/common/asdasf9z09x0c90zx90123.php");
+$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
@@ -18,7 +19,6 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
     header('Location: ../../../');
     exit();
 }
-
 
 
 if(isset($_POST['drxassessment_question1'])){
@@ -266,6 +266,7 @@ if($dr_delete_is_status == "deleteassessment"){
                           <span style="color: #fff;">Welcome, <?php echo $drxassessmentname; ?></span>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" height="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../../../config/savage/"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -293,16 +294,16 @@ if($dr_delete_is_status == "deleteassessment"){
 
                         <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="active sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="../assessment/" class="active sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
+                                <li class="sidebar-item"><a href="../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
                                 <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
                         </li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="active sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
@@ -327,12 +328,12 @@ if($dr_delete_is_status == "deleteassessment"){
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Asssement Management</h4>
+                        <h4 class="page-title">Student Assessment History</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Asssement</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../assessment/">Management Asssement</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../history/">Student Assessment History</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -356,52 +357,59 @@ if($dr_delete_is_status == "deleteassessment"){
 													<thead>
 															<tr>
 																	<th class="text-center">#</th>
-																	<th class="text-center">Question</th>
-																	<th class="text-center">Answer</th>
+																	<th class="text-center">Name</th>
+																	<th class="text-center">Email</th>
+																	<th class="text-center">Overall Score</th>
+																	<th class="text-center">Total Correct Answer</th>
+																	<th class="text-center">Status</th>
 																	<th class="text-center">Date Created</th>
-																	<th class="text-center">Action</th>
+																	<!-- <th class="text-center">View</th> -->
 															</tr>
 													</thead>
 													<tbody>
 														<?php
 	                          $drx_count = 0;
-	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_created_at ASC");
-	                          $result->execute();
+														$result = $connection->prepare("SELECT * FROM drxassessment_assessment_history");
+													  $result->execute();
 	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	                                     $drx_count++;
-	                                     $drxassessment_id = $row['drxassessment_id'];
-	                                     $drxassessment_question1 = $row['drxassessment_question1'];
-																			 $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
-	                                     $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
-	                                     $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
-	                                     $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
-	                                     $drxassessment_created_at = $row['drxassessment_created_at'];
-                                       $drxassessmentanswer = $row['drxassessment_answer'];
+																			 $user_id = $row['user_id'];
+																			 $domain_name = $row['domain_name'];
+																			 $questions = $row['questions'];
+																			 $answer = $row['answer'];
+																			 $user_email = $row['user_email'];
+																			 $user_name = $row['user_name'];
+																			 $created_at = $row['created_at'];
+																			 $total_correct_answer = $row['total_correct_answer'];
+																			 $overall_score = $row['overall_score'];
 	                          ?>
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
-																<td class="text-center"><?php echo $drxassessment_question1; ?></td>
-																<td class="text-center"><?php echo $drxassessmentanswer; ?></td>
-																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
+																<td class="text-center"><?php echo $user_name; ?></td>
+																<td class="text-center"><?php echo $user_email; ?></td>
+																<td class="text-center"><?php echo $overall_score; ?></td>
+																<td class="text-center"><?php echo $total_correct_answer; ?></td>
 																<td class="text-center">
-                                  <!-- style="width: 200px;" -->
-																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-warning btn-mg"
-                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                          '<?php echo $drxassessment_question1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_2 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_3 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_4 ; ?>',
-                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                  <i class="ti-pencil"></i> Edit
-                                  </button>
-																	<!-- &nbsp;
-                                  <button type="button" data-toggle="modal" data-target="#deleteAssessmentModal" class="btn btn-danger btn-mg"
-                                  onclick="deleteAssessment('<?php echo $drxassessment_id ; ?>');">
-                                  <i class="ti-trash"></i> Delete
-                                  </button> -->
+																	<?php
+																	if ($total_correct_answer <= 9)
+																	{
+																		  echo "Failed";
+																	} else if ($total_correct_answer >= 10)
+																	{
+																			echo "Passed";
+																	}
+																	?>
 																</td>
+																<td class="text-center"><?php echo $created_at; ?></td>
+																<!-- <td class="text-center">
+																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+                                  onclick="viewHistoryAssessment('<?php echo $drxassessment_id ; ?>',
+			                                                           '<?php echo $drxassessment_profile_pic ; ?>',
+			                                                           '<?php echo $drxassessment_name ; ?>',
+			                                                           '<?php echo $drxassessment_email ; ?>');">
+                                  <i class="fa fa-eye"></i>
+                                  </button>
+																</td> -->
 															</tr>
 														<?php } ?>
 													</tbody>
@@ -435,104 +443,52 @@ if($dr_delete_is_status == "deleteassessment"){
 								</div>
 
 								<div class="modal-body">
-									<form method="POST">
+									<div class="table-responsive">
+											<table id="zero_config" class="table table-striped table-bordered">
+													<thead>
+															<tr>
+																	<th class="text-center" style="color:#000;">#</th>
+  																<th class="text-center" style="color:#000;">Domain</th>
+																	<th class="text-center" style="color:#000;">Total Correct Answer</th>
+																	<th class="text-center" style="color:#000;">Date of Assessment</th>
+															</tr>
+													</thead>
+													<tbody>
+														<?php
+	                          $drx_count = 0;
+														$drxassessment_student_email = '<span id="drxassessment_email_value"></span>';
+	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment_history");
+													  $result->execute();
+	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	                                     $drx_count++;
+																			 $user_id = $row['user_id'];
+																			 $questions = $row['questions'];
+																			 $answer = $row['answer'];
+																			 $user_email = $row['user_email'];
+																			 $created_at = $row['created_at'];
+																			 $total_correct_answer = $row['total_correct_answer'];
 
-										<input type="hidden" id="drx_status" name="drx_status">
-										<input type="hidden" id="drx_key" name="drx_key">
-
-										<!-- <h4 class="card-title">Question</h4> -->
-										<div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control is-valid" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
-												</div>
-										</div>
-
-                    <div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Answer</label>
-												<div class="col-sm-9">
-														<select class="form-control is-valid" name="drxassessment_answer" id="drxassessment_answer" required>
-                                <option value="" disabled selected>--Select Answer--</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                            </select>
-												</div>
-										</div>
-
-
-
-										<div class="form-group row">
-												<label for="fname" class="col-sm-3 text-right control-label col-form-label">A.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_1" name="drxassessment_q1_answer_1" placeholder="Answer for Question (Letter A)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">B.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_2" name="drxassessment_q1_answer_2" placeholder="Answer for Question (Letter B)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">C.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_3" name="drxassessment_q1_answer_3" placeholder="Answer for Question (Letter C)">
-												</div>
-										</div>
-
-										<div class="form-group row">
-												<label for="lname" class="col-sm-3 text-right control-label col-form-label">D.)</label>
-												<div class="col-sm-9">
-														<input type="text" class="form-control is-valid" id="drxassessment_q1_answer_4" name="drxassessment_q1_answer_4" placeholder="Answer for Question (Letter D)">
-												</div>
-										</div>
-
-
-										<div class="modal-footer">
-											  <button type="submit" class="btn btn-success">Submit</button>
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
-
-									</form>
-
+		 														// if($drxassessment_student_email != $user_email) {
+		 														// 		echo "<br />
+		 														// 				<span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
+		 														// 					<i class='fas fa-exclamation-circle'></i> NO ASSESSMENT RECORD.
+		 														// 				</span>
+		 														// 			 ";
+		 														// } else {
+	                          ?>
+															<tr>
+																<td class="text-center" style="color:#000;"><?php echo $drx_count; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $domain_name; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $total_correct_answer; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $created_at; ?></td>
+															</tr>
+														<?php }
+													//} ?>
+													</tbody>
+											</table>
+									</div>
 								</div>
 
-						</div>
-				</div>
-		</div>
-
-
-
-    <div class="modal fade" id="deleteAssessmentModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssessmentModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-						<div class="modal-content">
-
-								<div class="modal-header">
-										<h5 class="modal-title" id="deleteAssessmentModalLabel"></h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-										</button>
-								</div>
-
-								<div class="modal-body">
-									<form method="POST">
-
-										<input type="hidden" id="dr_delete_is_status" name="dr_delete_is_status">
-										<input type="hidden" id="drx_delete_is_key" name="drx_delete_is_key">
-
-                    <h3 class="text-center">Are you sure you want to Delete?</h3>
-
-                    <center>
-  									  <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Yes</button> &nbsp;
-  										<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> No</button>
-                    </center>
-
-									</form>
-								</div>
 						</div>
 				</div>
 		</div>
@@ -580,40 +536,11 @@ if($dr_delete_is_status == "deleteassessment"){
     </script>
 
 		<script>
-
-    function addAssessment(){
-      $("#assessmentModalLabel").html("Add New Asssement") ;
-      $("#drx_status").val("addnewassessment") ;
-
-      $("#drxassessment_question1").val("") ;
-      $("#drxassessment_q1_answer_1").val("") ;
-      $("#drxassessment_q1_answer_2").val("") ;
-      $("#drxassessment_q1_answer_3").val("") ;
-      $("#drxassessment_q1_answer_4").val("") ;
-    }
-
-    function editAssessment(key, q1, a1, a2, a3, a4, answer)
+    function viewHistoryAssessment(id, pic, name, email)
     {
-          $("#assessmentModalLabel").html("Edit Asssement") ;
-          $("#drx_status").val("editassessment") ;
-          $("#drx_key").val(key) ;
-
-          $("#drxassessment_question1").val(q1) ;
-          $("#drxassessment_q1_answer_1").val(a1) ;
-          $("#drxassessment_q1_answer_2").val(a2) ;
-          $("#drxassessment_q1_answer_3").val(a3) ;
-          $("#drxassessment_q1_answer_4").val(a4) ;
-          $("#drxassessment_answer").val(answer) ;
+          $("#assessmentModalLabel").html("Assessment History of '" + name + "'") ;
+          $("#drxassessment_email_value").html(email) ;
     }
-
-    function deleteAssessment(key)
-    {
-          $("#deleteAssessmentModalLabel").html("Delete Asssement") ;
-          $("#dr_delete_is_status").val("deleteassessment") ;
-          $("#drx_delete_is_key").val(key) ;
-    }
-
-
     </script>
 
 </body>

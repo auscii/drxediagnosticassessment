@@ -2,10 +2,27 @@
 session_start();
 include("../../../config/common/asdasf9z09x0c90zx90123.php");
 
+if (!empty($_SESSION['drxch3ck5ecur1ty'])) {
+	  $drxch3ck5ecur1ty = $_SESSION['drxch3ck5ecur1ty'];
+} else {
+		$drxch3ck5ecur1ty = "";
+}
+
+if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
+    header('Location: ../../');
+    exit();
+}
+
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
 } else {
     $drxassessmentname = "";
+}
+
+if (!empty($_SESSION['drx_welcome'])) {
+    $drx_welcome = $_SESSION['drx_welcome'];
+} else {
+    $drx_welcome = "";
 }
 
 // echo $drxassessmentname;
@@ -27,6 +44,17 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <link href="../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../../dist/css/style.min.css" rel="stylesheet">
     <link href="../../assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
+
+    <link href="../../dist/charts/Chart.css" rel="stylesheet">
+    <link href="../../dist/charts/Chart.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      /* #chart-container {
+        width: 50%;
+        height: auto;
+        margin: auto;
+      } */
+    </style>
 </head>
 
 <body>
@@ -104,9 +132,8 @@ if (!empty($_SESSION['drxassessmentname'])) {
 
                         <li class="nav-item dropdown">
                           <span style="color: #fff;">Welcome, <?php echo $drxassessmentname; ?></span>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" height="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../../config/savage/"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -143,11 +170,11 @@ if (!empty($_SESSION['drxassessmentname'])) {
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
 
                     </ul>
                 </nav>
@@ -192,49 +219,60 @@ if (!empty($_SESSION['drxassessmentname'])) {
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-md-6 col-lg-2 col-xlg-3">
-                        <div class="card card-hover">
-                            <div class="box bg-cyan text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                                <h6 class="text-white">Dashboard</h6>
-                            </div>
-                        </div>
-                    </div>
+
+                      <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <a href="../teacher/">
+                          <div class="card card-hover">
+                              <div class="box bg-cyan text-center">
+                                  <h1 class="font-light text-white"><i class="fa fa-home"></i></h1>
+                                  <h6 class="text-white">Dashboard</h6>
+                              </div>
+                          </div>
+                        </a>
+                      </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-4 col-xlg-3">
+                      <a href="assessment/">
                         <div class="card card-hover">
                             <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                                <h1 class="font-light text-white"><i class="fas fa-book"></i></h1>
                                 <h6 class="text-white">Asssement</h6>
                             </div>
                         </div>
+                      </a>
                     </div>
                      <!-- Column -->
                     <div class="col-md-6 col-lg-2 col-xlg-3">
+                      <a href="history/">
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
                                 <h6 class="text-white">History</h6>
                             </div>
                         </div>
+                      </a>
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-2 col-xlg-3">
+                      <a href="reports/">
                         <div class="card card-hover">
                             <div class="box bg-danger text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                                <h1 class="font-light text-white"><i class="fa fa-file"></i></h1>
                                 <h6 class="text-white">Reports</h6>
                             </div>
                         </div>
+                      </a>
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-2 col-xlg-3">
+                      <a href="rankings/">
                         <div class="card card-hover">
                             <div class="box bg-info text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
+                                <h1 class="font-light text-white"><i class="fa fa-list"></i></h1>
                                 <h6 class="text-white">Ranking</h6>
                             </div>
                         </div>
+                      </a>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -246,59 +284,95 @@ if (!empty($_SESSION['drxassessmentname'])) {
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div>
-                                        <h4 class="card-title">Site Analysis</h4>
-                                        <h5 class="card-subtitle">Overview of Student Assessment</h5>
+                                        <h4 class="card-title">Assessment of Overall Student(s)</h4>
+                                        <h5 class="card-subtitle"></h5>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <!-- column -->
                                     <div class="col-lg-9">
-                                        <div class="flot-chart">
-                                            <div class="flot-chart-content" id="flot-line-chart"></div>
+                                        <div id="chart-container">
+                                          <canvas id="report_chart"></canvas>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-user m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">Total Users</small>
+                                                   <i class="fa fa-user-circle m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(*) FROM drxassessment_users";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_overall_users = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_overall_users; ?></h5>
+                                                   <small class="font-light">Total User(s)</small>
                                                 </div>
                                             </div>
                                              <div class="col-6">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-plus m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">New Users</small>
+                                                   <i class="fa fa-file m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(*) FROM drxassessment_assessment_domains";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_domains = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_domains; ?></h5>
+                                                   <small class="font-light">Total Domain(s)</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 m-t-15">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-cart-plus m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">Total Student</small>
+                                                   <i class="fa fa-users m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(*) FROM drxassessment_users WHERE drxassessment_position = '5tud3nt'";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_students = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_domains; ?></h5>
+                                                   <small class="font-light">Total Student(s)</small>
                                                 </div>
                                             </div>
                                              <div class="col-6 m-t-15">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-tag m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">Total Questions</small>
+                                                   <i class="fa fa-book m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(drxassessment_question1) FROM drxassessment_assessment";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_questions = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_questions; ?></h5>
+                                                   <small class="font-light">Total Question(s)</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 m-t-15">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-table m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">Passed Students</small>
+                                                   <i class="fa fa-user m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(*) FROM drxassessment_assessment_history WHERE overall_score >= 75";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_questions = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_questions; ?></h5>
+                                                   <small class="font-light">Passed Student(s)</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 m-t-15">
                                                 <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-globe m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">0</h5>
-                                                   <small class="font-light">Failed Students</small>
+                                                   <i class="fa fa-user m-b-5 font-16"></i>
+                                                   <?php
+                                                   $sql = "SELECT count(*) FROM drxassessment_assessment_history WHERE overall_score <= 74";
+                                                   $result = $connection->prepare($sql);
+                                                   $result->execute();
+                                                   $total_questions = $result->fetchColumn();
+                                                   ?>
+                                                   <h5 class="m-b-0 m-t-5"><?php echo $total_questions; ?></h5>
+                                                   <small class="font-light">Failed Student(s)</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -362,10 +436,21 @@ if (!empty($_SESSION['drxassessmentname'])) {
     <script src="../../dist/js/pages/chart/chart-page-init.js"></script>
     <script src="../../assets/libs/toastr/build/toastr.min.js"></script>
 
+    <script type="text/javascript" src="../../dist/charts/Chart.min.js"></script>
+    <script type="text/javascript" src="../../dist/charts/Chart.bundle.js"></script>
+    <script type="text/javascript" src="../../dist/charts/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="../../dist/charts/Chart.js"></script>
+    <script type="text/javascript" src="reports/app.js"></script>
+
+
+
     <script>
-          $(function(){
-                toastr.info('Welcome to DRx E-Diagnostic Assessment!', 'Welcome!');
-          });
+
+          // $(function(){
+          //   <?php //if ($drx_welcome == 1) { ?>
+          //       toastr.info('Welcome to DRx E-Diagnostic Assessment!', 'Welcome!');
+          //   <?php //} $drx_welcome = 0; ?>
+          // });
     </script>
 
 </body>

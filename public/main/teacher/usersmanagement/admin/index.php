@@ -15,6 +15,16 @@ if (!empty($_SESSION['drxassessmentid'])) {
     $drxassessmentid = "";
 }
 
+if (!empty($_SESSION['drxch3ck5ecur1ty'])) {
+	  $drxch3ck5ecur1ty = $_SESSION['drxch3ck5ecur1ty'];
+} else {
+		$drxch3ck5ecur1ty = "";
+}
+
+if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
+    header('Location: ../../../../');
+    exit();
+}
 
 
 if(isset($_POST['drxassessment_name'])){
@@ -245,9 +255,9 @@ if($dr_delete_is_status == "deleteuser"){
 
                         <li class="nav-item dropdown">
                           <span style="color: #fff;">Welcome, <?php echo $drxassessmentname; ?></span>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" height="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../../../../config/savage/"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -284,11 +294,11 @@ if($dr_delete_is_status == "deleteuser"){
 
                         <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
 
                     </ul>
                 </nav>

@@ -1,12 +1,6 @@
 <?php
 session_start();
-include("../../../../config/common/asdasf9z09x0c90zx90123.php");
-$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-if (!empty($_SESSION['drxassessmentname'])) {
-    $drxassessmentname = $_SESSION['drxassessmentname'];
-} else {
-    $drxassessmentname = "";
-}
+
 if (!empty($_SESSION['drxch3ck5ecur1ty'])) {
 	  $drxch3ck5ecur1ty = $_SESSION['drxch3ck5ecur1ty'];
 } else {
@@ -17,6 +11,14 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
     header('Location: ../../../');
     exit();
 }
+
+$drx_count = 0;
+$reportQuery = "";
+$reportTitle = "";
+
+include("../../../../config/common/asdasf9z09x0c90zx90123.php");
+include("../reports/fetch_report.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -147,13 +149,13 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
                             </ul>
                         </li>
 
-                        <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../history/" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">History</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                        <li class="active sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
 
                     </ul>
                 </nav>
@@ -174,12 +176,12 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Users Management</h4>
+                        <h4 class="page-title">Student Assessment Rankings</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Users Management</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../usersmanagement/">Choose Users</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../rankings/">Student Assessment Rankings</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -194,49 +196,89 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
             <!-- ============================================================== -->
             <div class="container-fluid">
 
-							<div class="card-body">
 
-								<div class="row el-element-overlay">
-
-										<div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../../../assets/images/teacher_icon.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a title="Manage Admin/Teacher" class="btn default btn-outline image-popup-vertical-fit el-link" href="admin/"><i class="mdi mdi-arrow-compress"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Admin/Teacher</h4> <span class="text-muted">Manage User</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-										<div class="col-lg-3 col-md-6">
-												<div class="card">
-														<div class="el-card-item">
-																<div class="el-card-avatar el-overlay-1"> <img src="../../../assets/images/student_icon.jpg" alt="user" />
-																		<div class="el-overlay">
-																				<ul class="list-style-none el-info">
-																					<li class="el-item"><a title="Manage Student" class="btn default btn-outline image-popup-vertical-fit el-link" href="student/"><i class="mdi mdi-arrow-compress"></i></a></li>
-																				</ul>
-																		</div>
-																</div>
-																<div class="el-card-content">
-																	<h4 class="m-b-0">Student</h4> <span class="text-muted">Manage User</span>
-																</div>
-														</div>
+							<form method="POST">
+									<div class="row">
+										<div class="col-xs-5 col-sm-5 col-md-5">
+												<div class="form-group">
+													<label>Student Performance</label>
+													<select class="form-control" name="report_type" id="report_type" onchange='this.form.submit()'>
+															<option value="" disabled selected>--Select Option--</option>
+															<option value="1">Overall Students</option>
+															<option value="9">Highest Score</option>
+															<option value="6">Lowest Score</option>
+													</select>
 												</div>
-										</div>
+											</div>
+									</div>
+						 </form>
 
-								</div>
+							<div class="card-body">
+									<!-- <h5 class="card-title">Assessment</h5> -->
+									<div class="table-responsive">
+                    <h3 class="text-center"><?php echo $reportTitle; ?></h3>
+											<table id="zero_config" class="table table-striped table-bordered">
+													<thead>
+															<tr>
+																	<th class="text-center">#</th>
+																	<th class="text-center">Name</th>
+                                  <th class="text-center">Email</th>
+																	<th class="text-center">Domain</th>
+																	<th class="text-center">Overall Score</th>
+																	<th class="text-center">Total Correct Answer</th>
+																	<th class="text-center">Status</th>
+																	<th class="text-center">Date of Assessment</th>
+															</tr>
+													</thead>
+													<tbody>
+														<?php
+														if (isset($_POST['report_type'])) {
+																$result = $connection->prepare($reportQuery);
+															  $result->execute();
+			                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			                                     $drx_count++;
+																					 $user_id = $row['user_id'];
+																					 $domain_name = $row['domain_name'];
+																					 $questions = $row['questions'];
+																					 $answer = $row['answer'];
+																					 $user_email = $row['user_email'];
+																					 $user_name = $row['user_name'];
+																					 $created_at = $row['created_at'];
+																					 $total_correct_answer = $row['total_correct_answer'];
+																					 $overall_score = $row['overall_score'];
+	                          ?>
 
-							</div>
+															<tr>
+																<td class="text-center"><?php echo $drx_count; ?></td>
+																<td class="text-center"><?php echo $user_name; ?></td>
+                                <td class="text-center"><?php echo $user_email; ?></td>
+																<td class="text-center"><?php echo $domain_name; ?></td>
+																<td class="text-center"><?php echo $overall_score; ?></td>
+																<td class="text-center"><?php echo $total_correct_answer; ?></td>
+																<td class="text-center">
+																	<?php
+																	if ($overall_score <= 75)
+																	{
+																		  echo "Failed";
+																	} else if ($overall_score >= 75)
+																	{
+																			echo "Passed";
+																	}
+																	?>
+																</td>
+																<td class="text-center"><?php echo $created_at; ?></td>
+															</tr>
+														<?php } } ?>
+													</tbody>
+											</table>
 
-        		</div>
+												<button id="csv" class="btn btn-primary"><i class="fa fa-print"></i> Export to Excel</button>&nbsp;
+												<button id="pdf" class="btn btn-danger"><i class="fa fa-print"></i> Save as PDF</button> <br />
+									</div>
+
+            </div>
+
+        </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
@@ -245,17 +287,86 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
     <!-- End Wrapper -->
     <!-- ============================================================== -->
 
+
+		<!-- ============================================================== -->
+		<!-- MODALS -->
+		<!-- ============================================================== -->
+		<div class="modal fade" id="assessmentModal" tabindex="-1" role="dialog" aria-labelledby="assessmentModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+						<div class="modal-content">
+
+								<div class="modal-header">
+										<h5 class="modal-title" id="assessmentModalLabel"></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+										</button>
+								</div>
+
+								<div class="modal-body">
+									<div class="table-responsive">
+											<table id="zero_config" class="table table-striped table-bordered">
+													<thead>
+															<tr>
+																	<th class="text-center" style="color:#000;">#</th>
+  																<th class="text-center" style="color:#000;">Domain</th>
+																	<th class="text-center" style="color:#000;">Total Correct Answer</th>
+																	<th class="text-center" style="color:#000;">Date of Assessment</th>
+															</tr>
+													</thead>
+													<tbody>
+														<?php
+	                          $drx_count = 0;
+														$drxassessment_student_email = '<span id="drxassessment_email_value"></span>';
+	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment_history");
+													  $result->execute();
+	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	                                     $drx_count++;
+																			 $user_id = $row['user_id'];
+																			 $questions = $row['questions'];
+																			 $answer = $row['answer'];
+																			 $user_email = $row['user_email'];
+																			 $created_at = $row['created_at'];
+																			 $total_correct_answer = $row['total_correct_answer'];
+	                          ?>
+															<tr>
+																<td class="text-center" style="color:#000;"><?php echo $drx_count; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $domain_name; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $total_correct_answer; ?></td>
+																<td class="text-center" style="color:#000;"><?php echo $created_at; ?></td>
+															</tr>
+														<?php } ?>
+													</tbody>
+											</table>
+									</div>
+								</div>
+
+						</div>
+				</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- END MODALS -->
+		<!-- ============================================================== -->
+
+
+
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
     <script src="../../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
     <script src="../../../assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
     <script src="../../../dist/js/waves.js"></script>
+    <!--Menu sidebar -->
     <script src="../../../dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
     <script src="../../../dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="../../../dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
     <script src="../../../assets/libs/flot/excanvas.js"></script>
     <script src="../../../assets/libs/flot/jquery.flot.js"></script>
     <script src="../../../assets/libs/flot/jquery.flot.pie.js"></script>
@@ -264,6 +375,24 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
     <script src="../../../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../../../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../../../dist/js/pages/chart/chart-page-init.js"></script>
+
+		<script src="../../../assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="../../../assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+    <script src="../../../assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+    </script>
+
+		<script>
+    function viewHistoryAssessment(id, pic, name, email)
+    {
+          $("#assessmentModalLabel").html("Assessment History of '" + name + "'") ;
+          $("#drxassessment_email_value").html(email) ;
+    }
+    </script>
 
 </body>
 
