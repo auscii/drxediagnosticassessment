@@ -21,37 +21,43 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 
 
 
-if(isset($_POST['drxassessment_question1'])){
+if(!empty($_POST['drxassessment_question1'])){
     $drxassessment_question1 = $_POST['drxassessment_question1'];
 } else {
     $drxassessment_question1 = "";
 }
 
-if (isset($_POST['drxassessment_answer'])) {
+if (!empty($_POST['drxassessment_domain'])) {
+    $drxassessment_domain = $_POST['drxassessment_domain'];
+} else {
+    $drxassessment_domain = "";
+}
+
+if (!empty($_POST['drxassessment_answer'])) {
     $drxassessment_answer = $_POST['drxassessment_answer'];
 } else {
     $drxassessment_answer = "";
 }
 
-if(isset($_POST['drxassessment_q1_answer_1'])){
+if(!empty($_POST['drxassessment_q1_answer_1'])){
     $drxassessment_q1_answer_1 = $_POST['drxassessment_q1_answer_1'];
 } else {
     $drxassessment_q1_answer_1 = "";
 }
 
-if(isset($_POST['drxassessment_q1_answer_2'])){
+if(!empty($_POST['drxassessment_q1_answer_2'])){
     $drxassessment_q1_answer_2 = $_POST['drxassessment_q1_answer_2'];
 } else {
     $drxassessment_q1_answer_2 = "";
 }
 
-if(isset($_POST['drxassessment_q1_answer_3'])){
+if(!empty($_POST['drxassessment_q1_answer_3'])){
     $drxassessment_q1_answer_3 = $_POST['drxassessment_q1_answer_3'];
 } else {
     $drxassessment_q1_answer_3 = "";
 }
 
-if(isset($_POST['drxassessment_q1_answer_4'])){
+if(!empty($_POST['drxassessment_q1_answer_4'])){
     $drxassessment_q1_answer_4 = $_POST['drxassessment_q1_answer_4'];
 } else {
     $drxassessment_q1_answer_4 = "";
@@ -59,25 +65,25 @@ if(isset($_POST['drxassessment_q1_answer_4'])){
 
 
 
-if(isset($_POST['drx_status'])){
+if(!empty($_POST['drx_status'])){
     $drx_status = $_POST['drx_status'];
 } else {
     $drx_status = "";
 }
 
-if(isset($_POST['drx_key'])){
+if(!empty($_POST['drx_key'])){
     $drx_key = $_POST['drx_key'];
 } else {
     $drx_key = "";
 }
 
-if(isset($_POST['dr_delete_is_status'])){
+if(!empty($_POST['dr_delete_is_status'])){
     $dr_delete_is_status = $_POST['dr_delete_is_status'];
 } else {
     $dr_delete_is_status = "";
 }
 
-if(isset($_POST['drx_delete_is_key'])){
+if(!empty($_POST['drx_delete_is_key'])){
     $drx_delete_is_key = $_POST['drx_delete_is_key'];
 } else {
     $drx_delete_is_key = "";
@@ -141,7 +147,8 @@ if($drx_status == "editassessment"){
 																								 drxassessment_q1_answer_4      = :drxassessment_q1_answer_4,
 																								 drxassessment_updated_at       = :drxassessment_updated_at,
                                                  drxassessment_answer           = :drxassessment_answer,
-                                                 drxassessment_answer_value     = :drxassessment_answer_value
+                                                 drxassessment_answer_value     = :drxassessment_answer_value,
+                                                 drxassessment_domain           = :drxassessment_domain
                                            WHERE drxassessment_id = $drx_key;");
     $drx_statement->execute(
         array(
@@ -152,7 +159,8 @@ if($drx_status == "editassessment"){
 						'drxassessment_q1_answer_4'						  => $drxassessment_q1_answer_4,
 						'drxassessment_updated_at'						  => $date_created_format,
             'drxassessment_answer'                  => $drxassessment_answer,
-            'drxassessment_answer_value'            => $drxassessment_answer_value
+            'drxassessment_answer_value'            => $drxassessment_answer_value,
+            'drxassessment_domain'                  => $drxassessment_domain
         )
     );
     $drx_statement->fetchAll();
@@ -293,12 +301,14 @@ if($dr_delete_is_status == "deleteassessment"){
 
                         <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="active sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                        <!-- <li class="active sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="../assessment/" class="active sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
                                 <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
-                        </li>
+                        </li> -->
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Manage Assessment </span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
@@ -356,7 +366,8 @@ if($dr_delete_is_status == "deleteassessment"){
 													<thead>
 															<tr>
 																	<th class="text-center">#</th>
-																	<th class="text-center">Question</th>
+                                  <th class="text-center">Question</th>
+																	<th class="text-center">Domain</th>
 																	<th class="text-center">Answer</th>
 																	<th class="text-center">Date Created</th>
 																	<th class="text-center">Action</th>
@@ -372,6 +383,7 @@ if($dr_delete_is_status == "deleteassessment"){
 	                                     $drx_count++;
 	                                     $drxassessment_id = $row['drxassessment_id'];
 	                                     $drxassessment_question1 = $row['drxassessment_question1'];
+																			 $drxassessment_domain = $row['drxassessment_domain'];
 																			 $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
 	                                     $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
 	                                     $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
@@ -381,20 +393,22 @@ if($dr_delete_is_status == "deleteassessment"){
 	                          ?>
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
-																<td class="text-center"><?php echo $drxassessment_question1; ?></td>
+                                <td class="text-center"><?php echo $drxassessment_question1; ?></td>
+																<td class="text-center"><?php echo $drxassessment_domain; ?></td>
 																<td class="text-center"><?php echo $drxassessmentanswer; ?></td>
 																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
 																<td class="text-center">
                                   <!-- style="width: 200px;" -->
-																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-warning btn-mg"
+																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
                                   onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
                                                           '<?php echo $drxassessment_question1 ; ?>',
                                                           '<?php echo $drxassessment_q1_answer_1 ; ?>',
                                                           '<?php echo $drxassessment_q1_answer_2 ; ?>',
                                                           '<?php echo $drxassessment_q1_answer_3 ; ?>',
                                                           '<?php echo $drxassessment_q1_answer_4 ; ?>',
-                                                          '<?php echo $drxassessmentanswer ; ?>');">
-                                  <i class="ti-pencil"></i> Edit
+                                                          '<?php echo $drxassessmentanswer ; ?>',
+                                                          '<?php echo $drxassessment_domain ; ?>');">
+                                  <i class="ti-pencil"></i> UPDATE
                                   </button>
 																	<!-- &nbsp;
                                   <button type="button" data-toggle="modal" data-target="#deleteAssessmentModal" class="btn btn-danger btn-mg"
@@ -447,6 +461,20 @@ if($dr_delete_is_status == "deleteassessment"){
 														<input type="text" class="form-control is-valid" id="drxassessment_question1" name="drxassessment_question1" placeholder="Enter Question">
 												</div>
 										</div>
+
+                    <div class="form-group row">
+                    		<label class="col-sm-3 text-right control-label col-form-label">Domain</label>
+                        <div class="col-sm-9">
+                        		<select class="form-control is-valid" name="drxassessment_domain" id="drxassessment_domain" required>
+                        			<option value="" disabled selected>Select Domain</option>
+                        			<option value="Number Sense">Number Sense</option>
+                        			<option value="Memorization of Arithmetic Facts">Memorization of Arithmetic Facts</option>
+                        			<option value="Accurate Calculation">Accurate Calculation</option>
+                        			<option value="Fluent Calculation">Fluent Calculation</option>
+                        			<option value="Mathematical Reasoning and Application">Mathematical Reasoning and Application</option>
+                        		</select>
+                        </div>
+                    </div>
 
                     <div class="form-group row">
 												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Answer</label>
@@ -592,13 +620,14 @@ if($dr_delete_is_status == "deleteassessment"){
       $("#drxassessment_q1_answer_4").val("") ;
     }
 
-    function editAssessment(key, q1, a1, a2, a3, a4, answer)
+    function editAssessment(key, q1, a1, a2, a3, a4, answer, domain)
     {
           $("#assessmentModalLabel").html("Edit Asssement") ;
           $("#drx_status").val("editassessment") ;
           $("#drx_key").val(key) ;
 
           $("#drxassessment_question1").val(q1) ;
+          $("#drxassessment_domain").val(domain) ;
           $("#drxassessment_q1_answer_1").val(a1) ;
           $("#drxassessment_q1_answer_2").val(a2) ;
           $("#drxassessment_q1_answer_3").val(a3) ;

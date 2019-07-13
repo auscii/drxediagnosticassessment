@@ -142,12 +142,14 @@ include("../reports/fetch_report.php");
 
                         <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
                                 <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
-                        </li>
+                        </li> -->
+
+												<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Manage Assessment </span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
@@ -223,11 +225,13 @@ include("../reports/fetch_report.php");
 																	<th class="text-center">#</th>
 																	<th class="text-center">Name</th>
                                   <th class="text-center">Email</th>
-																	<th class="text-center">Domain</th>
+																	<!-- <th class="text-center">Domain</th> -->
 																	<th class="text-center">Overall Score</th>
 																	<th class="text-center">Total Correct Answer</th>
 																	<th class="text-center">Status</th>
-																	<th class="text-center">Date of Assessment</th>
+																	<!-- <th class="text-center">Date of Assessment</th> -->
+																	<th class="text-center">Start of Assessment</th>
+																	<th class="text-center">End of Assessment</th>
 															</tr>
 													</thead>
 													<tbody>
@@ -246,15 +250,17 @@ include("../reports/fetch_report.php");
 																					 $created_at = $row['created_at'];
 																					 $total_correct_answer = $row['total_correct_answer'];
 																					 $overall_score = $row['overall_score'];
+																					 $start_at = $row['start_at'];
+																					 $end_at = $row['end_at'];
 	                          ?>
 
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
 																<td class="text-center"><?php echo $user_name; ?></td>
                                 <td class="text-center"><?php echo $user_email; ?></td>
-																<td class="text-center"><?php echo $domain_name; ?></td>
-																<td class="text-center"><?php echo $overall_score; ?></td>
-																<td class="text-center"><?php echo $total_correct_answer; ?></td>
+																<!-- <td class="text-center"><?php //echo $domain_name; ?></td> -->
+																<td class="text-center"><?php echo $start_at; ?></td>
+																<td class="text-center"><?php echo $end_at; ?></td>
 																<td class="text-center">
 																	<?php
 																	if ($overall_score <= 75)
@@ -266,6 +272,8 @@ include("../reports/fetch_report.php");
 																	}
 																	?>
 																</td>
+																<!-- <td class="text-center"><?php //echo $created_at; ?></td> -->
+																<td class="text-center"><?php echo $created_at; ?></td>
 																<td class="text-center"><?php echo $created_at; ?></td>
 															</tr>
 														<?php } } ?>
@@ -385,6 +393,21 @@ include("../reports/fetch_report.php");
          ****************************************/
         $('#zero_config').DataTable();
     </script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+		<script src="../../../dist/table-export/tableHTMLExport.js"></script>
+		<script>
+		  $('#json').on('click',function(){
+		    $("#zero_config").tableHTMLExport({type:'json',filename:'Assessment_Reports.json'});
+		  });
+		  $('#csv').on('click',function(){
+		    $("#zero_config").tableHTMLExport({type:'csv',filename:'Assessment_Reports.csv'});
+		  });
+		  $('#pdf').on('click',function(){
+		    $("#zero_config").tableHTMLExport({type:'pdf',filename:'Assessment_Reports.pdf'});
+		  });
+		</script>
 
 		<script>
     function viewHistoryAssessment(id, pic, name, email)

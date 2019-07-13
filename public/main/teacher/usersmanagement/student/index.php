@@ -46,6 +46,21 @@ if(isset($_POST['drx_delete_is_key'])){
     $drx_delete_is_key = "";
 }
 
+
+if(isset($_POST['dr_approveexam_is_status'])){
+    $dr_approveexam_is_status = $_POST['dr_approveexam_is_status'];
+} else {
+    $dr_approveexam_is_status = "";
+}
+
+
+if(isset($_POST['drx_approveexam_is_key'])){
+    $drx_approveexam_is_key = $_POST['drx_approveexam_is_key'];
+} else {
+    $drx_approveexam_is_key = "";
+}
+
+
 if($drx_status == "approvalstudentuser"){
     $drx_statement = $connection->prepare("UPDATE drxassessment_users SET
                                                  drxassessment_status = :drxassessment_status
@@ -65,6 +80,17 @@ if($dr_delete_is_status == "deleteuser"){
     $drx_statement->fetchAll();
 }
 
+if ($dr_approveexam_is_status == "approveexamuser") {
+    $drx_statement_exam = $connection->prepare("UPDATE drxassessment_users SET
+                                                       drxassessment_exam = :drxassessment_exam
+                                                WHERE drxassessment_id = :drxassessment_id");
+    $drx_statement_exam->execute(
+        array(
+            'drxassessment_exam'               => 0,
+            'drxassessment_id'                 => $drx_approveexam_is_key
+        )
+    );
+}
 
 
 ?>
@@ -190,12 +216,14 @@ if($dr_delete_is_status == "deleteuser"){
 
                         <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="../../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
                                 <li class="sidebar-item"><a href="../../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
-                        </li>
+                        </li> -->
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../assessment/" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Manage Assessment </span></a></li>
 
                         <li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
@@ -253,7 +281,9 @@ if($dr_delete_is_status == "deleteuser"){
 																	<th class="text-center">Email</th>
 																	<th class="text-center">Status</th>
 																	<th class="text-center">Date Created</th>
-																	<th class="text-center">Action</th>
+                                  <th class="text-center">Registration</th>
+                                  <th class="text-center">Retake Exam</th>
+																	<th class="text-center">Delete</th>
 															</tr>
 													</thead>
 													<tbody>
@@ -271,7 +301,8 @@ if($dr_delete_is_status == "deleteuser"){
 	                                     $drxassessment_username = $row['drxassessment_username'];
                                        $drxassessment_password = $row['drxassessment_password'];
 																			 $drxassessment_created_at = $row['drxassessment_created_at'];
-	                                     $drxassessment_status = $row['drxassessment_status'];
+                                       $drxassessment_status = $row['drxassessment_status'];
+	                                     $drxassessment_exam = $row['drxassessment_exam'];
 	                          ?>
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
@@ -286,25 +317,37 @@ if($dr_delete_is_status == "deleteuser"){
 																</td>
 																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
 																<td class="text-center">
-
 																	<?php if($drxassessment_status == 1) {?>
-																	<button type="button" class="btn btn-success btn-mg" style="width: 120px;" disabled>
+																	<button type="button" class="btn btn-warning btn-mg" style="width: 120px;" disabled>
                                   <i class="fas fa-check"></i> Approved
                                   </button>
 																	<?php } else if($drxassessment_status == 0) {?>
 																	<button type="button" data-toggle="modal" data-target="#usersModal" style="width: 120px;"  class="btn btn-warning btn-mg"
                                   onclick="approveUser('<?php echo $drxassessment_id ; ?>',
 	                                                     '<?php echo $drxassessment_name ; ?>');">
-                                  <i class="fas fa-exclamation"></i> Approval
+                                  <i class="fas fa-exclamation"></i> Approve
                                   </button>
 																	<?php } ?>
-
-																	&nbsp;
+																</td>
+																<td class="text-center">
+                                  <?php if ($drxassessment_exam == 1) { ?>
+                                  <button type="button" data-toggle="modal" data-target="#approveusersModal"  style="width: 120px;" class="btn btn-primary btn-mg"
+                                  onclick="approveExam('<?php echo $drxassessment_id ; ?>');">
+                                  <i class="fas fa-exclamation"></i> Approve
+                                  </button>
+                                <?php } else if($drxassessment_exam == 0) { ?>
+                                  <button type="button" style="width: 120px;" class="btn btn-primary btn-mg" disabled>
+                                  <i class="fas fa-check"></i> Approved
+                                  </button>
+                                <?php } ?>
+																</td>
+																<td class="text-center">
                                   <button type="button" data-toggle="modal" data-target="#deleteusersModal"  style="width: 120px;" class="btn btn-danger btn-mg"
                                   onclick="deleteUser('<?php echo $drxassessment_id ; ?>');">
                                   <i class="ti-trash"></i> Delete
                                   </button>
 																</td>
+
 															</tr>
 														<?php } ?>
 													</tbody>
@@ -390,6 +433,37 @@ if($dr_delete_is_status == "deleteuser"){
 						</div>
 				</div>
 		</div>
+
+
+    <div class="modal fade" id="approveusersModal" tabindex="-1" role="dialog" aria-labelledby="approveusersModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+						<div class="modal-content">
+
+								<div class="modal-header">
+										<h5 class="modal-title" id="approveusersModalLabel"></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+										</button>
+								</div>
+
+								<div class="modal-body">
+									<form method="POST">
+
+										<input type="hidden" id="dr_approveexam_is_status" name="dr_approveexam_is_status">
+										<input type="hidden" id="drx_approveexam_is_key" name="drx_approveexam_is_key">
+
+                    <h3 class="text-center">Are you sure you want to approve his/her retake exam?</h3>
+
+                    <center>
+  									  <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Yes</button> &nbsp;
+  										<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> No</button>
+                    </center>
+
+									</form>
+								</div>
+						</div>
+				</div>
+		</div>
 		<!-- ============================================================== -->
 		<!-- END MODALS -->
 		<!-- ============================================================== -->
@@ -447,6 +521,13 @@ if($dr_delete_is_status == "deleteuser"){
           $("#deleteusersModalLabel").html("Delete Student") ;
           $("#dr_delete_is_status").val("deleteuser") ;
           $("#drx_delete_is_key").val(key) ;
+    }
+
+    function approveExam(key)
+    {
+          $("#approveusersModalLabel").html("Approve Retake Exam");
+          $("#dr_approveexam_is_status").val("approveexamuser") ;
+          $("#drx_approveexam_is_key").val(key) ;
     }
 
 

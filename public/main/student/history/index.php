@@ -207,7 +207,6 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 													<thead>
 															<tr>
 																	<th class="text-center">#</th>
-  																<th class="text-center">Domain</th>
 																	<th class="text-center">Total Correct Answer</th>
 																	<th class="text-center">Status</th>
 																	<th class="text-center">Date of Assessment</th>
@@ -231,7 +230,6 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 	                          ?>
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
-																<td class="text-center"><?php echo $domain_name; ?></td>
 																<td class="text-center"><?php echo $total_correct_answer; ?></td>
 																<td class="text-center">
 																	<?php

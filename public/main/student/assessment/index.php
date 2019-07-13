@@ -264,9 +264,11 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 													 </div>
 											 </li>
 
+                       <?php $start_exam = date('Y-m-d g:i:s'); ?>
+
 											 <div class="row">
                            <div class="col-md-6 col-lg-4 col-xlg-3" style="margin: auto;">
-                             <a href="domains/" title="Start Assessment" style="color: #fff;">
+                             <a href="domains/startexam/index.php?start_exam=<?php echo $start_exam; ?>" title="Start Assessment" style="color: #fff;">
                                <div class="card card-hover">
                                    <div class="box bg-primary text-center">
                                        <h1 class="font-light text-white"><i class="mdi mdi-arrow-right-bold-circle"></i></h1>

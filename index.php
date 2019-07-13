@@ -109,7 +109,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
     // );
     // $drx_insert_assessment->fetchAll();
 
-		echo "<script>alert('Successfuly Register!');</script>";
+		echo "<script>alert('Registration Successful! Please wait for your account to be activated to log-in.');</script>";
 }
 ?>
 

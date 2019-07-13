@@ -14,6 +14,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 
 $drx_count = 0;
 $reportQuery = "";
+$reportFetchAll = "";
 $reportTitle = "";
 
 include("../../../../config/common/asdasf9z09x0c90zx90123.php");
@@ -153,12 +154,14 @@ include("fetch_report.php");
 
                         <li class="sidebar-item"> <a class=" sidebar-link waves-effect waves-dark sidebar-link" href="../../../main/teacher/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Assessment </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="../assessment/" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Manage Assessment </span></a></li>
                                 <li class="sidebar-item"><a href="../sequence/" class="sidebar-link"><i class="mdi mdi-note"></i><span class="hide-menu"> Sequence of Assessment </span></a></li>
                             </ul>
-                        </li>
+                        </li> -->
+
+												<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../assessment/" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Manage Assessment </span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../usersmanagement/" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span class="hide-menu">Users Management</span></a></li>
 
@@ -207,13 +210,13 @@ include("fetch_report.php");
             <!-- ============================================================== -->
             <div class="container-fluid">
 
-                <form method="POST">
+                <!-- <form method="POST">
                     <div class="row">
                         <div class="col-xs-5 col-sm-5 col-md-5">
                           <div class="form-group">
                             <label>Domain</label>
                             <select class="form-control" name="report_type" id="report_type" onchange='this.form.submit()'>
-                                <option value="" disabled selected>--Select Option--</option>
+                                <option value="" disabled selected>Select Option</option>
                                 <option value="All Domains">All Domains</option>
                                 <option value="Number Sense">Number Sense</option>
                                 <option value="Memorization of Arithmetic Facts">Memorization of Arithmetic Facts</option>
@@ -224,7 +227,7 @@ include("fetch_report.php");
                           </div>
                         </div>
                     </div>
-               </form>
+               </form> -->
 
 
 							<div class="card-body">
@@ -232,21 +235,26 @@ include("fetch_report.php");
                     <h3 class="text-center"><?php echo $reportTitle; ?></h3>
 											<table id="zero_config" class="table table-striped table-bordered">
 													<thead>
+															<!-- <tr>
+																	<td colspan="10"><h3 class="text-center"><?php //echo $reportTitle; ?></h3></td>
+															</tr> -->
 															<tr>
 																	<th class="text-center">#</th>
 																	<th class="text-center">Name</th>
                                   <th class="text-center">Email</th>
-																	<th class="text-center">Domain</th>
+																	<!-- <th class="text-center">Domain</th> -->
 																	<th class="text-center">Overall Score</th>
 																	<th class="text-center">Total Correct Answer</th>
 																	<th class="text-center">Status</th>
-																	<th class="text-center">Date of Assessment</th>
+																	<!-- <th class="text-center">Date of Assessment</th> -->
+																	<th class="text-center">Start of Assessment</th>
+																	<th class="text-center">End of Assessment</th>
 															</tr>
 													</thead>
 													<tbody>
 														<?php
-														if (isset($_POST['report_type'])) {
-																$result = $connection->prepare($reportQuery);
+														// if (isset($_POST['report_type'])) {
+																$result = $connection->prepare($reportFetchAll);
 															  $result->execute();
 			                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			                                     $drx_count++;
@@ -259,13 +267,15 @@ include("fetch_report.php");
 																					 $created_at = $row['created_at'];
 																					 $total_correct_answer = $row['total_correct_answer'];
 																					 $overall_score = $row['overall_score'];
+																					 $start_at = $row['start_at'];
+																					 $end_at = $row['end_at'];
 	                          ?>
 
 															<tr>
 																<td class="text-center"><?php echo $drx_count; ?></td>
 																<td class="text-center"><?php echo $user_name; ?></td>
                                 <td class="text-center"><?php echo $user_email; ?></td>
-																<td class="text-center"><?php echo $domain_name; ?></td>
+																<!-- <td class="text-center"><?php //echo $domain_name; ?></td> -->
 																<td class="text-center"><?php echo $overall_score; ?></td>
 																<td class="text-center"><?php echo $total_correct_answer; ?></td>
 																<td class="text-center">
@@ -279,9 +289,13 @@ include("fetch_report.php");
 																	}
 																	?>
 																</td>
+																<!-- <td class="text-center"><?php //echo $created_at; ?></td> -->
+																<td class="text-center"><?php echo $created_at; ?></td>
 																<td class="text-center"><?php echo $created_at; ?></td>
 															</tr>
-														<?php } } ?>
+														<?php }
+																//}
+														?>
 													</tbody>
 											</table>
 

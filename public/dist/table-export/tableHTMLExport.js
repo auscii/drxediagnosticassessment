@@ -190,7 +190,10 @@ THE SOFTWARE.*/
                     console.log(jsonExportArray);
                 }
 
-                var doc = new jsPDF('p', 'pt');
+                var doc = new jsPDF('l', 'mm', [297, 210]);
+                //var pdf = new jsPDF('l', 'mm', [297, 210]); //The first Param is for landscape or portrait
+
+
                 doc.autoTable(jsonExportArray.header, jsonExportArray.data);
                 doc.save(options.filename);
 
@@ -199,4 +202,3 @@ THE SOFTWARE.*/
         }
     });
 })(jQuery);
-

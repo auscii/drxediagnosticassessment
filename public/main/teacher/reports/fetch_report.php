@@ -1,4 +1,7 @@
 <?php
+
+$reportFetchAll = "SELECT * FROM drxassessment_assessment_history";
+
 if (!empty($_SESSION['drxassessmentname'])) {
     $drxassessmentname = $_SESSION['drxassessmentname'];
 } else {

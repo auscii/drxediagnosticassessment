@@ -18,19 +18,20 @@ if (!empty($_POST['drxassessment_password'])) {
 if (isset($_POST['drx_login_submit'])) {
 
   $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$m364 = $connection->prepare("SELECT * FROM drxassessment_users WHERE
+	$drx_login = $connection->prepare("SELECT * FROM drxassessment_users WHERE
 													drxassessment_username = :drxassessment_username AND
 													drxassessment_password = :drxassessment_password
 												");
-	$m364->execute(
+	$drx_login->execute(
       array(
           'drxassessment_username'      		 	 => $drxassessment_username,
           'drxassessment_password'      		   => $drxassessment_password
       )
   );
-  // $m364->fetchAll();
-	$row = $m364->fetch(PDO::FETCH_ASSOC);
+  // $drx_login->fetchAll();
+	$row = $drx_login->fetch(PDO::FETCH_ASSOC);
   $drxassessment_status = $row['drxassessment_status'];
+  $drxassessment_exam = $row['drxassessment_exam'];
 
   	if ($row) {
        $_SESSION['drx_welcome'] = 1;
@@ -46,19 +47,34 @@ if (isset($_POST['drx_login_submit'])) {
        $_SESSION['drxch3ck5ecur1ty']="z01nxc98zxncnzx12131102930190293019203910920391";
        $position = $row['drxassessment_position'];
 
-       if ($drxassessment_status == 1) {
-           if ($position === "4dm1n15t4t0r") {
+       if ($drxassessment_status == 1)
+       {
+           if ($position === "4dm1n15t4t0r")
+           {
                header("Location: main/teacher");
           		 exit();
-           } else if ($position === "5tud3nt"){
-               header("Location: main/student");
-          		 exit();
            }
-       } else {
+           else if ($position === "5tud3nt")
+           {
+               if ($drxassessment_exam == 0)
+               {
+                   header("Location: main/student");
+              		 exit();
+               }
+               else
+               {
+                   echo "<script>alert('You have already taken an exam. Please contact Administrator.');</script>";
+               }
+           }
+       }
+       else
+       {
            echo "<script>alert('User are not yet activated. Please contact Administrator.');</script>";
        }
 
-  	} else {
+  	}
+    else
+    {
   		 echo "<script>alert('incorrect Password!'); window.location.href='main/../';</script>";
   		 exit();
   	}

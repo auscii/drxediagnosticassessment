@@ -42,10 +42,24 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 // End - User Info
 
 // Start - Student Assessment Result
-if (!empty($_GET['drxassessment_domain_name'])) {
-    $drxassessment_domain_name = $_GET['drxassessment_domain_name'];
+
+// if (!empty($_GET['drxassessment_domain_name'])) {
+//     $drxassessment_domain_name = $_GET['drxassessment_domain_name'];
+// } else {
+//     $drxassessment_domain_name = "";
+// }
+
+if (!empty($_GET['start_exam'])) {
+    $start_exam = $_GET['start_exam'];
 } else {
-    $drxassessment_domain_name = "";
+    $start_exam = "";
+}
+
+if (!empty($_POST['drxassessment_domain_student'])) {
+    $drxassessment_domain_student = $_POST['drxassessment_domain_student'];
+    $drxassessment_domain_student = implode(" ", $_POST['drxassessment_domain_student']);
+} else {
+    $drxassessment_domain_student = "";
 }
 
 if (!empty($_POST['drxassessment_question_student'])) {
@@ -64,26 +78,43 @@ if (!empty($_POST['drxassessment_student_answer'])) {
 
 if (isset($_POST['drx_btn_start_exam']))
 {
-    $splitQuestion = preg_split("/[\s,]+/", $drxassessment_question_student);
-    $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
-    $questionValue = join("','",$splitQuestion);
-    $answerValue = join("' OR drxassessment_answer_value ='",$splitAnswer);
-
-
-    $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1,
-                                           IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer
-                                    FROM drxassessment_assessment
-                                    WHERE drxassessment_question1 IN('$questionValue')
-                                  ");
-    $result->execute();
     $count_correct_answer = "";
     $assessment_correct_answer2 = "";
     $drxassessment_answer_result = "";
     $drxassessment_question1_result = "";
     $assessment_correct_answer2_result = "";
     $correct_answer_result = "";
+    $drxassessment_domainname2 = "";
+
+    $splitQuestion = preg_split("/[\s,]+/", $drxassessment_question_student);
+    $splitAnswer = preg_split("/[\s,]+/", $drxassessment_student_answer);
+    $splitDomain = preg_split("/[\s,]+/", $drxassessment_domain_student);
+
+    $questionValue = join("','",$splitQuestion);
+    $answerValue = join("' OR drxassessment_answer_value ='",$splitAnswer);
+    $countFetchQuestions = count($_POST['drxassessment_question_student']);
+
+    // For Taking Assessment
+    $drx_statement_exam = $connection->prepare("UPDATE drxassessment_users SET
+                                                       drxassessment_exam = :drxassessment_exam
+                                                WHERE drxassessment_id = :drxassessment_id");
+    $drx_statement_exam->execute(
+        array(
+            'drxassessment_exam'               => 1,
+            'drxassessment_id'                 => $drxassessmentid
+        )
+    );
+
+    $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                           IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer
+                                    FROM drxassessment_assessment
+                                    WHERE drxassessment_question1 IN('$questionValue')
+                                  ");
+    $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC))
     {
+      $drxassessment_domainname = $row['drxassessment_domain'];
+      $drxassessment_domainname2 .= $row['drxassessment_domain'] . " ";
       $drxassessment_answer_value = $row['drxassessment_answer_value'];
       $drxassessment_question1 = $row['drxassessment_question1'];
       $assessment_correct_answer = $row['assessment_correct_answer'];
@@ -93,9 +124,9 @@ if (isset($_POST['drx_btn_start_exam']))
       $assessment_correct_answer2_result .= $row['assessment_correct_answer'] . "<br /><br />";
 
       if ($assessment_correct_answer == 1) {
-          $correct_answer_result .= '<i class="fa fa-check" style="margin-top: 3%;"></i><br /><br />';
+          $correct_answer_result .= '<i class="fa fa-check" style="margin-top: 5%;"></i><br /><br />';
       } else {
-          $correct_answer_result .= '<i class="fa fa-times" style="margin-top: 3%;"></i><br /><br />';
+          $correct_answer_result .= '<i class="fa fa-times" style="margin-top: 5%;"></i><br /><br />';
       }
 
       $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
@@ -119,31 +150,27 @@ if (isset($_POST['drx_btn_start_exam']))
                'user_id'                       => $drxassessmentid,
                'user_name'                     => $drxassessmentname,
                'user_email'                    => $drxassessmentemail,
-               'student_selected_domain'			 => $drxassessment_domain_name,
+               'student_selected_domain'			 => $drxassessment_domainname,
                'student_selected_question'		 => $drxassessment_question1,
                'assessment_correct_answer'     => $assessment_correct_answer
            )
         );
     }
 
+    // Fetch Student Domain Names
+    // echo $drxassessment_domainname2;
+    // exit();
+
     // For History Assessment
     $drxassessment_student_answer_history = implode(", ", $_POST['drxassessment_student_answer']);
     $drxassessment_student_question_history = implode(", ", $_POST['drxassessment_question_student']);
     $countCorrectAnswer = substr_count($assessment_correct_answer2,'1');
+    $countWrongAnswer = substr_count($assessment_correct_answer2,'0');
 
-    $result_total = $connection->prepare("SELECT drxassessment_question_total
-                                    FROM drxassessment_assessment_domains
-                                    WHERE drxassessment_domain_name = '$drxassessment_domain_name'
-                                  ");
-    $drxassessment_question_total = "";
-    $result_total->execute();
-    while($row_total = $result_total->fetch(PDO::FETCH_ASSOC))
-    {
-      $drxassessment_question_total .= $row_total['drxassessment_question_total'];
-    }
-    // Score/50 x 50 +50 OR === Score/50 x 100
-    $overallScore = ($countCorrectAnswer / $drxassessment_question_total) * 50 + 50;
+    $overallScore = ($countCorrectAnswer / $countFetchQuestions) * 50 + 50;
 
+    $end_at = date('Y-m-d g:i:s');
+    // 2019-07-13 13:57:32
 
     $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_history (
                                                        user_id,
@@ -153,7 +180,9 @@ if (isset($_POST['drx_btn_start_exam']))
                                                        questions,
                                                        answer,
                                                        total_correct_answer,
-                                                       overall_score
+                                                       overall_score,
+                                                       start_at,
+                                                       end_at
                                                        )
                                                 VALUES (
                                                        :user_id,
@@ -163,20 +192,25 @@ if (isset($_POST['drx_btn_start_exam']))
                                                        :questions,
                                                        :answer,
                                                        :total_correct_answer,
-                                                       :overall_score
+                                                       :overall_score,
+                                                       :start_at,
+                                                       :end_at
                                                        )");
       $drx_statement->execute(
          array(
              'user_id'                       => $drxassessmentid,
              'user_name'                     => $drxassessmentname,
              'user_email'                    => $drxassessmentemail,
-             'domain_name'			             => $drxassessment_domain_name,
+             'domain_name'			             => $drxassessment_domain_student,
              'questions'		                 => $drxassessment_student_question_history,
              'answer'                        => $drxassessment_student_answer_history,
              'total_correct_answer'          => $countCorrectAnswer,
-             'overall_score'                 => $overallScore
+             'overall_score'                 => $overallScore,
+             'start_at'                      => $start_exam,
+             'end_at'                        => $end_at
          )
       );
+      // 'domain_name'			             => $drxassessment_domainname2,
       // End History Assessment
 
       // Retake Assessment
@@ -195,7 +229,7 @@ if (isset($_POST['drx_btn_start_exam']))
        $drx_statement_taken->execute(
           array(
               'user_id'                     => $drxassessmentid,
-              'user_domain'                 => $drxassessment_domain_name,
+              'user_domain'                 => $drxassessment_domainname2,
               'user_name'                   => $drxassessmentname,
               'taken_count'			            => 1
           )
@@ -241,8 +275,22 @@ if (isset($_POST['drx_btn_start_exam']))
                           <td>&nbsp;</td>
                         </tr>
                         <tr>
+                          <td><b>TOTAL CORRECT ANSWER:</b></td>
+                          <td><?php echo $countCorrectAnswer; ?></td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><b>TOTAL WRONG ANSWER:</b></td>
+                          <td><?php echo $countWrongAnswer; ?></td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
                           <td><b>TOTAL QUESTION:</b></td>
-                          <td><?php echo $drxassessment_question_total; ?></td>
+                          <td><?php echo $countFetchQuestions; ?></td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
@@ -257,7 +305,7 @@ if (isset($_POST['drx_btn_start_exam']))
                     </tbody>
                   </table>
                 <div class="modal-footer">
-                 <a href="../" class="btn btn-success"><i class="fa fa-check-circle"></i> OK</a>
+                 <a href="../../../../../../config/savage/" class="btn btn-success"><i class="fa fa-check-circle"></i> OK</a>
                 </div>
         </div>
     </div>
@@ -385,7 +433,7 @@ if (isset($_POST['drx_btn_start_exam']))
 								<nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../../" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Home</span></a></li>
 
 												<li class="active sidebar-item"> <a class="active sidebar-link waves-effect waves-dark sidebar-link" href="../../" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Assessment</span></a></li>
 
@@ -418,8 +466,7 @@ if (isset($_POST['drx_btn_start_exam']))
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../../../">Assessment</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../../">Assessment Instructions</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../">Domains</a></li>
-                                     <li class="breadcrumb-item active" aria-current="page"><a href="../startexam/">Start Exam</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../startexam/">Start Exam</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -439,25 +486,43 @@ if (isset($_POST['drx_btn_start_exam']))
                         <input type="hidden" id="drx_status" name="drx_status">
                         <input type="hidden" id="drx_key" name="drx_key">
 
-                        <h4 class="text-center"><?php echo $drxassessment_domain_name; ?></h4>
+                        <!-- <h4 class="text-center"><?php //echo $drxassessment_domain_name; ?></h4> -->
+                        <?php
+                        // $checkEmptyTable = "SELECT drxassessment_question_total FROM drxassessment_assessment_domains WHERE drxassessment_domain_name = :drxassessment_domain_name";
+                        // $resultEmpty = $connection->prepare($checkEmptyTable);
+                        // $resultEmpty->execute( array('drxassessment_domain_name' => $drxassessment_domain_name));
+                        // $checkAssessment = $resultEmpty->fetchColumn();
+                        // if ($checkAssessment === '0')
+                        // {
+                        //   echo "<br />
+                        //         <span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
+                        //           <i class='fas fa-exclamation-circle'></i> NO ASSESSMENT AVAILABLE.
+                        //         </span>
+                        //        ";
+                        // }
+                        // else
+                        // {
+                        $resultdomain = $connection->prepare("SELECT DISTINCT drxassessment_domain_name FROM drxassessment_assessment_domains");
+                        $resultdomain->execute();
+                                 while ($rowd = $resultdomain->fetch(PDO::FETCH_ASSOC))
+                                 {
+                                        $domain_name = $rowd['drxassessment_domain_name'];
+
+                        ?>
+
+                        <div class="form-group row" style="margin-top: 10%;">
+                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">
+                                  <h3><?php echo $domain_name; ?></h3>
+                                </label>
+                                <input type="hidden" name="drxassessment_domain_student[]" value="<?php echo $domain_name; ?>">
+                        </div>
 
                         <?php
-                        $checkEmptyTable = "SELECT drxassessment_question_total FROM drxassessment_assessment_domains WHERE drxassessment_domain_name = :drxassessment_domain_name";
-                        $resultEmpty = $connection->prepare($checkEmptyTable);
-                        $resultEmpty->execute( array('drxassessment_domain_name' => $drxassessment_domain_name));
-                        $checkAssessment = $resultEmpty->fetchColumn();
-                        if ($checkAssessment === '0')
-                        {
-                          echo "<br />
-                                <span class='badge badge-danger' style='font-size: 15px; font-weight: bolder;'>
-                                  <i class='fas fa-exclamation-circle'></i> NO ASSESSMENT AVAILABLE.
-                                </span>
-                               ";
-                        }
-                        else
-                        {
-                        $result2 = $connection->prepare("SELECT * FROM drxassessment_assessment WHERE drxassessment_domain = :drxassessment_domain ORDER BY drxassessment_order ASC");
-                        $result2->execute( array( 'drxassessment_domain' => $drxassessment_domain_name) );
+                        $result2 = $connection->prepare("SELECT * FROM drxassessment_assessment
+                                                         WHERE drxassessment_domain = '$domain_name'
+                                                         ORDER BY RAND()
+                                                       ");
+                        $result2->execute();
                                  while ($row2 = $result2->fetch(PDO::FETCH_ASSOC))
                                  {
                                         $drxassessment_question1 = $row2['drxassessment_question1'];
@@ -469,6 +534,7 @@ if (isset($_POST['drx_btn_start_exam']))
                                         $drxassessment_q1_answer_4 = $row2['drxassessment_q1_answer_4'];
                                         $drxassessment_order = $row2['drxassessment_order'];
                                         $drxassessment_status = $row2['drxassessment_status'];
+
                         ?> <br /> <br />
 
                             <div class="form-group row">
@@ -492,12 +558,14 @@ if (isset($_POST['drx_btn_start_exam']))
                                     </div>
                             </div> <br /> <br />
 
-                        <?php } } if ($checkAssessment != '0') { ?>
+                        <?php //} } if ($checkAssessment != '0') {
+                        } }
+                        ?>
 
                         <div class="modal-footer">
                               <button type="submit" name="drx_btn_start_exam" class="btn btn-success">Submit</button>
                         </div>
-                        <?php } ?>
+                        <?php   ?>
 
                     </form>
         </div>
