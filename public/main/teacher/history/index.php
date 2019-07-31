@@ -309,7 +309,7 @@ if($dr_delete_is_status == "deleteassessment"){
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                       <!--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li> -->
 
                     </ul>
                 </nav>
@@ -351,72 +351,76 @@ if($dr_delete_is_status == "deleteassessment"){
             <div class="container-fluid">
 							<!-- <button type="button" onclick="addAssessment();" data-toggle="modal" data-target="#assessmentModal" class="btn btn-success btn-lg"><i class="ti-plus"></i></a> Add New Question</button> <br /> -->
 
-							<div class="card-body">
-									<!-- <h5 class="card-title">Assessment</h5> -->
+			<div class="card-body">
+					<!-- <h5 class="card-title">Assessment</h5> -->
 
-									<div class="table-responsive">
-											<table id="zero_config" class="table table-striped table-bordered">
-													<thead>
-															<tr>
-																	<th class="text-center">#</th>
-																	<th class="text-center">Name</th>
-																	<th class="text-center">Email</th>
-																	<th class="text-center">Overall Score</th>
-																	<th class="text-center">Total Correct Answer</th>
-																	<th class="text-center">Status</th>
-																	<th class="text-center">Date Created</th>
-																	<!-- <th class="text-center">View</th> -->
-															</tr>
-													</thead>
-													<tbody>
-														<?php
-	                          $drx_count = 0;
-														$result = $connection->prepare("SELECT * FROM drxassessment_assessment_history");
-													  $result->execute();
-	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	                                     $drx_count++;
-																			 $user_id = $row['user_id'];
-																			 $domain_name = $row['domain_name'];
-																			 $questions = $row['questions'];
-																			 $answer = $row['answer'];
-																			 $user_email = $row['user_email'];
-																			 $user_name = $row['user_name'];
-																			 $created_at = $row['created_at'];
-																			 $total_correct_answer = $row['total_correct_answer'];
-																			 $overall_score = $row['overall_score'];
-	                          ?>
-															<tr>
-																<td class="text-center"><?php echo $drx_count; ?></td>
-																<td class="text-center"><?php echo $user_name; ?></td>
-																<td class="text-center"><?php echo $user_email; ?></td>
-																<td class="text-center"><?php echo $overall_score; ?></td>
-																<td class="text-center"><?php echo $total_correct_answer; ?></td>
-																<td class="text-center">
-																	<?php
-																	if ($total_correct_answer <= 9)
-																	{
-																		  echo "Failed";
-																	} else if ($total_correct_answer >= 10)
-																	{
-																			echo "Passed";
-																	}
-																	?>
-																</td>
-																<td class="text-center"><?php echo $created_at; ?></td>
-																<!-- <td class="text-center">
-																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                  onclick="viewHistoryAssessment('<?php echo $drxassessment_id ; ?>',
-			                                                           '<?php echo $drxassessment_profile_pic ; ?>',
-			                                                           '<?php echo $drxassessment_name ; ?>',
-			                                                           '<?php echo $drxassessment_email ; ?>');">
-                                  <i class="fa fa-eye"></i>
-                                  </button>
-																</td> -->
-															</tr>
-														<?php } ?>
-													</tbody>
-											</table>
-									</div>
+			 <div class="table-responsive">
+					<table id="zero_config" class="table table-striped table-bordered">
+							<thead>
+									<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">Name</th>
+											<th class="text-center">Email</th>
+											<th class="text-center">Overall Score</th>
+											<th class="text-center">Total Correct Answer</th>
+											<!-- <th class="text-center">Status</th> -->
+                                            <th class="text-center">Start of Assessment</th>
+											<th class="text-center">End of Assessment</th>
+											<!-- <th class="text-center">View</th> -->
+									</tr>
+							</thead>
+							<tbody>
+							<?php
+    	                          $drx_count = 0;
+    							  $result = $connection->prepare("SELECT * FROM drxassessment_assessment_history");
+    						      $result->execute();
+                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  $drx_count++;
+    							  $user_id = $row['user_id'];
+    							  $domain_name = $row['domain_name'];
+    							  $questions = $row['questions'];
+    							  $answer = $row['answer'];
+    							  $user_email = $row['user_email'];
+    							  $user_name = $row['user_name'];
+    							  $created_at = $row['created_at'];
+    							  $total_correct_answer = $row['total_correct_answer'];
+                                  $overall_score = $row['overall_score'];
+                                  $start_at = $row['start_at'];
+    							  $end_at = $row['end_at'];
+	                         ?>
+        							<tr>
+        								<td class="text-center"><?php echo $drx_count; ?></td>
+        								<td class="text-center"><?php echo $user_name; ?></td>
+        								<td class="text-center"><?php echo $user_email; ?></td>
+        								<td class="text-center"><?php echo $overall_score; ?></td>
+        								<td class="text-center"><?php echo $total_correct_answer; ?></td>
+        								<!-- <td class="text-center">
+        									<?php
+        									if ($total_correct_answer <= 9)
+        									{
+        										  //echo "Failed";
+        									} else if ($total_correct_answer >= 10)
+        									{
+        											//echo "Passed";
+        									}
+        									?>
+        								</td> -->
+                                        <td class="text-center"><?php echo $start_at; ?></td>
+        								<td class="text-center"><?php echo $end_at; ?></td>
+        								<!-- <td class="text-center">
+        									<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+          onclick="viewHistoryAssessment('<?php //echo $drxassessment_id ; ?>',
+                                               '<?php //echo $drxassessment_profile_pic ; ?>',
+                                               '<?php //echo $drxassessment_name ; ?>',
+                                               '<?php //echo $drxassessment_email ; ?>');">
+          <i class="fa fa-eye"></i>
+          </button>
+        								</td> -->
+        							</tr>
+        						<?php } ?>
+					</tbody>
+			</table>
+	</div>
 
             </div>
 

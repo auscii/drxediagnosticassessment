@@ -78,6 +78,7 @@ if (!empty($_POST['drxassessment_student_answer'])) {
 
 if (isset($_POST['drx_btn_start_exam']))
 {
+
     $count_correct_answer = "";
     $assessment_correct_answer2 = "";
     $drxassessment_answer_result = "";
@@ -105,6 +106,117 @@ if (isset($_POST['drx_btn_start_exam']))
         )
     );
 
+    // Check Number Sense Result
+    $numbersense_result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                                         IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer_domain
+                                                FROM drxassessment_assessment
+                                                WHERE drxassessment_domain = 'Number Sense'
+                                              ");
+    $numbersense_result->execute();
+    $numbersense_correct_answer = "";
+    while($row_ns = $numbersense_result->fetch(PDO::FETCH_ASSOC))
+    {
+    $numbersense_correct_answer .= $row_ns['assessment_correct_answer_domain'] . " ";
+    }
+    $countCorrectAnswerNumberSense = substr_count($numbersense_correct_answer,'1');
+
+    $numbersense_percentage = ($countCorrectAnswerNumberSense / 10) * 50 + 50;
+
+    // Check Fluent Calculation Result
+    $fluentcalculation_result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                                         IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer_domain
+                                                FROM drxassessment_assessment
+                                                WHERE drxassessment_domain = 'Fluent Calculation'
+                                              ");
+    $fluentcalculation_result->execute();
+    $fluentcalculation_correct_answer = "";
+    while($row_fc = $fluentcalculation_result->fetch(PDO::FETCH_ASSOC))
+    {
+    $fluentcalculation_correct_answer .= $row_fc['assessment_correct_answer_domain'] . " ";
+    }
+    $countCorrectAnswerFluentCalculation = substr_count($fluentcalculation_correct_answer,'1');
+
+    $fluentcalculation_percentage = ($countCorrectAnswerFluentCalculation / 10) * 50 + 50;
+
+    // Check Accurate Calculation Result
+    $accuratecalculation_result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                                         IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer_domain
+                                                FROM drxassessment_assessment
+                                                WHERE drxassessment_domain = 'Accurate Calculation'
+                                              ");
+    $accuratecalculation_result->execute();
+    $accuratecalculation_correct_answer = "";
+    while($row_ac = $accuratecalculation_result->fetch(PDO::FETCH_ASSOC))
+    {
+    $accuratecalculation_correct_answer .= $row_ac['assessment_correct_answer_domain'] . " ";
+    }
+    $countCorrectAnswerAccurateCalculation = substr_count($accuratecalculation_correct_answer,'1');
+
+    $accuratecalculation_percentage = ($countCorrectAnswerAccurateCalculation / 10) * 50 + 50;
+
+    // Check Mathematical Reasoning and Application Result
+    $mathematicalreasoningandapplication_result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                                         IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer_domain
+                                                FROM drxassessment_assessment
+                                                WHERE drxassessment_domain = 'Mathematical Reasoning and Application'
+                                              ");
+    $mathematicalreasoningandapplication_result->execute();
+    $mathematicalreasoningandapplication_correct_answer = "";
+    while($row_mra = $mathematicalreasoningandapplication_result->fetch(PDO::FETCH_ASSOC))
+    {
+    $mathematicalreasoningandapplication_correct_answer .= $row_mra['assessment_correct_answer_domain'] . " ";
+    }
+    $countCorrectAnswerrow_mra = substr_count($mathematicalreasoningandapplication_correct_answer,'1');
+
+    $mathematicalreasoningandapplication_percentage = ($countCorrectAnswerrow_mra / 10) * 50 + 50;
+
+    // Check Memorization of Arithmetic Facts Result
+    $memorizationofarithmeticfacts_result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
+                                                         IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer_domain
+                                                FROM drxassessment_assessment
+                                                WHERE drxassessment_domain = 'Memorization of Arithmetic Facts'
+                                              ");
+    $memorizationofarithmeticfacts_result->execute();
+    $memorizationofarithmeticfacts_correct_answer = "";
+    while($row_mara = $memorizationofarithmeticfacts_result->fetch(PDO::FETCH_ASSOC))
+    {
+    $memorizationofarithmeticfacts_correct_answer .= $row_mara['assessment_correct_answer_domain'] . " ";
+    }
+    $countCorrectAnswerrow_memorizationofarithmeticfacts = substr_count($memorizationofarithmeticfacts_correct_answer,'1');
+
+    $memorizationofarithmeticfacts_percentage = ($countCorrectAnswerrow_memorizationofarithmeticfacts / 10) * 50 + 50;
+
+
+    $drx_statement_domain_result = $connection->prepare("INSERT INTO drxassessment_domain_result (
+                                                         user_id,
+                                                         number_sense,
+                                                         memorization_of_arithmetic_facts,
+                                                         accurate_calculation,
+                                                         fluent_calculation,
+                                                         mathematical_reasoning_and_applications
+                                                         )
+                                                         VALUES (
+                                                         :user_id,
+                                                         :number_sense,
+                                                         :memorization_of_arithmetic_facts,
+                                                         :accurate_calculation,
+                                                         :fluent_calculation,
+                                                         :mathematical_reasoning_and_applications
+                                                         )");
+    $drx_statement_domain_result->execute(
+       array(
+           'user_id'                                     => $drxassessmentid,
+           'number_sense'                                => $numbersense_percentage,
+           'memorization_of_arithmetic_facts'            => $memorizationofarithmeticfacts_percentage,
+           'accurate_calculation'                        => $accuratecalculation_percentage,
+           'fluent_calculation'                          => $fluentcalculation_percentage,
+           'mathematical_reasoning_and_applications'     => $mathematicalreasoningandapplication_percentage
+       )
+    );
+    // End of Check Domain Result
+
+
+
     $result = $connection->prepare("SELECT drxassessment_answer_value, drxassessment_question1, drxassessment_domain,
                                            IF(drxassessment_answer_value = '$answerValue', '1', '0') AS assessment_correct_answer
                                     FROM drxassessment_assessment
@@ -123,10 +235,13 @@ if (isset($_POST['drx_btn_start_exam']))
       $drxassessment_question1_result .= $row['drxassessment_question1'] . "<br /><br />";
       $assessment_correct_answer2_result .= $row['assessment_correct_answer'] . "<br /><br />";
 
+      // echo $assessment_correct_answer;
+      // exit();
+
       if ($assessment_correct_answer == 1) {
-          $correct_answer_result .= '<i class="fa fa-check" style="margin-top: 5%;"></i><br /><br />';
+          $correct_answer_result .= '<i class="fa fa-check" style="margin-top: 2.2%;"></i><br /><br />';
       } else {
-          $correct_answer_result .= '<i class="fa fa-times" style="margin-top: 5%;"></i><br /><br />';
+          $correct_answer_result .= '<i class="fa fa-times" style="margin-top: 2.2%;"></i><br /><br />';
       }
 
       $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment_result (
@@ -253,8 +368,9 @@ if (isset($_POST['drx_btn_start_exam']))
                     <thead>
                         <tr>
                           <th><b>QUESTIONS</b></th>
-                          <th><b>ANSWERS</b></th>
+                          <!-- <th><b>ANSWERS</b></th> -->
                           <th><b>STATUS</b></th>
+                          <td>&nbsp;</td>
                           <th>&nbsp;</th>
                           <th>&nbsp;</th>
                         </tr>
@@ -262,8 +378,9 @@ if (isset($_POST['drx_btn_start_exam']))
                     <tbody>
                         <tr>
                           <td><?php echo $drxassessment_question1_result ; ?></td><br />
-                          <td><?php echo $drxassessment_answer_result; ?></td>
+                          <!-- <td><?php //echo $drxassessment_answer_result; ?></td> -->
                           <td><?php echo $correct_answer_result; ?></td>
+                          <td>&nbsp;</td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
                         </tr>
@@ -288,20 +405,20 @@ if (isset($_POST['drx_btn_start_exam']))
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td><b>TOTAL QUESTION:</b></td>
-                          <td><?php echo $countFetchQuestions; ?></td>
+                          <td><?php //echo $countFetchQuestions; ?></td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
-                        </tr>
-                        <tr>
+                        </tr> -->
+                        <!-- <tr>
                           <td><b>STATUS:</b></td>
-                          <td><?php echo $assessmentStatus; ?></td>
+                          <td><?php //echo $assessmentStatus; ?></td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
                           <td>&nbsp;</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                   </table>
                 <div class="modal-footer">
@@ -510,12 +627,13 @@ if (isset($_POST['drx_btn_start_exam']))
 
                         ?>
 
-                        <div class="form-group row" style="margin-top: 10%;">
-                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">
-                                  <h3><?php echo $domain_name; ?></h3>
-                                </label>
+                        <!-- <div class="form-group row" style="margin-top: 10%;"> -->
+                                <!-- DOMAIN NAME -->
+                                <!-- <label class="col-sm-3 text-right control-label col-form-label">
+                                  <h3><?php //echo $domain_name; ?></h3>
+                                </label> -->
                                 <input type="hidden" name="drxassessment_domain_student[]" value="<?php echo $domain_name; ?>">
-                        </div>
+                        <!-- </div> -->
 
                         <?php
                         $result2 = $connection->prepare("SELECT * FROM drxassessment_assessment
@@ -537,18 +655,18 @@ if (isset($_POST['drx_btn_start_exam']))
 
                         ?> <br /> <br />
 
-                            <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
-                                    <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="drxassessment_question_student" name="drxassessment_question_student[]" value="<?php echo $drxassessment_question1; ?>" readonly>
+                            <div class="form-group row" style="margin-right: 20%;">
+                                    <strong class="col-sm-3 text-right control-label col-form-label" style="color: #000;">Question</strong>
+                                    <div class="col-sm-9" style="color: #000;">
+                                            <input type="text" class="form-control" id="drxassessment_question_student" name="drxassessment_question_student[]" value="<?php echo $drxassessment_question1; ?>" style="color: #000; width: 100%;" readonly>
                                     </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">Choices</label>
+                            <div class="form-group row" style="margin-right: 20%;">
+                                <strong class="col-sm-3 text-right control-label col-form-label" style="color: #000;">Choices</strong>
                                     <div class="col-sm-9">
                                       <!-- multiple="multiple" -->
-                                        <select class="form-control" name="drxassessment_student_answer[]" id="drxassessment_student_answer" required>
+                                        <select class="form-control is-valid" name="drxassessment_student_answer[]" id="drxassessment_student_answer" style="color: #000;" required>
                                             <option value="" disabled selected>--Select Your Answer---</option>
                                             <option value="<?php echo $drxassessment_q1_answer_1; ?>"><?php echo $drxassessment_q1_answer_1; ?></option>
                                             <option value="<?php echo $drxassessment_q1_answer_2; ?>"><?php echo $drxassessment_q1_answer_2; ?></option>

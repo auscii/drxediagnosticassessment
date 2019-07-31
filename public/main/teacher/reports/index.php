@@ -169,7 +169,7 @@ include("fetch_report.php");
 
                         <li class="active sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../reports/" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Reports</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li>
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../rankings/" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Ranking</span></a></li> -->
 
                     </ul>
                 </nav>
@@ -230,85 +230,76 @@ include("fetch_report.php");
                </form> -->
 
 
-							<div class="card-body">
-									<div class="table-responsive">
-                    <h3 class="text-center"><?php echo $reportTitle; ?></h3>
-											<table id="zero_config" class="table table-striped table-bordered">
-													<thead>
-															<!-- <tr>
-																	<td colspan="10"><h3 class="text-center"><?php //echo $reportTitle; ?></h3></td>
-															</tr> -->
-															<tr>
-																	<th class="text-center">#</th>
-																	<th class="text-center">Name</th>
-                                  <th class="text-center">Email</th>
-																	<!-- <th class="text-center">Domain</th> -->
-																	<th class="text-center">Overall Score</th>
-																	<th class="text-center">Total Correct Answer</th>
-																	<th class="text-center">Status</th>
-																	<!-- <th class="text-center">Date of Assessment</th> -->
-																	<th class="text-center">Start of Assessment</th>
-																	<th class="text-center">End of Assessment</th>
-															</tr>
-													</thead>
-													<tbody>
-														<?php
-														// if (isset($_POST['report_type'])) {
-																$result = $connection->prepare($reportFetchAll);
-															  $result->execute();
-			                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			                                     $drx_count++;
-																					 $user_id = $row['user_id'];
-																					 $domain_name = $row['domain_name'];
-																					 $questions = $row['questions'];
-																					 $answer = $row['answer'];
-																					 $user_email = $row['user_email'];
-																					 $user_name = $row['user_name'];
-																					 $created_at = $row['created_at'];
-																					 $total_correct_answer = $row['total_correct_answer'];
-																					 $overall_score = $row['overall_score'];
-																					 $start_at = $row['start_at'];
-																					 $end_at = $row['end_at'];
-	                          ?>
+			<div class="card-body">
+			<div class="table-responsive">
+                <h3 class="text-center"><?php echo $reportTitle; ?></h3>
+					<table id="zero_config" class="table table-striped table-bordered">
+							<thead>
+									<tr>
+										<th class="text-center">#</th>
+										<th class="text-center">Name</th>
+                                        <th class="text-center">Email</th>
+										<th class="text-center">Overall Score</th>
+                                        <th class="text-center">Number Sense</th>
+										<th class="text-center">Status</th>
+										<th class="text-center">Start of Assessment</th>
+										<th class="text-center">End of Assessment</th>
+									</tr>
+							</thead>
+							<tbody>
+								   <?php
+									 $result = $connection->prepare($reportFetchAll);
+									 $result->execute();
+                                     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                         $drx_count++;
+    									 $user_id = $row['user_id'];
+    									 $domain_name = $row['domain_name'];
+    									 $questions = $row['questions'];
+    									 $answer = $row['answer'];
+    									 $user_email = $row['user_email'];
+    									 $user_name = $row['user_name'];
+    									 $created_at = $row['created_at'];
+    									 $total_correct_answer = $row['total_correct_answer'];
+    									 $overall_score = $row['overall_score'];
+    									 $start_at = $row['start_at'];
+    									 $end_at = $row['end_at'];
 
-															<tr>
-																<td class="text-center"><?php echo $drx_count; ?></td>
-																<td class="text-center"><?php echo $user_name; ?></td>
-                                <td class="text-center"><?php echo $user_email; ?></td>
-																<!-- <td class="text-center"><?php //echo $domain_name; ?></td> -->
-																<td class="text-center"><?php echo $overall_score; ?></td>
-																<td class="text-center"><?php echo $total_correct_answer; ?></td>
-																<td class="text-center">
-																	<?php
-																	if ($overall_score <= 75)
-																	{
-																		  echo "Failed";
-																	} else if ($overall_score >= 75)
-																	{
-																			echo "Passed";
-																	}
-																	?>
-																</td>
-																<!-- <td class="text-center"><?php //echo $created_at; ?></td> -->
-																<td class="text-center"><?php echo $created_at; ?></td>
-																<td class="text-center"><?php echo $created_at; ?></td>
-															</tr>
-														<?php }
-																//}
-														?>
-													</tbody>
-											</table>
+                                         // $number_sense_total_correct_answer = ;
+                                         
+                                    ?>
+									<tr>
+										<td class="text-center"><?php echo $drx_count; ?></td>
+										<td class="text-center"><?php echo $user_name; ?></td>
+                                        <td class="text-center"><?php echo $user_email; ?></td>
+										<td class="text-center"><?php echo $overall_score; ?></td>
+										<td class="text-center"><?php echo $number_sense; ?>%</td> 
+										<td class="text-center">
+											<?php
+											if ($overall_score <= 75)
+											{
+												  echo "Failed";
+											} else if ($overall_score >= 75)
+											{
+													echo "Passed";
+											}
+											?>
+										</td>
+										<td class="text-center"><?php echo $created_at; ?></td>
+										<td class="text-center"><?php echo $created_at; ?></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+					</table>
 
-												<button id="csv" class="btn btn-primary"><i class="fa fa-print"></i> Export to Excel</button>&nbsp;
-												<button id="pdf" class="btn btn-danger"><i class="fa fa-print"></i> Save as PDF</button> <br /> <br /><br /> <br />
+					<button id="csv" class="btn btn-primary"><i class="fa fa-print"></i> Export to Excel</button>&nbsp;
+					<button id="pdf" class="btn btn-danger"><i class="fa fa-print"></i> Save as PDF</button> <br /> <br /><br /> <br />
 
-                      <h3 class="text-center">Overall Student Assessment</h3>
-                      <div id="chart-container">
-                        <canvas id="report_chart"></canvas>
-                      </div>
-									</div>
-
-            </div>
+                  <h3 class="text-center">Overall Student Assessment</h3>
+                  <div id="chart-container">
+                    <canvas id="report_chart"></canvas>
+                  </div>
+			</div>
+        </div>
 
         </div>
         <!-- ============================================================== -->
