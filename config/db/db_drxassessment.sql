@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2019 at 12:12 PM
+-- Generation Time: Aug 06, 2019 at 03:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -156,7 +156,22 @@ CREATE TABLE `drxassessment_assessment_history` (
 INSERT INTO `drxassessment_assessment_history` (`drxassessment_id`, `user_id`, `user_name`, `user_email`, `domain_name`, `questions`, `answer`, `total_correct_answer`, `overall_score`, `created_at`, `start_at`, `end_at`) VALUES
 (1, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_47, Question_5, Question_31, Question_50, Question_38, Question_1, Question_6, Question_34, Question_45, Question_4, Question_9, Question_2, Question_49, Question_44, Question_43, Question_39, Question_3, Question_8', 'q47_a, q5_b, q31_c, q50_d, q38_b, q1_c, q6_a, q34_a, q45_d, q4_c, q9_a, q2_a, q49_a, q44_c, q43_d, q39_a, q3_b, q8_c', 5, 64, '2019-07-13 23:04:14', '2019-07-13 10:57:45', '2019-07-13 11:04:14'),
 (2, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_31, Question_38, Question_47, Question_50, Question_34, Question_1, Question_5, Question_45, Question_4, Question_9, Question_43, Question_2, Question_49, Question_44, Question_8, Question_3, Question_39', 'q6_b, q31_b, q38_b, q47_b, q50_a, q34_d, q1_c, q5_a, q45_a, q4_c, q9_c, q43_d, q2_a, q49_b, q44_c, q8_d, q3_c, q39_a', 2, 56, '2019-07-13 23:40:12', '2019-07-13 11:39:40', '2019-07-13 11:40:12'),
-(3, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_50, Question_47, Question_38, Question_34, Question_31, Question_5, Question_6, Question_1, Question_45, Question_9, Question_4, Question_43, Question_2, Question_44, Question_49, Question_39, Question_8, Question_3', 'q50_b, q47_a, q38_c, q34_d, q31_a, q5_c, q6_c, q1_a, q45_b, q9_c, q4_c, q43_b, q2_a, q44_d, q49_b, q39_b, q8_b, q3_a', 3, 58, '2019-07-13 23:44:40', '2019-07-13 11:44:08', '2019-07-13 11:44:40');
+(3, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_50, Question_47, Question_38, Question_34, Question_31, Question_5, Question_6, Question_1, Question_45, Question_9, Question_4, Question_43, Question_2, Question_44, Question_49, Question_39, Question_8, Question_3', 'q50_b, q47_a, q38_c, q34_d, q31_a, q5_c, q6_c, q1_a, q45_b, q9_c, q4_c, q43_b, q2_a, q44_d, q49_b, q39_b, q8_b, q3_a', 3, 58, '2019-07-13 23:44:40', '2019-07-13 11:44:08', '2019-07-13 11:44:40'),
+(4, 16, 'xc', 'xc@xc.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_1, Question_38, Question_6, Question_34, Question_50, Question_31, Question_47, Question_5, Question_45, Question_4, Question_9, Question_2, Question_44, Question_49, Question_43, Question_39, Question_8, Question_3', 'q1_d, q38_c, q6_a, q34_d, q50_b, q31_a, q47_a, q5_c, q45_c, q4_c, q9_c, q2_b, q44_d, q49_a, q43_d, q39_a, q8_d, q3_c', 4, 61, '2019-07-28 20:39:36', '2019-07-28 06:49:28', '2019-07-28 08:39:36'),
+(5, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_47, Question_50, Question_6, Question_1, Question_34, Question_5, Question_31, Question_38, Question_45, Question_9, Question_4, Question_44, Question_43, Question_2, Question_49, Question_8, Question_39, Question_3', 'q47_a, q50_b, q6_c, q1_b, q34_c, q5_a, q31_b, q38_a, q45_d, q9_c, q4_c, q44_c, q43_b, q2_d, q49_a, q8_b, q39_c, q3_a', 5, 64, '2019-07-31 21:35:03', '2019-07-31 08:08:36', '2019-07-31 09:35:03'),
+(6, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_47, Question_50, Question_6, Question_1, Question_34, Question_5, Question_31, Question_38, Question_45, Question_9, Question_4, Question_44, Question_43, Question_2, Question_49, Question_8, Question_39, Question_3', 'q47_a, q50_b, q6_c, q1_b, q34_c, q5_a, q31_b, q38_a, q45_d, q9_c, q4_c, q44_c, q43_b, q2_d, q49_a, q8_b, q39_c, q3_a', 5, 64, '2019-07-31 21:44:33', '2019-07-31 08:08:36', '2019-07-31 09:44:33'),
+(7, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:02:49', '2019-07-31 08:08:36', '2019-07-31 10:02:49'),
+(8, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:04:18', '2019-07-31 08:08:36', '2019-07-31 10:04:18'),
+(9, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:10:26', '2019-07-31 08:08:36', '2019-07-31 10:10:26'),
+(10, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:10:56', '2019-07-31 08:08:36', '2019-07-31 10:10:56'),
+(11, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:11:39', '2019-07-31 08:08:36', '2019-07-31 10:11:39'),
+(12, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:11:55', '2019-07-31 08:08:36', '2019-07-31 10:11:55'),
+(13, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:12:07', '2019-07-31 08:08:36', '2019-07-31 10:12:07'),
+(14, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:12:20', '2019-07-31 08:08:36', '2019-07-31 10:12:20'),
+(15, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:12:36', '2019-07-31 08:08:36', '2019-07-31 10:12:36'),
+(16, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:13:01', '2019-07-31 08:08:36', '2019-07-31 10:13:01'),
+(17, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_34, Question_50, Question_5, Question_31, Question_1, Question_47, Question_38, Question_45, Question_4, Question_9, Question_2, Question_49, Question_43, Question_44, Question_3, Question_39, Question_8', 'q6_b, q34_b, q50_a, q5_b, q31_d, q1_c, q47_c, q38_a, q45_b, q4_c, q9_d, q2_a, q49_b, q43_c, q44_d, q3_b, q39_c, q8_a', 6, 67, '2019-07-31 22:13:14', '2019-07-31 08:08:36', '2019-07-31 10:13:14'),
+(18, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_34, Question_50, Question_6, Question_47, Question_38, Question_31, Question_5, Question_1, Question_45, Question_9, Question_4, Question_43, Question_44, Question_2, Question_49, Question_3, Question_8, Question_39', 'q34_c, q50_b, q6_a, q47_a, q38_c, q31_c, q5_c, q1_d, q45_c, q9_a, q4_c, q43_b, q44_d, q2_d, q49_b, q3_a, q8_c, q39_b', 1, 53, '2019-08-06 19:46:39', '2019-08-06 07:45:13', '2019-08-06 07:46:39');
 
 -- --------------------------------------------------------
 
@@ -236,7 +251,277 @@ INSERT INTO `drxassessment_assessment_result` (`drxassessment_id`, `user_id`, `u
 (51, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-13 23:44:39'),
 (52, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-13 23:44:39'),
 (53, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-13 23:44:40'),
-(54, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-13 23:44:40');
+(54, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-13 23:44:40'),
+(55, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_1', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(56, 16, 'xc', 'xc@xc.com', 'Fluent Calculation', 'Question_2', '', '1', 0, 0, '2019-07-28 20:39:35'),
+(57, 16, 'xc', 'xc@xc.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(58, 16, 'xc', 'xc@xc.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(59, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(60, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(61, 16, 'xc', 'xc@xc.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(62, 16, 'xc', 'xc@xc.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(63, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_31', '', '1', 0, 0, '2019-07-28 20:39:35'),
+(64, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(65, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(66, 16, 'xc', 'xc@xc.com', 'Mathematical Reasoning and Application', 'Question_39', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(67, 16, 'xc', 'xc@xc.com', 'Fluent Calculation', 'Question_43', '', '1', 0, 0, '2019-07-28 20:39:35'),
+(68, 16, 'xc', 'xc@xc.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-28 20:39:35'),
+(69, 16, 'xc', 'xc@xc.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-28 20:39:36'),
+(70, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-28 20:39:36'),
+(71, 16, 'xc', 'xc@xc.com', 'Fluent Calculation', 'Question_49', '', '1', 0, 0, '2019-07-28 20:39:36'),
+(72, 16, 'xc', 'xc@xc.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-28 20:39:36'),
+(73, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(74, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(75, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '1', 0, 0, '2019-07-31 21:35:02'),
+(76, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(77, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(78, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '1', 0, 0, '2019-07-31 21:35:02'),
+(79, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(80, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(81, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(82, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(83, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 21:35:02'),
+(84, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 21:35:03'),
+(85, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 21:35:03'),
+(86, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 21:35:03'),
+(87, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '1', 0, 0, '2019-07-31 21:35:03'),
+(88, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-31 21:35:03'),
+(89, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '1', 0, 0, '2019-07-31 21:35:03'),
+(90, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 21:35:03'),
+(91, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '0', 0, 0, '2019-07-31 21:44:31'),
+(92, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 21:44:31'),
+(93, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '1', 0, 0, '2019-07-31 21:44:31'),
+(94, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 21:44:31'),
+(95, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(96, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '1', 0, 0, '2019-07-31 21:44:32'),
+(97, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(98, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(99, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(100, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(101, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(102, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 21:44:32'),
+(103, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(104, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(105, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '1', 0, 0, '2019-07-31 21:44:32'),
+(106, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(107, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '1', 0, 0, '2019-07-31 21:44:32'),
+(108, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 21:44:32'),
+(109, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:02:48'),
+(110, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(111, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(112, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(113, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(114, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(115, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:02:48'),
+(116, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:02:48'),
+(117, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(118, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:02:48'),
+(119, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(120, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:02:48'),
+(121, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(122, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(123, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:02:48'),
+(124, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:02:49'),
+(125, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:02:49'),
+(126, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:02:49'),
+(127, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:04:15'),
+(128, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(129, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(130, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(131, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(132, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(133, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:04:16'),
+(134, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:04:16'),
+(135, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:04:16'),
+(136, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:04:17'),
+(137, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:04:17'),
+(138, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:04:17'),
+(139, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:04:17'),
+(140, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:04:17'),
+(141, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:04:17'),
+(142, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:04:18'),
+(143, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:04:18'),
+(144, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:04:18'),
+(145, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:10:24'),
+(146, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(147, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(148, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(149, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(150, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(151, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:10:25'),
+(152, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:10:25'),
+(153, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(154, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:10:25'),
+(155, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:10:25'),
+(156, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:10:25'),
+(157, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:10:26'),
+(158, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:10:26'),
+(159, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:10:26'),
+(160, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:10:26'),
+(161, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:10:26'),
+(162, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:10:26'),
+(163, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:10:55'),
+(164, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(165, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(166, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(167, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(168, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(169, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:10:55'),
+(170, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:10:55'),
+(171, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:10:55'),
+(172, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:10:55'),
+(173, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(174, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:10:56'),
+(175, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(176, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(177, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(178, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:10:56'),
+(179, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(180, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:10:56'),
+(181, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:11:37'),
+(182, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(183, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(184, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(185, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(186, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(187, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:11:37'),
+(188, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:11:37'),
+(189, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:11:37'),
+(190, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:11:37'),
+(191, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(192, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:11:38'),
+(193, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(194, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(195, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(196, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:11:38'),
+(197, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(198, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:11:38'),
+(199, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:11:52'),
+(200, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:11:53'),
+(201, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:11:53'),
+(202, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(203, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(204, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(205, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:11:54'),
+(206, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:11:54'),
+(207, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(208, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:11:54'),
+(209, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(210, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:11:54'),
+(211, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(212, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(213, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:11:54'),
+(214, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:11:54'),
+(215, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:11:55'),
+(216, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:11:55'),
+(217, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:12:06'),
+(218, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(219, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(220, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(221, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(222, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(223, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:12:06'),
+(224, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:12:06'),
+(225, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(226, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:12:06'),
+(227, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:12:06'),
+(228, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:12:07'),
+(229, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:12:07'),
+(230, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:12:07'),
+(231, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:12:07'),
+(232, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:12:07'),
+(233, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:12:07'),
+(234, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:12:07'),
+(235, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:12:18'),
+(236, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:12:18'),
+(237, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:12:18'),
+(238, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:12:18'),
+(239, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:12:18'),
+(240, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:12:18'),
+(241, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:12:18'),
+(242, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:12:19'),
+(243, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:12:19'),
+(244, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:12:19'),
+(245, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:12:19'),
+(246, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:12:19'),
+(247, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:12:19'),
+(248, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:12:19'),
+(249, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:12:19'),
+(250, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:12:19'),
+(251, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:12:20'),
+(252, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:12:20'),
+(253, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:12:35'),
+(254, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:12:35'),
+(255, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:12:35'),
+(256, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:12:35'),
+(257, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:12:35'),
+(258, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:12:35'),
+(259, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:12:35'),
+(260, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:12:36'),
+(261, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(262, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:12:36'),
+(263, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(264, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:12:36'),
+(265, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(266, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(267, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(268, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:12:36'),
+(269, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(270, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:12:36'),
+(271, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:13:00'),
+(272, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:13:00'),
+(273, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:13:00'),
+(274, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:13:00'),
+(275, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:13:00'),
+(276, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:13:00'),
+(277, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:13:00'),
+(278, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:13:01'),
+(279, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(280, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:13:01'),
+(281, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(282, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:13:01'),
+(283, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(284, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(285, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(286, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:13:01'),
+(287, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(288, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:13:01'),
+(289, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-31 22:13:12'),
+(290, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-31 22:13:12'),
+(291, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-31 22:13:12'),
+(292, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-31 22:13:12'),
+(293, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-31 22:13:12'),
+(294, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-31 22:13:12'),
+(295, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '1', 0, 0, '2019-07-31 22:13:13'),
+(296, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '1', 0, 0, '2019-07-31 22:13:13'),
+(297, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(298, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '1', 0, 0, '2019-07-31 22:13:13'),
+(299, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(300, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '1', 0, 0, '2019-07-31 22:13:13'),
+(301, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(302, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(303, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(304, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '1', 0, 0, '2019-07-31 22:13:13'),
+(305, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(306, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-31 22:13:13'),
+(307, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_1', '', '0', 0, 0, '2019-08-06 19:46:38'),
+(308, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-08-06 19:46:38'),
+(309, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '1', 0, 0, '2019-08-06 19:46:39'),
+(310, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(311, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(312, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(313, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(314, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(315, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(316, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(317, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(318, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(319, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(320, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(321, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(322, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(323, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-08-06 19:46:39'),
+(324, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-08-06 19:46:39');
 
 -- --------------------------------------------------------
 
@@ -260,7 +545,60 @@ CREATE TABLE `drxassessment_assessment_taken` (
 INSERT INTO `drxassessment_assessment_taken` (`drxassessment_id`, `user_id`, `user_domain`, `user_name`, `taken_count`, `created_at`) VALUES
 (1, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-13 23:04:14'),
 (2, 12, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Ethane Kyle', 1, '2019-07-13 23:40:12'),
-(3, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-13 23:44:40');
+(3, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-13 23:44:40'),
+(4, 16, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'xc', 1, '2019-07-28 20:39:36'),
+(5, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 21:35:03'),
+(6, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 21:44:33'),
+(7, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:02:49'),
+(8, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:04:19'),
+(9, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:10:27'),
+(10, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:10:57'),
+(11, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:11:39'),
+(12, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:11:55'),
+(13, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:12:07'),
+(14, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:12:20'),
+(15, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:12:36'),
+(16, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:13:01'),
+(17, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-31 22:13:14'),
+(18, 12, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Ethane Kyle', 1, '2019-08-06 19:46:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drxassessment_domain_result`
+--
+
+CREATE TABLE `drxassessment_domain_result` (
+  `drxassessment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `number_sense` int(11) NOT NULL,
+  `memorization_of_arithmetic_facts` int(11) NOT NULL,
+  `accurate_calculation` int(11) NOT NULL,
+  `fluent_calculation` int(11) NOT NULL,
+  `mathematical_reasoning_and_applications` int(11) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drxassessment_domain_result`
+--
+
+INSERT INTO `drxassessment_domain_result` (`drxassessment_id`, `user_id`, `number_sense`, `memorization_of_arithmetic_facts`, `accurate_calculation`, `fluent_calculation`, `mathematical_reasoning_and_applications`, `date_created`) VALUES
+(1, 16, 70, 70, 70, 70, 70, '2019-07-28 20:39:35'),
+(2, 11, 55, 55, 50, 55, 60, '2019-07-31 21:35:02'),
+(3, 11, 55, 55, 50, 55, 60, '2019-07-31 21:44:31'),
+(4, 11, 65, 50, 55, 50, 60, '2019-07-31 22:02:48'),
+(5, 11, 65, 50, 55, 50, 60, '2019-07-31 22:04:15'),
+(6, 11, 65, 50, 55, 50, 60, '2019-07-31 22:10:24'),
+(7, 11, 65, 50, 55, 50, 60, '2019-07-31 22:10:55'),
+(8, 11, 65, 50, 55, 50, 60, '2019-07-31 22:11:37'),
+(9, 11, 65, 50, 55, 50, 60, '2019-07-31 22:11:52'),
+(10, 11, 65, 50, 55, 50, 60, '2019-07-31 22:12:06'),
+(11, 11, 65, 50, 55, 50, 60, '2019-07-31 22:12:18'),
+(12, 11, 65, 50, 55, 50, 60, '2019-07-31 22:12:34'),
+(13, 11, 65, 50, 55, 50, 60, '2019-07-31 22:13:00'),
+(14, 11, 65, 50, 55, 50, 60, '2019-07-31 22:13:12'),
+(15, 12, 50, 50, 50, 50, 55, '2019-08-06 19:46:38');
 
 -- --------------------------------------------------------
 
@@ -362,11 +700,13 @@ INSERT INTO `drxassessment_users` (`drxassessment_id`, `drxassessment_code`, `dr
 (2, '', 'user.jpg', 'admin', 123123, 'admin@admin.com', 'admin', 'admin', '4dm1n15t4t0r', 1, 0, '2019-05-26 20:28:25', '2019-05-26 20:28:43'),
 (5, '', 'user.jpg', 'Auscillator', 55, 'auscii@gmail.com', 'auscii', 'auscii', '4dm1n15t4t0r', 1, 0, '2019-06-09 11:03:00', '2019-06-09 11:05:41'),
 (10, '', 'deadmau5-wallpapers-hd-72995-6439649.png', 'XX', 123123, 'x@x.com', 'x', 'x', '5tud3nt', 1, 0, '2019-06-09 12:22:37', '0000-00-00 00:00:00'),
-(11, '', 'edm-wallpaper-hd.jpg', 'Hann', 916, 'hann@gmail.com', 'han', 'han', '5tud3nt', 1, 1, '2019-06-09 12:23:16', '0000-00-00 00:00:00'),
+(11, '', 'edm-wallpaper-hd.jpg', 'Hann', 916, 'hann@gmail.com', 'han', 'han', '5tud3nt', 1, 0, '2019-06-09 12:23:16', '0000-00-00 00:00:00'),
 (12, '', 'f297e48c38c1dc8854c29b11790a4096.jpg', 'Ethane Kyle', 2147483647, 'kyle@gmail.com', 'kyle', 'kyle', '5tud3nt', 1, 1, '2019-06-09 12:24:31', '0000-00-00 00:00:00'),
 (13, '', 'user.jpg', 'Executioner', 2147483647, 'exe@gmail.com', 'exe', 'exe', '5tud3nt', 0, 0, '2019-06-26 11:08:16', '0000-00-00 00:00:00'),
 (14, '', 'user.jpg', 'seann', 2147483647, 'sean@gmail.com', 'seann', 'seann', '4dm1n15t4t0r', 1, 0, '2019-06-26 11:14:33', '0000-00-00 00:00:00'),
-(15, '', 'user.jpg', 'aaa', 23123123, 'a@a.com', 'a', 'a', '4dm1n15t4t0r', 1, 0, '2019-06-26 11:19:48', '0000-00-00 00:00:00');
+(15, '', 'user.jpg', 'aaa', 23123123, 'a@a.com', 'a', 'a', '4dm1n15t4t0r', 1, 0, '2019-06-26 11:19:48', '0000-00-00 00:00:00'),
+(16, '', 'user.jpg', 'xc', 2312, 'xc@xc.com', 'xc', 'xc', '5tud3nt', 1, 1, '2019-07-28 06:48:29', '0000-00-00 00:00:00'),
+(18, '', 'user.jpg', 'v', 2, 'v@v.com', 'v', 'v', '5tud3nt', 0, 0, '2019-07-28 06:49:04', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -403,6 +743,12 @@ ALTER TABLE `drxassessment_assessment_taken`
   ADD PRIMARY KEY (`drxassessment_id`);
 
 --
+-- Indexes for table `drxassessment_domain_result`
+--
+ALTER TABLE `drxassessment_domain_result`
+  ADD PRIMARY KEY (`drxassessment_id`);
+
+--
 -- Indexes for table `drxassessment_order_roles`
 --
 ALTER TABLE `drxassessment_order_roles`
@@ -434,19 +780,25 @@ ALTER TABLE `drxassessment_assessment_domains`
 -- AUTO_INCREMENT for table `drxassessment_assessment_history`
 --
 ALTER TABLE `drxassessment_assessment_history`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_assessment_result`
 --
 ALTER TABLE `drxassessment_assessment_result`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_assessment_taken`
 --
 ALTER TABLE `drxassessment_assessment_taken`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `drxassessment_domain_result`
+--
+ALTER TABLE `drxassessment_domain_result`
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_order_roles`
@@ -458,7 +810,7 @@ ALTER TABLE `drxassessment_order_roles`
 -- AUTO_INCREMENT for table `drxassessment_users`
 --
 ALTER TABLE `drxassessment_users`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

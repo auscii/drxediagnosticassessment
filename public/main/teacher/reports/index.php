@@ -240,7 +240,6 @@ include("fetch_report.php");
 										<th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
 										<th class="text-center">Overall Score</th>
-                                        <th class="text-center">Number Sense</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Start of Assessment</th>
 										<th class="text-center">End of Assessment</th>
@@ -272,7 +271,6 @@ include("fetch_report.php");
 										<td class="text-center"><?php echo $user_name; ?></td>
                                         <td class="text-center"><?php echo $user_email; ?></td>
 										<td class="text-center"><?php echo $overall_score; ?></td>
-										<td class="text-center"><?php echo $number_sense; ?>%</td> 
 										<td class="text-center">
 											<?php
 											if ($overall_score <= 75)

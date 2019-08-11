@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2019 at 07:24 PM
+-- Generation Time: Jul 14, 2019 at 12:12 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -53,8 +53,8 @@ CREATE TABLE `drxassessment_assessment` (
 
 INSERT INTO `drxassessment_assessment` (`drxassessment_id`, `drxassessment_question1`, `drxassessment_answer`, `drxassessment_answer_value`, `drxassessment_domain`, `drxassessment_q1_answer_1`, `drxassessment_q1_answer_2`, `drxassessment_q1_answer_3`, `drxassessment_q1_answer_4`, `drxassessment_order`, `drxassessment_order_value`, `drxassessment_status`, `drxassessment_created_at`, `drxassessment_updated_at`) VALUES
 (1, 'Question_1', 'C', 'q1_c', 'Number Sense', 'q1_a', 'q1_b', 'q1_c', 'q1_d', 12, '12th', 1, '2019-06-01 05:23:43', '2019-06-22 01:40:21'),
-(2, 'Question_2', 'B', 'q2_b', 'Number Sense', 'q2_a', 'q2_b', 'q2_c', 'q2_d', 1, '1st', 1, '2019-06-01 05:24:39', '2019-06-22 01:40:30'),
-(3, 'Question_3', 'A', 'q3_a', 'Number Sense', 'q3_a', 'q3_b', 'q3_c', 'q3_d', 2, '2nd ', 1, '2019-06-01 05:25:06', '2019-06-22 01:40:51'),
+(2, 'Question_2', 'B', 'q2_b', 'Fluent Calculation', 'q2_a', 'q2_b', 'q2_c', 'q2_d', 1, '1st', 1, '2019-06-01 05:24:39', '2019-07-13 03:48:26'),
+(3, 'Question_3', 'A', 'q3_a', 'Mathematical Reasoning and Application', 'q3_a', 'q3_b', 'q3_c', 'q3_d', 2, '2nd ', 1, '2019-06-01 05:25:06', '2019-07-13 03:48:41'),
 (4, 'Question_4', 'A', 'q4_a', 'Accurate Calculation', 'q4_a', 'q4_b', 'q4_c', 'q4_d', 13, '13th	', 1, '2019-06-01 05:25:30', '2019-06-22 01:40:55'),
 (5, 'Question_5', 'D', 'q5_d', 'Number Sense', 'q5_a', 'q5_b', 'q5_c', 'q5_d', 16, '16th	', 1, '2019-06-01 05:26:00', '2019-06-22 01:40:59'),
 (6, 'Question_6', 'C', 'q6_c', 'Number Sense', 'q6_a', 'q6_b', 'q6_c', 'q6_d', 17, '17th	', 1, '2019-06-01 05:27:02', '2019-06-22 01:41:03'),
@@ -144,8 +144,19 @@ CREATE TABLE `drxassessment_assessment_history` (
   `answer` text NOT NULL,
   `total_correct_answer` int(25) NOT NULL,
   `overall_score` int(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `start_at` datetime NOT NULL,
+  `end_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drxassessment_assessment_history`
+--
+
+INSERT INTO `drxassessment_assessment_history` (`drxassessment_id`, `user_id`, `user_name`, `user_email`, `domain_name`, `questions`, `answer`, `total_correct_answer`, `overall_score`, `created_at`, `start_at`, `end_at`) VALUES
+(1, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_47, Question_5, Question_31, Question_50, Question_38, Question_1, Question_6, Question_34, Question_45, Question_4, Question_9, Question_2, Question_49, Question_44, Question_43, Question_39, Question_3, Question_8', 'q47_a, q5_b, q31_c, q50_d, q38_b, q1_c, q6_a, q34_a, q45_d, q4_c, q9_a, q2_a, q49_a, q44_c, q43_d, q39_a, q3_b, q8_c', 5, 64, '2019-07-13 23:04:14', '2019-07-13 10:57:45', '2019-07-13 11:04:14'),
+(2, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_6, Question_31, Question_38, Question_47, Question_50, Question_34, Question_1, Question_5, Question_45, Question_4, Question_9, Question_43, Question_2, Question_49, Question_44, Question_8, Question_3, Question_39', 'q6_b, q31_b, q38_b, q47_b, q50_a, q34_d, q1_c, q5_a, q45_a, q4_c, q9_c, q43_d, q2_a, q49_b, q44_c, q8_d, q3_c, q39_a', 2, 56, '2019-07-13 23:40:12', '2019-07-13 11:39:40', '2019-07-13 11:40:12'),
+(3, 11, 'Hann', 'hann@gmail.com', 'Number Sense Memorization of Arithmetic Facts Accurate Calculation Fluent Calculation Mathematical Reasoning and Application', 'Question_50, Question_47, Question_38, Question_34, Question_31, Question_5, Question_6, Question_1, Question_45, Question_9, Question_4, Question_43, Question_2, Question_44, Question_49, Question_39, Question_8, Question_3', 'q50_b, q47_a, q38_c, q34_d, q31_a, q5_c, q6_c, q1_a, q45_b, q9_c, q4_c, q43_b, q2_a, q44_d, q49_b, q39_b, q8_b, q3_a', 3, 58, '2019-07-13 23:44:40', '2019-07-13 11:44:08', '2019-07-13 11:44:40');
 
 -- --------------------------------------------------------
 
@@ -167,6 +178,66 @@ CREATE TABLE `drxassessment_assessment_result` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `drxassessment_assessment_result`
+--
+
+INSERT INTO `drxassessment_assessment_result` (`drxassessment_id`, `user_id`, `user_name`, `user_email`, `student_selected_domain`, `student_selected_question`, `student_selected_answer`, `assessment_correct_answer`, `student_sequence`, `student_status`, `created_at`) VALUES
+(1, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-13 23:04:13'),
+(2, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-13 23:04:13'),
+(3, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-13 23:04:13'),
+(4, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-13 23:04:13'),
+(5, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(6, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(7, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(8, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(9, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(10, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(11, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(12, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(13, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '1', 0, 0, '2019-07-13 23:04:14'),
+(14, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(15, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '1', 0, 0, '2019-07-13 23:04:14'),
+(16, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-13 23:04:14'),
+(17, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '1', 0, 0, '2019-07-13 23:04:14'),
+(18, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '1', 0, 0, '2019-07-13 23:04:14'),
+(19, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_1', '', '1', 0, 0, '2019-07-13 23:40:11'),
+(20, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-13 23:40:11'),
+(21, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '0', 0, 0, '2019-07-13 23:40:11'),
+(22, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-13 23:40:11'),
+(23, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-13 23:40:11'),
+(24, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_6', '', '0', 0, 0, '2019-07-13 23:40:11'),
+(25, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(26, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(27, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_31', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(28, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(29, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(30, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(31, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_43', '', '1', 0, 0, '2019-07-13 23:40:12'),
+(32, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(33, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(34, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(35, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(36, 12, 'Ethane Kyle', 'kyle@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-13 23:40:12'),
+(37, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_1', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(38, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_2', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(39, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_3', '', '1', 0, 0, '2019-07-13 23:44:39'),
+(40, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_4', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(41, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_5', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(42, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_6', '', '1', 0, 0, '2019-07-13 23:44:39'),
+(43, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_8', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(44, 11, 'Hann', 'hann@gmail.com', 'Accurate Calculation', 'Question_9', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(45, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_31', '', '1', 0, 0, '2019-07-13 23:44:39'),
+(46, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_34', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(47, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_38', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(48, 11, 'Hann', 'hann@gmail.com', 'Mathematical Reasoning and Application', 'Question_39', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(49, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_43', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(50, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_44', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(51, 11, 'Hann', 'hann@gmail.com', 'Memorization of Arithmetic Facts', 'Question_45', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(52, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_47', '', '0', 0, 0, '2019-07-13 23:44:39'),
+(53, 11, 'Hann', 'hann@gmail.com', 'Fluent Calculation', 'Question_49', '', '0', 0, 0, '2019-07-13 23:44:40'),
+(54, 11, 'Hann', 'hann@gmail.com', 'Number Sense', 'Question_50', '', '0', 0, 0, '2019-07-13 23:44:40');
+
 -- --------------------------------------------------------
 
 --
@@ -181,6 +252,15 @@ CREATE TABLE `drxassessment_assessment_taken` (
   `taken_count` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drxassessment_assessment_taken`
+--
+
+INSERT INTO `drxassessment_assessment_taken` (`drxassessment_id`, `user_id`, `user_domain`, `user_name`, `taken_count`, `created_at`) VALUES
+(1, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-13 23:04:14'),
+(2, 12, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Ethane Kyle', 1, '2019-07-13 23:40:12'),
+(3, 11, 'Number Sense Fluent Calculation Mathematical Reasoning ', 'Hann', 1, '2019-07-13 23:44:40');
 
 -- --------------------------------------------------------
 
@@ -269,6 +349,7 @@ CREATE TABLE `drxassessment_users` (
   `drxassessment_password` varchar(55) NOT NULL,
   `drxassessment_position` varchar(55) NOT NULL,
   `drxassessment_status` int(1) NOT NULL,
+  `drxassessment_exam` int(1) NOT NULL,
   `drxassessment_created_at` datetime NOT NULL,
   `drxassessment_updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -277,15 +358,15 @@ CREATE TABLE `drxassessment_users` (
 -- Dumping data for table `drxassessment_users`
 --
 
-INSERT INTO `drxassessment_users` (`drxassessment_id`, `drxassessment_code`, `drxassessment_profile_pic`, `drxassessment_name`, `drxassessment_contactnumber`, `drxassessment_email`, `drxassessment_username`, `drxassessment_password`, `drxassessment_position`, `drxassessment_status`, `drxassessment_created_at`, `drxassessment_updated_at`) VALUES
-(2, '', 'user.jpg', 'admin', 123123, 'admin@admin.com', 'admin', 'admin', '4dm1n15t4t0r', 1, '2019-05-26 20:28:25', '2019-05-26 20:28:43'),
-(5, '', 'user.jpg', 'Auscillator', 55, 'auscii@gmail.com', 'auscii', 'auscii', '4dm1n15t4t0r', 1, '2019-06-09 11:03:00', '2019-06-09 11:05:41'),
-(10, '', 'deadmau5-wallpapers-hd-72995-6439649.png', 'XX', 123123, 'x@x.com', 'x', 'x', '5tud3nt', 1, '2019-06-09 12:22:37', '0000-00-00 00:00:00'),
-(11, '', 'edm-wallpaper-hd.jpg', 'Hann', 916, 'hann@gmail.com', 'han', 'han', '5tud3nt', 1, '2019-06-09 12:23:16', '0000-00-00 00:00:00'),
-(12, '', 'f297e48c38c1dc8854c29b11790a4096.jpg', 'Ethane Kyle', 2147483647, 'kyle@gmail.com', 'kyle', 'kyle', '5tud3nt', 0, '2019-06-09 12:24:31', '0000-00-00 00:00:00'),
-(13, '', 'user.jpg', 'Executioner', 2147483647, 'exe@gmail.com', 'exe', 'exe', '5tud3nt', 0, '2019-06-26 11:08:16', '0000-00-00 00:00:00'),
-(14, '', 'user.jpg', 'seann', 2147483647, 'sean@gmail.com', 'seann', 'seann', '4dm1n15t4t0r', 1, '2019-06-26 11:14:33', '0000-00-00 00:00:00'),
-(15, '', 'user.jpg', 'aaa', 23123123, 'a@a.com', 'a', 'a', '4dm1n15t4t0r', 1, '2019-06-26 11:19:48', '0000-00-00 00:00:00');
+INSERT INTO `drxassessment_users` (`drxassessment_id`, `drxassessment_code`, `drxassessment_profile_pic`, `drxassessment_name`, `drxassessment_contactnumber`, `drxassessment_email`, `drxassessment_username`, `drxassessment_password`, `drxassessment_position`, `drxassessment_status`, `drxassessment_exam`, `drxassessment_created_at`, `drxassessment_updated_at`) VALUES
+(2, '', 'user.jpg', 'admin', 123123, 'admin@admin.com', 'admin', 'admin', '4dm1n15t4t0r', 1, 0, '2019-05-26 20:28:25', '2019-05-26 20:28:43'),
+(5, '', 'user.jpg', 'Auscillator', 55, 'auscii@gmail.com', 'auscii', 'auscii', '4dm1n15t4t0r', 1, 0, '2019-06-09 11:03:00', '2019-06-09 11:05:41'),
+(10, '', 'deadmau5-wallpapers-hd-72995-6439649.png', 'XX', 123123, 'x@x.com', 'x', 'x', '5tud3nt', 1, 0, '2019-06-09 12:22:37', '0000-00-00 00:00:00'),
+(11, '', 'edm-wallpaper-hd.jpg', 'Hann', 916, 'hann@gmail.com', 'han', 'han', '5tud3nt', 1, 1, '2019-06-09 12:23:16', '0000-00-00 00:00:00'),
+(12, '', 'f297e48c38c1dc8854c29b11790a4096.jpg', 'Ethane Kyle', 2147483647, 'kyle@gmail.com', 'kyle', 'kyle', '5tud3nt', 1, 1, '2019-06-09 12:24:31', '0000-00-00 00:00:00'),
+(13, '', 'user.jpg', 'Executioner', 2147483647, 'exe@gmail.com', 'exe', 'exe', '5tud3nt', 0, 0, '2019-06-26 11:08:16', '0000-00-00 00:00:00'),
+(14, '', 'user.jpg', 'seann', 2147483647, 'sean@gmail.com', 'seann', 'seann', '4dm1n15t4t0r', 1, 0, '2019-06-26 11:14:33', '0000-00-00 00:00:00'),
+(15, '', 'user.jpg', 'aaa', 23123123, 'a@a.com', 'a', 'a', '4dm1n15t4t0r', 1, 0, '2019-06-26 11:19:48', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -353,19 +434,19 @@ ALTER TABLE `drxassessment_assessment_domains`
 -- AUTO_INCREMENT for table `drxassessment_assessment_history`
 --
 ALTER TABLE `drxassessment_assessment_history`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_assessment_result`
 --
 ALTER TABLE `drxassessment_assessment_result`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_assessment_taken`
 --
 ALTER TABLE `drxassessment_assessment_taken`
-  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `drxassessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `drxassessment_order_roles`
