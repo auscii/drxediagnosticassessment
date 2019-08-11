@@ -190,7 +190,10 @@ THE SOFTWARE.*/
                     console.log(jsonExportArray);
                 }
 
-                var doc = new jsPDF('l', 'mm', [297, 210]);
+                var doc = new jsPDF('l', 'mm', [350, 450]);
+
+                // var width = doc.internal.pageSize.getWidth();
+                // var height = doc.internal.pageSize.getHeight();
                 //var pdf = new jsPDF('l', 'mm', [297, 210]); //The first Param is for landscape or portrait
 
 
