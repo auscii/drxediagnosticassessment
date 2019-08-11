@@ -194,7 +194,8 @@ include("fetch_report.php");
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+
+                                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../reports/">Reports</a></li>
                                 </ol>
                             </nav>
@@ -239,7 +240,12 @@ include("fetch_report.php");
 										<th class="text-center">#</th>
 										<th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
-										<th class="text-center">Overall Score</th>
+                                        <th class="text-center">Overall Score</th>
+                                        <th class="text-center">Number Sense</th>
+                                        <th class="text-center">Memorization of Arithmethic Facts</th>
+                                        <th class="text-center">Accurate Calculation</th>
+                                        <th class="text-center">Fluent Calculation</th>
+										<th class="text-center">Mathematical Reasoning and Application</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Start of Assessment</th>
 										<th class="text-center">End of Assessment</th>
@@ -247,30 +253,33 @@ include("fetch_report.php");
 							</thead>
 							<tbody>
 								   <?php
-									 $result = $connection->prepare($reportFetchAll);
+									 $result = $connection->prepare($reportFetchDomains);
 									 $result->execute();
                                      while($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                          $drx_count++;
     									 $user_id = $row['user_id'];
-    									 $domain_name = $row['domain_name'];
-    									 $questions = $row['questions'];
-    									 $answer = $row['answer'];
     									 $user_email = $row['user_email'];
     									 $user_name = $row['user_name'];
-    									 $created_at = $row['created_at'];
-    									 $total_correct_answer = $row['total_correct_answer'];
-    									 $overall_score = $row['overall_score'];
+    									 $overall_score = $row['r_overall_score'];
     									 $start_at = $row['start_at'];
     									 $end_at = $row['end_at'];
-
-                                         // $number_sense_total_correct_answer = ;
-                                         
+                                         $number_sense = $row['number_sense'];
+                                         $memorization_of_arithmetic_facts = $row['memorization_of_arithmetic_facts'];
+                                         $accurate_calculation = $row['accurate_calculation'];
+                                         $fluent_calculation = $row['fluent_calculation'];
+                                         $mathematical_reasoning_and_applications = $row['mathematical_reasoning_and_applications'];
                                     ?>
 									<tr>
 										<td class="text-center"><?php echo $drx_count; ?></td>
 										<td class="text-center"><?php echo $user_name; ?></td>
                                         <td class="text-center"><?php echo $user_email; ?></td>
-										<td class="text-center"><?php echo $overall_score; ?></td>
+                                        <td class="text-center"><?php echo $overall_score; ?></td>
+                                        <td class="text-center"><?php echo $number_sense; ?>%</td>
+                                        <td class="text-center"><?php echo $memorization_of_arithmetic_facts; ?>%</td>
+                                        <td class="text-center"><?php echo $accurate_calculation; ?>%</td>
+                                        <td class="text-center"><?php echo $fluent_calculation; ?>%</td>
+										<td class="text-center"><?php echo $mathematical_reasoning_and_applications; ?>%</td>
+
 										<td class="text-center">
 											<?php
 											if ($overall_score <= 75)
@@ -282,21 +291,21 @@ include("fetch_report.php");
 											}
 											?>
 										</td>
-										<td class="text-center"><?php echo $created_at; ?></td>
-										<td class="text-center"><?php echo $created_at; ?></td>
+										<td class="text-center"><?php echo $start_at; ?></td>
+										<td class="text-center"><?php echo $end_at; ?></td>
 									</tr>
 								<?php } ?>
 							</tbody>
 					</table>
-
+                    </div>
 					<button id="csv" class="btn btn-primary"><i class="fa fa-print"></i> Export to Excel</button>&nbsp;
 					<button id="pdf" class="btn btn-danger"><i class="fa fa-print"></i> Save as PDF</button> <br /> <br /><br /> <br />
 
                   <h3 class="text-center">Overall Student Assessment</h3>
-                  <div id="chart-container">
+                  <div id="chart-container" style="height: 100%; width: 100%;">
                     <canvas id="report_chart"></canvas>
                   </div>
-			</div>
+			
         </div>
 
         </div>

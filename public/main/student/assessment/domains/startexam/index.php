@@ -187,32 +187,35 @@ if (isset($_POST['drx_btn_start_exam']))
     $memorizationofarithmeticfacts_percentage = ($countCorrectAnswerrow_memorizationofarithmeticfacts / 10) * 50 + 50;
 
 
-    $drx_statement_domain_result = $connection->prepare("INSERT INTO drxassessment_domain_result (
-                                                         user_id,
-                                                         number_sense,
-                                                         memorization_of_arithmetic_facts,
-                                                         accurate_calculation,
-                                                         fluent_calculation,
-                                                         mathematical_reasoning_and_applications
-                                                         )
-                                                         VALUES (
-                                                         :user_id,
-                                                         :number_sense,
-                                                         :memorization_of_arithmetic_facts,
-                                                         :accurate_calculation,
-                                                         :fluent_calculation,
-                                                         :mathematical_reasoning_and_applications
-                                                         )");
-    $drx_statement_domain_result->execute(
-       array(
-           'user_id'                                     => $drxassessmentid,
-           'number_sense'                                => $numbersense_percentage,
-           'memorization_of_arithmetic_facts'            => $memorizationofarithmeticfacts_percentage,
-           'accurate_calculation'                        => $accuratecalculation_percentage,
-           'fluent_calculation'                          => $fluentcalculation_percentage,
-           'mathematical_reasoning_and_applications'     => $mathematicalreasoningandapplication_percentage
-       )
-    );
+    // $drx_statement_domain_result = $connection->prepare("INSERT INTO drxassessment_domain_result (
+    //                                                      user_id,
+    //                                                      number_sense,
+    //                                                      memorization_of_arithmetic_facts,
+    //                                                      accurate_calculation,
+    //                                                      fluent_calculation,
+    //                                                      mathematical_reasoning_and_applications,
+    //                                                      overall_score
+    //                                                      )
+    //                                                      VALUES (
+    //                                                      :user_id,
+    //                                                      :number_sense,
+    //                                                      :memorization_of_arithmetic_facts,
+    //                                                      :accurate_calculation,
+    //                                                      :fluent_calculation,
+    //                                                      :mathematical_reasoning_and_applications,
+    //                                                      :overall_score
+    //                                                      )");
+    // $drx_statement_domain_result->execute(
+    //    array(
+    //        'user_id'                                     => $drxassessmentid,
+    //        'number_sense'                                => $numbersense_percentage,
+    //        'memorization_of_arithmetic_facts'            => $memorizationofarithmeticfacts_percentage,
+    //        'accurate_calculation'                        => $accuratecalculation_percentage,
+    //        'fluent_calculation'                          => $fluentcalculation_percentage,
+    //        'mathematical_reasoning_and_applications'     => $mathematicalreasoningandapplication_percentage,
+    //        'overall_score'                               => $overall_score
+    //    )
+    // );
     // End of Check Domain Result
 
 
@@ -325,6 +328,37 @@ if (isset($_POST['drx_btn_start_exam']))
              'end_at'                        => $end_at
          )
       );
+
+
+       $drx_statement_domain_result = $connection->prepare("INSERT INTO drxassessment_domain_result (
+                                                         user_id,
+                                                         number_sense,
+                                                         memorization_of_arithmetic_facts,
+                                                         accurate_calculation,
+                                                         fluent_calculation,
+                                                         mathematical_reasoning_and_applications,
+                                                         overall_score
+                                                         )
+                                                         VALUES (
+                                                         :user_id,
+                                                         :number_sense,
+                                                         :memorization_of_arithmetic_facts,
+                                                         :accurate_calculation,
+                                                         :fluent_calculation,
+                                                         :mathematical_reasoning_and_applications,
+                                                         :overall_score
+                                                         )");
+    $drx_statement_domain_result->execute(
+       array(
+           'user_id'                                     => $drxassessmentid,
+           'number_sense'                                => $numbersense_percentage,
+           'memorization_of_arithmetic_facts'            => $memorizationofarithmeticfacts_percentage,
+           'accurate_calculation'                        => $accuratecalculation_percentage,
+           'fluent_calculation'                          => $fluentcalculation_percentage,
+           'mathematical_reasoning_and_applications'     => $mathematicalreasoningandapplication_percentage,
+           'overall_score'                               => $overallScore
+       )
+    );
       // 'domain_name'			             => $drxassessment_domainname2,
       // End History Assessment
 

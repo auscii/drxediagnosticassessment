@@ -334,7 +334,7 @@ if($dr_delete_is_status == "deleteassessment"){
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
                                     <li class="breadcrumb-item active" aria-current="page"><a href="../history/">Student Assessment History</a></li>
                                 </ol>
                             </nav>

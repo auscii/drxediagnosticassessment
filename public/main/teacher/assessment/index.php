@@ -337,12 +337,13 @@ if($dr_delete_is_status == "deleteassessment"){
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Asssement Management</h4>
+                        <h4 class="page-title">Assessment Management</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Asssement</li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="../assessment/">Management Asssement</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Assessment</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="../assessment/">Management Assessment</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -610,7 +611,7 @@ if($dr_delete_is_status == "deleteassessment"){
 		<script>
 
     function addAssessment(){
-      $("#assessmentModalLabel").html("Add New Asssement") ;
+      $("#assessmentModalLabel").html("Add New Assessment") ;
       $("#drx_status").val("addnewassessment") ;
 
       $("#drxassessment_question1").val("") ;
@@ -622,7 +623,7 @@ if($dr_delete_is_status == "deleteassessment"){
 
     function editAssessment(key, q1, a1, a2, a3, a4, answer, domain)
     {
-          $("#assessmentModalLabel").html("Edit Asssement") ;
+          $("#assessmentModalLabel").html("Edit Assessment") ;
           $("#drx_status").val("editassessment") ;
           $("#drx_key").val(key) ;
 
@@ -637,7 +638,7 @@ if($dr_delete_is_status == "deleteassessment"){
 
     function deleteAssessment(key)
     {
-          $("#deleteAssessmentModalLabel").html("Delete Asssement") ;
+          $("#deleteAssessmentModalLabel").html("Delete Assessment") ;
           $("#dr_delete_is_status").val("deleteassessment") ;
           $("#drx_delete_is_key").val(key) ;
     }

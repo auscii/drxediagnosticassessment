@@ -201,8 +201,8 @@ if (!empty($_SESSION['drx_welcome'])) {
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                                 </ol>
                             </nav>
                         </div>
@@ -222,33 +222,36 @@ if (!empty($_SESSION['drx_welcome'])) {
                 <div class="row">
                     <!-- Column -->
 
-                      <div class="col-md-6 col-lg-2 col-xlg-3">
-                        <a href="../teacher/">
-                          <div class="card card-hover">
-                              <div class="box bg-cyan text-center">
-                                  <h1 class="font-light text-white"><i class="fa fa-home"></i></h1>
-                                  <h6 class="text-white">Dashboard</h6>
-                              </div>
-                          </div>
-                        </a>
-                      </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-4 col-xlg-3">
                       <a href="assessment/">
                         <div class="card card-hover">
                             <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"><i class="fas fa-book"></i></h1>
-                                <h6 class="text-white">Asssement</h6>
+                                <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                                <h6 class="text-white">Manage Assessment</h6>
                             </div>
                         </div>
                       </a>
                     </div>
+
+
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <a href="../teacher/usersmanagement">
+                          <div class="card card-hover">
+                              <div class="box bg-cyan text-center">
+                                  <h1 class="font-light text-white"><i class="mdi mdi-account-circle"></i></h1>
+                                  <h6 class="text-white">Users Management</h6>
+                              </div>
+                          </div>
+                        </a>
+                      </div>
+                      
                      <!-- Column -->
                     <div class="col-md-6 col-lg-2 col-xlg-3">
                       <a href="history/">
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-bar"></i></h1>
                                 <h6 class="text-white">History</h6>
                             </div>
                         </div>
@@ -259,19 +262,8 @@ if (!empty($_SESSION['drx_welcome'])) {
                       <a href="reports/">
                         <div class="card card-hover">
                             <div class="box bg-danger text-center">
-                                <h1 class="font-light text-white"><i class="fa fa-file"></i></h1>
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-bubble"></i></h1>
                                 <h6 class="text-white">Reports</h6>
-                            </div>
-                        </div>
-                      </a>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-2 col-xlg-3">
-                      <a href="rankings/">
-                        <div class="card card-hover">
-                            <div class="box bg-info text-center">
-                                <h1 class="font-light text-white"><i class="fa fa-list"></i></h1>
-                                <h6 class="text-white">Ranking</h6>
                             </div>
                         </div>
                       </a>
@@ -442,7 +434,7 @@ if (!empty($_SESSION['drx_welcome'])) {
     <script type="text/javascript" src="../../dist/charts/Chart.bundle.js"></script>
     <script type="text/javascript" src="../../dist/charts/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="../../dist/charts/Chart.js"></script>
-    <script type="text/javascript" src="reports/app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 
 
 
