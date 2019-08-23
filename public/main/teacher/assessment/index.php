@@ -425,7 +425,8 @@ if($dr_delete_is_status == "deleteassessment"){
                                                                   '<?php echo $drxassessment_q1_answer_3 ; ?>',
                                                                   '<?php echo $drxassessment_q1_answer_4 ; ?>',
                                                                   '<?php echo $drxassessmentanswer ; ?>',
-                                                                  '<?php echo $drxassessment_domain ; ?>');">
+                                                                  '<?php echo $drxassessment_domain ; ?>',
+                                                                  '<?php echo $drxassessment_question_image_res ; ?>');">
                                           <i class="ti-pencil"></i> UPDATE
                                           </button>
 										<!-- &nbsp;
@@ -475,7 +476,7 @@ if($dr_delete_is_status == "deleteassessment"){
 										<!-- <h4 class="card-title">Question</h4> -->
 
                                         <center>
-                                            <img src="../../../assets/images/noimage.png" id="questionimagesource" style="border-radius: 25px; width: 150px; height: 150px;">
+                                            <img id="questionimagesource" style="border-radius: 25px; width: 150px; height: 150px;">
                                         </center> <br>
 
                                         <div class="form-group row">
@@ -670,7 +671,7 @@ if($dr_delete_is_status == "deleteassessment"){
       $("#drxassessment_q1_answer_4").val("") ;
     }
 
-    function editAssessment(key, q1, a1, a2, a3, a4, answer, domain)
+    function editAssessment(key, q1, a1, a2, a3, a4, answer, domain, image)
     {
           $("#assessmentModalLabel").html("Edit Assessment") ;
           $("#drx_status").val("editassessment") ;
@@ -683,6 +684,14 @@ if($dr_delete_is_status == "deleteassessment"){
           $("#drxassessment_q1_answer_3").val(a3) ;
           $("#drxassessment_q1_answer_4").val(a4) ;
           $("#drxassessment_answer").val(answer) ;
+
+          if (image == "") 
+          {
+            $("#questionimagesource").attr('src', '../../../assets/images/noimage.png');
+          } else {
+            $('#questionimagesource').attr('src', '../../../assets/images/question_images/' + image);
+          }
+          
     }
 
     function deleteAssessment(key)
