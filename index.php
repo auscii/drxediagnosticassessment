@@ -116,10 +116,10 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>E-Diagnostic Assessment</title>
+<title>D’Rx e-Diagnostic Tool</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="E-Diagnostic Assessment" />
+<meta name="keywords" content="D’Rx e-Diagnostic Tool" />
 
     <script>
         addEventListener("load", function () {
@@ -163,7 +163,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 			<div id="logo">
 				<h1> <a href="index.html">
 					<!-- <img src="landing-page/images/s2.png" alt="">  -->
-					E-Diagnostic Assessment
+					D’Rx e-Diagnostic Tool
 				</a></h1>
 			</div>
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
@@ -196,7 +196,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 									<div class="w3ls_banner_txt">
 										<h3 class="b-w3ltxt text-capitalize mt-md-4">Student Assessment</h3>
 										<h4 class="b-w3ltxt text-capitalize mt-md-2">Discover your Potential</h4>
-										<p class="w3ls_pvt-title my-3">The E-Diagnostic Assessment is open for students in University of Makati to know your skills and knowledge.</p>
+										<p class="w3ls_pvt-title my-3">The D’Rx e-Diagnostic Tool is open for students in University of Makati to know your skills and knowledge.</p>
 										<a href="#about" class="btn btn-banner my-3">Read More</a>
 									</div>
 								</div>
@@ -300,8 +300,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 				</div>
 			</div>
 			<div class="col-lg-5">
-				<p class="mt-4">Vivamus mattis ex massa. Morbi sed dui imperdiet, tinci dunt libero a, sagittis enim. Donec lobortis cursuser uti justo, at
-				eleifend eros init ultricies sed. Vivamus efficit ur urna vitae tempus aliquam. Proin aliquet dictum est molestie maximus sapien leo cursus rhoncus.</p>
+				<p class="mt-4">D’Rx is an D’Rx e-Diagnostic Tool tool will be able to assess students’ mathematics learning competencies in the following areas: number sense; memorization of arithmetic facts; accurate calculation; fluent calculation; and accurate math reasoning and application.</p>
 			</div>
 			<div class="col-lg-1 col-sm-4 col-5 ser-img">
 				<img src="landing-page/images/s1.png" class="mt-4" alt="">
@@ -312,9 +311,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 				<img src="landing-page/images/s5.png" class="mt-4" alt="">
 			</div>
 			<div class="col-lg-5">
-				<p class="mt-4"> Vivamus efficitur ur vitae tempus aliquam. Proin aliquet dictum est, molestie maximus sapien maximus a.
-				Fuscer eleifend. convallis vitae enim eu egestas. Quisque placi rati enim nibh, vitae faucibus odio vestibulum pretium. Sed malesuada
-				libero sed commodo varius. </p>
+				<p class="mt-4">Further, the said tool will also serve as guide among grade 11 HSU (senior high school) math teachers to remediate specific weaknesses and to structure their lessons based on the result of the assessment. </p>
 			</div>
 		</div>
 	</div>
@@ -322,7 +319,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 <!-- //what we Serve -->
 
 <!-- services -->
-<section class="services py-5" id="services">
+<!-- <section class="services py-5" id="services">
 	<div class="container">
 		<h3 class="heading mb-5">Our Services</h3>
 		<div class="row ml-sm-5">
@@ -405,13 +402,8 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 				</div>
 			</div>
 		</div>
-		<!-- positioned image -->
-		<!-- <div class="position-image">
-			<img src="landing-page/images/services.png" alt="" class="img-fluid">
-		</div> -->
-		<!-- //positioned image -->
 	</div>
-</section>
+</section> -->
 <!-- //services -->
 
 
@@ -424,20 +416,20 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 				<div class="footer-title mb-3">
 					<a href="#">
 						<!-- <img src="landing-page/images/s2.png" alt="">  -->
-					E-Diagnostic Assessment</a>
+					D’Rx e-Diagnostic Tool</a>
 				</div>
 				<!-- <div class="footer-text">
 					<p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ipnut libero malesuada feugiat.
 					 Lorem ipsum dolor sit amet, consectetur elit.</p>
 				</div> -->
-				<ul class="social_section_1info">
+				<!-- <ul class="social_section_1info">
 					<li class="mb-2 facebook"><a href="#"><span class="fa fa-facebook"></span></a></li>
 					<li class="mb-2 twitter"><a href="#"><span class="fa fa-twitter"></span></a></li>
 					<li class="google"><a href="#"><span class="fa fa-google-plus"></span></a></li>
 					<li class="linkedin"><a href="#"><span class="fa fa-linkedin"></span></a></li>
 					<li class="pinterest"><a href="#"><span class="fa fa-pinterest"></span></a></li>
 					<li class="vimeo"><a href="#"><span class="fa fa-vimeo"></span></a></li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>
@@ -455,7 +447,7 @@ if (isset($_POST['drxassessment_regsubmit'])) {
 				<li><a href="#testi" class="">Testimonials </a></li>
 			</ul> -->
 			<div class="col-lg-6 copy-right p-0">
-				<p class="">© 2019 E-Diagnostic Assessment. All rights reserved
+				<p class="">© 2019 D’Rx e-Diagnostic Tool. All rights reserved
 				</p>
 			</div>
 		</div>

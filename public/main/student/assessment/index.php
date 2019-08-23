@@ -39,7 +39,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon.png"> -->
-    <title>E-Diagnostic Assessment</title>
+    <title>D’Rx e-Diagnostic Tool</title>
     <link href="../../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../../../dist/css/style.min.css" rel="stylesheet">
     <link href="../../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -80,7 +80,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
                          <!-- Logo text -->
                         <span class="logo-text">
                              <!-- dark Logo text -->
-                             <span style="font-size: 16px;">E-Diagnostic Assessment</span>
+                             <span style="font-size: 16px;">D’Rx e-Diagnostic Tool</span>
                              <!-- <img src="../../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
                         </span>
                         <!-- Logo icon -->
@@ -201,8 +201,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 											 <li class="d-flex no-block card-body">
 													 <i class="fa fa-check-circle w-30px m-t-5"></i>
 													 <div>
-															 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit adipiscing</span>
+															 <a href="#" class="m-b-0 font-medium p-0">This is a 50-item test that will measure your learning competencies in Mathematics.</a>
 													 </div>
 													 <div class="ml-auto">
 															 <div class="tetx-right">
@@ -212,10 +211,9 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 													 </div>
 											 </li>
 											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-gift w-30px m-t-5"></i>
+                                                     <i class="fa fa-check-circle w-30px m-t-5"></i>
 													 <div>
-															 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur</span>
+															 <a href="#" class="m-b-0 font-medium p-0">Finish all items, then click the Submit button at the bottom of the page.</a>
 													 </div>
 													 <div class="ml-auto">
 															 <div class="tetx-right">
@@ -225,10 +223,9 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 													 </div>
 											 </li>
 											 <li class="d-flex no-block card-body border-top">
-													 <i class="fa fa-plus w-30px m-t-5"></i>
+                                                     <i class="fa fa-check-circle w-30px m-t-5"></i>
 													 <div>
-														 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum adipiscing elit.</a>
-															 <span class="text-muted">Lorem ipsum dolor sit amet, consectetur rnas</span>
+														 <a href="#" class="m-b-0 font-medium p-0">Please make sure to review all your answers before submitting because you can only take the exam once, or as advised by your subject teacher.</a>
 													 </div>
 													 <div class="ml-auto">
 															 <div class="tetx-right">
@@ -237,7 +234,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 															 </div>
 													 </div>
 											 </li>
-											 <li class="d-flex no-block card-body border-top">
+											 <!-- <li class="d-flex no-block card-body border-top">
 													 <i class="fa fa-leaf w-30px m-t-5"></i>
 													 <div>
 														 <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum adipiscing elit lumpis</a>
@@ -262,7 +259,7 @@ if ($drxch3ck5ecur1ty!="z01nxc98zxncnzx12131102930190293019203910920391") {
 																 <span class="text-muted font-16">05</span>
 															 </div>
 													 </div>
-											 </li>
+											 </li> -->
 
                        <?php $start_exam = date('Y-m-d g:i:s'); ?>
 

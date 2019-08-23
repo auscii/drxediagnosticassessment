@@ -40,7 +40,7 @@ if (!empty($_SESSION['drx_welcome'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> -->
-    <title>E-Diagnostic Assessment</title>
+    <title>D’Rx e-Diagnostic Tool</title>
     <link href="../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../../dist/css/style.min.css" rel="stylesheet">
     <link href="../../assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
@@ -92,7 +92,7 @@ if (!empty($_SESSION['drx_welcome'])) {
                          <!-- Logo text -->
                         <span class="logo-text">
                              <!-- dark Logo text -->
-                             <span style="font-size: 16px;">E-Diagnostic Assessment</span>
+                             <span style="font-size: 16px;">D’Rx e-Diagnostic Tool</span>
                              <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
                         </span>
                         <!-- Logo icon -->
@@ -389,7 +389,7 @@ if (!empty($_SESSION['drx_welcome'])) {
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by <a href="#"> E-Diagnostic Assessment </a>
+                All Rights Reserved by <a href="#"> D’Rx e-Diagnostic Tool </a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -442,7 +442,7 @@ if (!empty($_SESSION['drx_welcome'])) {
 
           // $(function(){
           //   <?php //if ($drx_welcome == 1) { ?>
-          //       toastr.info('Welcome to DRx E-Diagnostic Assessment!', 'Welcome!');
+          //       toastr.info('Welcome to DRx D’Rx e-Diagnostic Tool!', 'Welcome!');
           //   <?php //} $drx_welcome = 0; ?>
           // });
     </script>

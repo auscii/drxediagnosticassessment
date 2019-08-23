@@ -91,6 +91,8 @@ if(!empty($_POST['drx_delete_is_key'])){
 
 $date_created_format = date('Y-m-d g:i:s');
 
+
+
 if($drx_status == "addnewassessment"){
     $drx_statement = $connection->prepare("INSERT INTO drxassessment_assessment (
                                         drxassessment_question1,
@@ -123,6 +125,10 @@ if($drx_status == "addnewassessment"){
 
 if($drx_status == "editassessment"){
 
+    move_uploaded_file($_FILES["drxassessment_question_image"]["tmp_name"],
+    "../../../assets/images/question_images/" . $_FILES["drxassessment_question_image"]["name"]);
+    $drxassessment_question_image = $_FILES["drxassessment_question_image"]["name"];
+
     if ($drxassessment_answer === "A") {
         $drxassessment_answer_value = $drxassessment_q1_answer_1;
     }
@@ -139,28 +145,30 @@ if($drx_status == "editassessment"){
         $drxassessment_answer_value = $drxassessment_q1_answer_4;
     }
 
-    $drx_statement = $connection->prepare("UPDATE drxassessment_assessment SET
-                                                 drxassessment_question1        = :drxassessment_question1,
-                                                 drxassessment_q1_answer_1      = :drxassessment_q1_answer_1,
-                                                 drxassessment_q1_answer_2      = :drxassessment_q1_answer_2,
-																								 drxassessment_q1_answer_3      = :drxassessment_q1_answer_3,
-																								 drxassessment_q1_answer_4      = :drxassessment_q1_answer_4,
-																								 drxassessment_updated_at       = :drxassessment_updated_at,
-                                                 drxassessment_answer           = :drxassessment_answer,
-                                                 drxassessment_answer_value     = :drxassessment_answer_value,
-                                                 drxassessment_domain           = :drxassessment_domain
+    $drx_statement = $connection->prepare("UPDATE drxassessment_assessment 
+                                           SET drxassessment_question1 = :drxassessment_question1,
+                                               drxassessment_q1_answer_1 = :drxassessment_q1_answer_1,
+                                               drxassessment_q1_answer_2 = :drxassessment_q1_answer_2,
+                                               drxassessment_q1_answer_3 = :drxassessment_q1_answer_3,
+                                               drxassessment_q1_answer_4 = :drxassessment_q1_answer_4,
+                                               drxassessment_updated_at = :drxassessment_updated_at,
+                                               drxassessment_answer = :drxassessment_answer,
+                                               drxassessment_answer_value = :drxassessment_answer_value,
+                                               drxassessment_domain = :drxassessment_domain,
+                                               drxassessment_question_image = :drxassessment_question_image
                                            WHERE drxassessment_id = $drx_key;");
     $drx_statement->execute(
         array(
-            'drxassessment_question1'               => $drxassessment_question1,
-            'drxassessment_q1_answer_1'             => $drxassessment_q1_answer_1,
-            'drxassessment_q1_answer_2'             => $drxassessment_q1_answer_2,
-						'drxassessment_q1_answer_3'						  => $drxassessment_q1_answer_3,
-						'drxassessment_q1_answer_4'						  => $drxassessment_q1_answer_4,
-						'drxassessment_updated_at'						  => $date_created_format,
-            'drxassessment_answer'                  => $drxassessment_answer,
-            'drxassessment_answer_value'            => $drxassessment_answer_value,
-            'drxassessment_domain'                  => $drxassessment_domain
+            'drxassessment_question1'                   => $drxassessment_question1,
+            'drxassessment_q1_answer_1'                 => $drxassessment_q1_answer_1,
+            'drxassessment_q1_answer_2'                 => $drxassessment_q1_answer_2,
+			'drxassessment_q1_answer_3'		            => $drxassessment_q1_answer_3,
+			'drxassessment_q1_answer_4'		            => $drxassessment_q1_answer_4,
+			'drxassessment_updated_at'		            => $date_created_format,
+            'drxassessment_answer'                      => $drxassessment_answer,
+            'drxassessment_answer_value'                => $drxassessment_answer_value,
+            'drxassessment_domain'                      => $drxassessment_domain,
+            'drxassessment_question_image'              => $drxassessment_question_image
         )
     );
     $drx_statement->fetchAll();
@@ -191,7 +199,7 @@ if($dr_delete_is_status == "deleteassessment"){
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon.png"> -->
-    <title>E-Diagnostic Assessment</title>
+    <title>D’Rx e-Diagnostic Tool</title>
     <link href="../../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../../../dist/css/style.min.css" rel="stylesheet">
     <link href="../../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -232,7 +240,7 @@ if($dr_delete_is_status == "deleteassessment"){
                          <!-- Logo text -->
                         <span class="logo-text">
                              <!-- dark Logo text -->
-                             <span style="font-size: 16px;">E-Diagnostic Assessment</span>
+                             <span style="font-size: 16px;">D’Rx e-Diagnostic Tool</span>
                              <!-- <img src="../../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
                         </span>
                         <!-- Logo icon -->
@@ -359,69 +367,78 @@ if($dr_delete_is_status == "deleteassessment"){
             <div class="container-fluid">
 							<!-- <button type="button" onclick="addAssessment();" data-toggle="modal" data-target="#assessmentModal" class="btn btn-success btn-lg"><i class="ti-plus"></i></a> Add New Question</button> <br /> -->
 
-							<div class="card-body">
-									<!-- <h5 class="card-title">Assessment</h5> -->
+		<div class="card-body">
+				<!-- <h5 class="card-title">Assessment</h5> -->
 
-									<div class="table-responsive">
-											<table id="zero_config" class="table table-striped table-bordered">
-													<thead>
-															<tr>
-																	<th class="text-center">#</th>
-                                  <th class="text-center">Question</th>
-																	<th class="text-center">Domain</th>
-																	<th class="text-center">Answer</th>
-																	<th class="text-center">Date Created</th>
-																	<th class="text-center">Action</th>
-															</tr>
-													</thead>
-													<tbody>
-														<?php
-	                          $drx_count = 0;
-	                          $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	                          $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_created_at ASC");
-	                          $result->execute();
-	                              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	                                     $drx_count++;
-	                                     $drxassessment_id = $row['drxassessment_id'];
-	                                     $drxassessment_question1 = $row['drxassessment_question1'];
-																			 $drxassessment_domain = $row['drxassessment_domain'];
-																			 $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
-	                                     $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
-	                                     $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
-	                                     $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
-	                                     $drxassessment_created_at = $row['drxassessment_created_at'];
-                                       $drxassessmentanswer = $row['drxassessment_answer'];
-	                          ?>
-															<tr>
-																<td class="text-center"><?php echo $drx_count; ?></td>
-                                <td class="text-center"><?php echo $drxassessment_question1; ?></td>
-																<td class="text-center"><?php echo $drxassessment_domain; ?></td>
-																<td class="text-center"><?php echo $drxassessmentanswer; ?></td>
-																<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
-																<td class="text-center">
-                                  <!-- style="width: 200px;" -->
-																	<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
-                                  onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
-                                                          '<?php echo $drxassessment_question1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_1 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_2 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_3 ; ?>',
-                                                          '<?php echo $drxassessment_q1_answer_4 ; ?>',
-                                                          '<?php echo $drxassessmentanswer ; ?>',
-                                                          '<?php echo $drxassessment_domain ; ?>');">
-                                  <i class="ti-pencil"></i> UPDATE
-                                  </button>
-																	<!-- &nbsp;
-                                  <button type="button" data-toggle="modal" data-target="#deleteAssessmentModal" class="btn btn-danger btn-mg"
-                                  onclick="deleteAssessment('<?php echo $drxassessment_id ; ?>');">
-                                  <i class="ti-trash"></i> Delete
-                                  </button> -->
-																</td>
-															</tr>
-														<?php } ?>
-													</tbody>
-											</table>
-									</div>
+			<div class="table-responsive">
+				<table id="zero_config" class="table table-striped table-bordered">
+						<thead>
+								<tr>
+										<th class="text-center">#</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Question</th>
+										<th class="text-center">Domain</th>
+										<th class="text-center">Answer</th>
+										<th class="text-center">Date Created</th>
+										<th class="text-center">Action</th>
+								</tr>
+						</thead>
+						<tbody>
+							<?php
+                              $drx_count = 0;
+                              $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                              $result = $connection->prepare("SELECT * FROM drxassessment_assessment ORDER BY drxassessment_created_at ASC");
+                              $result->execute();
+                                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                         $drx_count++;
+                                         $drxassessment_id = $row['drxassessment_id'];
+                                         $drxassessment_question1 = $row['drxassessment_question1'];
+                    														 $drxassessment_domain = $row['drxassessment_domain'];
+                    														 $drxassessment_q1_answer_1 = $row['drxassessment_q1_answer_1'];
+                                         $drxassessment_q1_answer_2 = $row['drxassessment_q1_answer_2'];
+                                         $drxassessment_q1_answer_3 = $row['drxassessment_q1_answer_3'];
+                                         $drxassessment_q1_answer_4 = $row['drxassessment_q1_answer_4'];
+                                         $drxassessment_created_at = $row['drxassessment_created_at'];
+                                         $drxassessmentanswer = $row['drxassessment_answer'];
+                                         $drxassessment_question_image_res = $row['drxassessment_question_image'];
+                              ?>
+								<tr>
+									<td class="text-center"><?php echo $drx_count; ?></td>
+                                    <td class="text-center">
+                                        <?php if (empty($drxassessment_question_image_res)) { ?>
+                                              <img src="../../../assets/images/noimage.png" style="border-radius: 25px; width: 90px; height: 90px;">
+                                        <?php } else { ?>
+                                              <img src="../../../assets/images/question_images/<?php echo $drxassessment_question_image_res; ?>" style="border-radius: 25px; width: 90px; height: 90px;">
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center"><?php echo $drxassessment_question1; ?></td>
+									<td class="text-center"><?php echo $drxassessment_domain; ?></td>
+									<td class="text-center"><?php echo $drxassessmentanswer; ?></td>
+									<td class="text-center"><?php echo $drxassessment_created_at; ?></td>
+									<td class="text-center">
+      <!-- style="width: 200px;" -->
+										<button type="button" data-toggle="modal" data-target="#assessmentModal" class="btn btn-primary btn-mg"
+                                          onclick="editAssessment('<?php echo $drxassessment_id ; ?>',
+                                                                  '<?php echo $drxassessment_question1 ; ?>',
+                                                                  '<?php echo $drxassessment_q1_answer_1 ; ?>',
+                                                                  '<?php echo $drxassessment_q1_answer_2 ; ?>',
+                                                                  '<?php echo $drxassessment_q1_answer_3 ; ?>',
+                                                                  '<?php echo $drxassessment_q1_answer_4 ; ?>',
+                                                                  '<?php echo $drxassessmentanswer ; ?>',
+                                                                  '<?php echo $drxassessment_domain ; ?>');">
+                                          <i class="ti-pencil"></i> UPDATE
+                                          </button>
+										<!-- &nbsp;
+      <button type="button" data-toggle="modal" data-target="#deleteAssessmentModal" class="btn btn-danger btn-mg"
+      onclick="deleteAssessment('<?php echo $drxassessment_id ; ?>');">
+      <i class="ti-trash"></i> Delete
+      </button> -->
+									</td>
+								</tr>
+							<?php } ?>
+						</tbody>
+				</table>
+			  </div>
 
             </div>
 
@@ -450,12 +467,25 @@ if($dr_delete_is_status == "deleteassessment"){
 								</div>
 
 								<div class="modal-body">
-									<form method="POST">
+									<form method="POST" enctype="multipart/form-data">
 
 										<input type="hidden" id="drx_status" name="drx_status">
 										<input type="hidden" id="drx_key" name="drx_key">
 
 										<!-- <h4 class="card-title">Question</h4> -->
+
+                                        <center>
+                                            <img src="../../../assets/images/noimage.png" id="questionimagesource" style="border-radius: 25px; width: 150px; height: 150px;">
+                                        </center> <br>
+
+                                        <div class="form-group row">
+                                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">Image</label>
+                                                <div class="col-sm-9">
+                                                        <input type="file" onchange="questionPreviewImage(this)" class="form-control is-valid" id="drxassessment_question_image" name="drxassessment_question_image">
+                                                </div>
+                                        </div>
+
+
 										<div class="form-group row">
 												<label for="fname" class="col-sm-3 text-right control-label col-form-label">Question</label>
 												<div class="col-sm-9">
@@ -609,6 +639,25 @@ if($dr_delete_is_status == "deleteassessment"){
     </script>
 
 		<script>
+
+
+      function questionPreviewImage(input) {
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+              $('#questionimagesource').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+
+        $("#questionimagesource").change(function() {
+          readURL(this);
+        });
+
+
 
     function addAssessment(){
       $("#assessmentModalLabel").html("Add New Assessment") ;

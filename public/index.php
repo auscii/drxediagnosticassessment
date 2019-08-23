@@ -92,11 +92,11 @@ if (isset($_POST['drx_login_submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png"> -->
-    <title>D'Rx E-Diagnostic Assessment</title>
+    <title>D’Rx e-Diagnostic Tool</title>
     <link href="dist/css/style.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-image: url('assets/images/login_bg.jpg'); background-size: cover; background-repeat: no-repeat;">
     <div class="main-wrapper">
         <div class="preloader">
             <div class="lds-ripple">
@@ -104,12 +104,12 @@ if (isset($_POST['drx_login_submit'])) {
                 <div class="lds-pos"></div>
             </div>
         </div>
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
-            <div class="auth-box bg-dark border-top border-secondary">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center ">
+            <div class="auth-box border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
                         <!-- <span class="db"><img src="assets/images/logo.png" alt="logo" /></span> -->
-                        <span class="db" style="color: #fff; font-size: 25px;">D'Rx E-Diagnostic Assessment</span>
+                        <span class="db" style="color: #000; font-size: 25px;">D’Rx e-Diagnostic Tool</span>
                     </div>
                     <!-- Form -->
                     <form class="form-horizontal m-t-20" id="loginform" method="POST">
@@ -117,17 +117,17 @@ if (isset($_POST['drx_login_submit'])) {
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
+                                        <span class="input-group-text bg-success text-black" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
                                     <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="drxassessment_username" required="">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                        <span class="input-group-text bg-warning text-black" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
                                     <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="drxassessment_password" required="">
                                 </div>
-                                <span class="text-white">Not yet registered? <a href="../">Register here</a></span>
+                                <span class="text-black">Not yet registered? <a href="../">Register here</a></span>
                             </div>
                         </div>
                         <div class="row border-top border-secondary">
@@ -146,7 +146,7 @@ if (isset($_POST['drx_login_submit'])) {
                 </div>
                 <div id="recoverform">
                     <div class="text-center">
-                        <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
+                        <span class="text-black">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
                     </div>
                     <div class="row m-t-20">
                         <!-- Form -->
@@ -154,7 +154,7 @@ if (isset($_POST['drx_login_submit'])) {
                             <!-- email -->
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
+                                    <span class="input-group-text bg-danger text-black" id="basic-addon1"><i class="ti-email"></i></span>
                                 </div>
                                 <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
                             </div>

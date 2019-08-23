@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2019 at 08:40 AM
+-- Generation Time: Aug 17, 2019 at 05:31 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -896,8 +896,8 @@ CREATE TABLE `drxassessment_domain_result` (
 
 INSERT INTO `drxassessment_domain_result` (`drxassessment_id`, `user_id`, `number_sense`, `memorization_of_arithmetic_facts`, `accurate_calculation`, `fluent_calculation`, `mathematical_reasoning_and_applications`, `overall_score`, `date_created`) VALUES
 (1, 13, 85, 90, 82, 75, 95, '87.89', '2019-08-11 13:56:43'),
-(2, 10, 60, 85, 75, 90, 72, '78.21', '2019-08-11 13:57:28'),
-(3, 11, 95, 75, 70, 85, 78, '85.87', '2019-08-11 13:58:10'),
+(2, 10, 79, 85, 75, 90, 72, '78.21', '2019-08-11 13:57:28'),
+(3, 11, 95, 75, 89, 85, 78, '85.87', '2019-08-11 13:58:10'),
 (4, 12, 75, 100, 85, 75, 85, '95.42', '2019-08-11 13:58:49');
 
 -- --------------------------------------------------------
