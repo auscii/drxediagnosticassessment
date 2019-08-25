@@ -678,6 +678,7 @@ if (isset($_POST['drx_btn_start_exam']))
                                  while ($row2 = $result2->fetch(PDO::FETCH_ASSOC))
                                  {
                                         $drxassessment_question1 = $row2['drxassessment_question1'];
+                                        $drxassessment_id = $row2['drxassessment_id'];
                                         $drxassessment_domain = $row2['drxassessment_domain'];
                                         $drxassessment_answer = $row2['drxassessment_answer'];
                                         $drxassessment_q1_answer_1 = $row2['drxassessment_q1_answer_1'];
@@ -686,13 +687,26 @@ if (isset($_POST['drx_btn_start_exam']))
                                         $drxassessment_q1_answer_4 = $row2['drxassessment_q1_answer_4'];
                                         $drxassessment_order = $row2['drxassessment_order'];
                                         $drxassessment_status = $row2['drxassessment_status'];
+                                        $drxassessment_question_image_res = $row2['drxassessment_question_image'];
 
                         ?> <br /> <br />
 
                             <div class="form-group row" style="margin-right: 20%;">
+                                    <strong class="col-sm-3 text-right control-label col-form-label" style="color: #000;">Image</strong>
+                                    <div class="col-sm-9" style="color: #000;">
+                                        <?php if (empty($drxassessment_question_image_res)) { ?>
+                                              <img src="../../../../../assets/images/noimage.png" style="border-radius: 25px; width: 90px; height: 90px;">
+                                        <?php } else { ?>
+                                              <img src="../../../../../assets/images/question_images/<?php echo $drxassessment_question_image_res; ?>" style="border-radius: 25px; width: 90px; height: 90px;" onclick="viewQuestionImage('<?php echo $drxassessment_question1 ?>', '<?php echo $drxassessment_question_image_res ?>');" data-toggle="modal" data-target="#questionModal">
+                                        <?php } ?>
+                                    </div>
+                            </div>
+
+                            <div class="form-group row" style="margin-right: 20%;">
                                     <strong class="col-sm-3 text-right control-label col-form-label" style="color: #000;">Question</strong>
                                     <div class="col-sm-9" style="color: #000;">
-                                            <input type="text" class="form-control" id="drxassessment_question_student" name="drxassessment_question_student[]" value="<?php echo $drxassessment_question1; ?>" style="color: #000; width: 100%;" readonly>
+                                            <label style="color: #000; margin-top: 1%;"><?php echo $drxassessment_question1; ?></label>
+                                            <input type="hidden" class="form-control" id="drxassessment_question_student" name="drxassessment_question_student[]" value="<?php echo $drxassessment_question1; ?>" style="color: #000; width: 100%;" readonly>
                                     </div>
                             </div>
 
@@ -732,12 +746,12 @@ if (isset($_POST['drx_btn_start_exam']))
 
     <!-- MODALS -->
 
-    <div class="modal fade" id="startAssessmentModal" tabindex="-1" role="dialog" aria-labelledby="startAssessmentModalLabel" aria-hidden="true">
+    <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
                 <div class="modal-content">
 
                         <div class="modal-header">
-                                <h5 class="modal-title" id="startAssessmentModalLabel"></h5>
+                                <h5 class="modal-title" id="questionModalLabel"></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                 </button>
@@ -745,6 +759,10 @@ if (isset($_POST['drx_btn_start_exam']))
 
                         <div class="modal-body">
 
+                          <center>
+                              <h4 class="text-left" id="questionnamesource"></h4> <br><br>
+                              <img id="questionimagesource" style="border-radius: 25px; width: 150px; height: 150px;"> <br>
+                          </center> <br>
 
                         </div>
 
@@ -790,19 +808,11 @@ if (isset($_POST['drx_btn_start_exam']))
     </script>
 
 		<script>
-    // function deleteUser(key)
-    // {
-    //       $("#deleteusersModalLabel").html("Delete Admin/Teacher") ;
-    //       $("#dr_delete_is_status").val("deleteuser") ;
-    //       $("#drx_delete_is_key").val(key) ;
-    // }
-
-    function startExam(domainname)
-    {
-        $("#drx_domain").html(domainname);
-    }
-
-
+      function viewQuestionImage(qname, image)
+      {
+          $("#questionnamesource").html(qname);
+          $("#questionimagesource").attr('src', '../../../../../assets/images/question_images/' + image);
+      }
     </script>
 
     <!-- Modal -->
